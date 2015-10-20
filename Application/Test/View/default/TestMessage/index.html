@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="__CDN__/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        function sub() {
+
+            var data = {
+                'key': 'd349133a9ea2f7a12ce0a75abef0bb2d',
+                'tpl_id': 5599,
+                'tpl_value': encodeURI("#code#=" + $("input[name='tpl_value']").val()),
+                'mobile': $("input[name='mobile']").val()
+            };
+            // console.info(data);
+            $.ajax({
+                url: "{:U('Api/Message/send')}?access_token={$access_token['access_token']}",
+                type: "POST",
+                data: data,
+                success: function (data) {
+                    //alert(data.reason);
+                }
+            })
+        }
+
+
+    </script>
+</head>
+<body>
+    <form action="{:U('Api/Message/send')}?access_token={$access_token['access_token']}" method="post">
+
+        <input name="mobile" placeholder="手机号"/><br />
+        <input type="submit"  value="点我发送" />
+    </form>
+    <iframe name="kuaidi100" src="http://www.kuaidi100.com/frame/index.html" width="960" height="880" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no"></iframe>
+</body>
+</html>

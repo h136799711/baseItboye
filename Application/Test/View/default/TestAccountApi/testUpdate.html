@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<base href="http://localhost/github/201507banma/" />
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div>access_token: {$access_token['access_token']}</div>
+<div>expires_in: {$access_token['expires_in']}</div>
+<div>token_type: {$access_token['token_type']}</div>
+<div>scope: {$access_token['scope']}</div>
+
+<form action="api.php/User/update?access_token={$access_token['access_token']}" method="post">
+    <!--<input type="hidden" name="access_token" value="{$access_token['access_token']}" />-->
+    <input type="text" name="uid" value="12" placeholder="用户ID"/><br />
+    <input type="text" name="realname" value="真实姓名" placeholder=""><br />
+    <input type="text" name="mobile" value="13578544411" placeholder="手机"><br />
+    <input type="text" name="email" value="198@qq.com" placeholder="邮箱"><br />
+    <input type="text" name="idnumber" value="331023199710014418" placeholder="身份证号"><br />
+    <input type="text" name="nickname" value="艾米" placeholder="昵称"><br />
+    <input type="radio" name="sex" value="1" checked="checked"/>男
+    <input type="radio" name="sex" value="0" />女<br />
+    <input type="text" name="birthday" value="1997-10-01" placeholder="生日"><br />
+    <input type="text" name="qq" value="154236478" placeholder="QQ号"><br />
+
+    <button type="submit">更新</button>
+</form>
+
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<extend name="template/base"/>
+<block name="area_header">
+
+</block>
+
+<block name="area_body">
+    <div class="col-lg-10 col-md-10 col-lg-offset-1 col-md-offset-1 clearfix">
+        <h2>Token获取测试 GET 请求</h2>
+        <form class="form-horizontal authForm" action="{:U('Api/Resource/test')}" method="get">
+
+            <div class="form-group">
+                <label class="control-label col-lg-2 col-md-2">access_token</label>
+                <div class="col-lg-10 col-md-10">
+                    <input type="text" name="access_token" class="form-control" value="3745faceeb4b5f933dac135402cdd76ff1e869cb"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-lg-2 col-md-2">&nbsp;</label>
+                <div class="col-lg-10 col-md-10">
+                    <button type="submit" class="btn btn-sm btn-primary "  >提交</button>
+                </div>
+            </div>
+        </form>
+
+        <div class="well js_panel">
+
+        </div>
+    </div>
+</block>
+
+<block name="area_footer">
+    <script type="text/javascript">
+        $(function(){
+            $(".js_submit").click(function(ev){
+                var that = ev.target;
+                $(that).button("loading");
+                var form = $(".authForm");
+                var query = form.serialize();
+                var target = "{:U('Api/Authorize/index')}";
+                $.get(target, query).always(function() {
+                    setTimeout(function(){
+                        $(that).button("reset");
+                    },1400);
+                }).done(function(data) {
+                    console.log(data);
+                }).fail(function(data){
+                    var json = JSON.parseJSON(data.responseText);
+                    console.log(json);
+                });//end post
+
+            })
+        });
+    </script>
+</block>

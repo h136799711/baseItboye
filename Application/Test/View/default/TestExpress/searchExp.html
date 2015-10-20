@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+{:dump($access_token)}
+<div>access_token: {$access_token['access_token']}</div>
+<div>expires_in: {$access_token['expires_in']}</div>
+<div>token_type: {$access_token['token_type']}</div>
+<div>scope: {$access_token['scope']}</div>
+<form action="{:U('Api/Express/searchExpressHtml')}?access_token={$access_token['access_token']}" method="post">
+    <input name="com" placeholder="请输入快递公司号" value="sf"/><br />
+    <input name="no" placeholder="请输入订单号" value="575677355677"/><br />
+    <button type="submit">查看</button>
+</form>
+
+</body>
+</html>

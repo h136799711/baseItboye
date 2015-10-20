@@ -1,0 +1,58 @@
+<extend name="template/base_index" />
+
+<block name="area_header">
+	<style type="text/css">
+		body {
+			background-color: #f9f9f9;
+		}
+		.logo {
+			/*border: 1px solid #000000;*/
+			color: orangered;
+			height: 100px;
+			width: 180px;
+			margin-left: 25%;
+			margin-top: 2%;
+		}
+		.am-panel {
+			width: 800px;
+			margin-left: 28%;
+			margin-top: 2%;
+		}
+		.am-panel-hd {
+			height: 80px;
+			padding: 20px;
+			background-color: #FFFFFF !important;
+			text-align: center;
+		}
+	</style>
+</block>
+
+<block name="area_body">
+	<div class="logo"><img src="__PUBLIC__/Home/Index/img/banma.png" height="80px" width="120px">
+	</div>
+	<div class="am-panel am-panel-default">
+		<div class="am-panel-hd"><h2>斑马平台用户注册</h2></div>
+			<div class="am-panel-bd">
+			<div class="am-g">
+				<div class="am-u-md-8 am-u-sm-centered">
+					<form class="am-form">
+						<fieldset class="am-form-set">
+							<input type="text" placeholder="用户名（字母开头不小于4位）"><br>
+							<input type="password" placeholder="设个密码（不小于6位）"><br>
+							<input type="password" placeholder="重复密码（必须保持一致）"><br>
+							<input type="number" placeholder="手机号码"><br>
+							<input type="email" placeholder="填下邮箱"><br>
+						</fieldset>
+						<button type="submit" class="am-btn am-btn-primary am-btn-block">注册个账号</button>
+						<br><font size="2">点击注册即表示同意接受<a href="">斑马协议</a>和<a>隐私策略</a></font>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<h4 style="text-align: center;">杭州博也网络科技版权所有<br>{__RUNTIME__}</h4>
+</block>
+
+<block name="area_footer">
+
+</block>

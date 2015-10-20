@@ -1,0 +1,120 @@
+<extend name="template/base_index" />
+
+
+<block name="area_header">
+    <link src="__CDN__/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet" type="text/css" />
+
+    <link type="text/css" rel="stylesheet" href="__CDN__/select2/4.0.0/css/select2.min.css" />
+    <script type="text/javascript" src="__CDN__/select2/4.0.0/js/select2.full.js"></script>
+    <script type="text/javascript" src="__CDN__/select2/4.0.0/js/i18n/zh-CN.js"></script>
+    <link type="text/css" rel="stylesheet" href="__CDN__/select2/4.0.0/css/cosmo-skin.css" />
+</block>
+
+<block name="area_body">
+    {:W('Menus/topbar')}
+    <div class="admin-main container-fluid">
+        {:W('Menus/left')}
+        <div class="admin-main-content">
+            {:W('Menus/breadcrumb')}
+            <!-- form -->
+            <form class="form-horizontal well validateForm">
+                <fieldset>
+                    <legend>
+                        发送站内信</legend>
+                    <div class="form-group">
+                        <label for="inputtitle" class="col-md-2 col-lg-2 control-label">目标/发给谁</label>
+                        <div class="col-md-10 col-lg-10">
+                            <select style="width:220px;padding: 10px 15px;font-size: 15px;line-height: 1.42857143;" id="user_select2" name="uid" class="form-control">
+                                <option></option>
+                            </select>
+                            <!--<input type="text" class="required form-control input-short" name="id" id="inputtitle" placeholder="请输入用户ID">-->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputredirect_url" class="col-md-2 col-lg-2 control-label">标题</label>
+                        <div class="col-md-10 col-lg-10">
+                            <input type="text" class="required form-control input-normal" name="title" id="inputredirect_url" placeholder="请输入标题">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputtitle" class="col-md-2 col-lg-2 control-label">内容</label>
+                        <div class="col-md-10 col-lg-10">
+                            <textarea name="content" class="form-control" rows="5"></textarea>
+                            <div class="help-block">(您可以输入内容)</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="btns" class="col-md-2 col-lg-2 control-label">&nbsp;</label>
+                        <div class="col-lg-10 col-md-10">
+                            <a target-form="validateForm" class="ajax-post btn btn-primary" href="{:U('Admin/Information/sendLetter')}" autofocus="autofocus"><i class="fa fa-save"></i> {:L('BTN_SAVE')}</a>
+                            <a class="btn btn-default" href="{:U('Admin/Information/outbox')}"><i class="fa fa-times-circle"></i>{:L('BTN_CANCEL')}</a>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+            <!-- form -->
+        </div>
+
+    </div>
+</block>
+
+<block name="area_footer">
+    <script type="text/javascript">
+
+        $(function(){
+
+
+
+            $("#groups").change(function(){
+                $(".groupForm").submit();
+            });
+            $("#addtogroup").text("添加到"+$("#groups").find("option:selected").text());
+            $("#user_select2").select2({
+                placeholder: "输入用户uid或昵称查询"
+                ,
+                language: "zh-CN",
+                ajax: {
+                    url: "{:U('Member/select')}",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        var queryParameters = {
+                            q: params.term
+                        }
+
+                        return queryParameters;
+
+                    },
+                    processResults: function (data, page) {
+                        if(!data.info){
+                            data.info = new Array();
+                            data.info['nodata']="无相关数据";
+                        }
+                        // parse the results into the format expected by Select2.
+                        // since we are using custom formatting functions we do not need to
+                        // alter the remote JSON data
+                        return {
+                            results: data.info
+                        };
+                    },
+                    cache: true
+                },
+                minimumInputLength: 0,
+                templateSelection: function (repo) {
+                    return repo.nickname || repo.text;
+                },
+                templateResult: function (repo) {
+
+                    if (repo.loading) return repo.text;
+                    if(repo.nodata) return repo.nodata;
+//    				var markup = '<div>'+repo.nickname+'</div>';
+                    var markup = '<div>[uid:'+repo.uid+'] '+repo.nickname+'</div>';
+                    return markup;
+                },
+            });
+
+
+        })
+    </script>
+</block>

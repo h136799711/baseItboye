@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>博也开放平台</title>
+    <style type="text/css">
+        .main_wrp {
+            width: 100%;
+            text-align: center;
+        }
+        .auth_login{
+            max-width: 480px;
+            margin: auto;
+            background: #D4D7F4;
+            padding: 10px;
+            text-align: left;
+            line-height: 1.2;
+            font-size: 16px;
+        }
+        .form button{
+
+        }
+    </style>
+</head>
+<body onload="load();">
+    <div class="main_wrp">
+        <div class="auth_login">
+            <i>{$client_name}</i> 需要访问以下资源:
+
+            <form class="form" method="post">
+                <label>你要授权给客户端吗?</label><br />
+                <input type="hidden" id="auth" name="authorized" value="yes">
+                <button type="submit" onclick="setAuth('yes');" >是</button>
+                <button type="submit" onclick="setAuth('no');"  >否</button>
+            </form>
+
+         </div>
+    </div>
+<script type="text/javascript">
+    function setAuth(right){
+        var ele = document.getElementById("auth");
+        ele.value = right;
+    }
+</script>
+</body>
+</html>

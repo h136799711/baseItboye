@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+{:dump($access_token)}
+<form method="post" action="{:U('Api/Bicyle/add')}?access_token={$access_token}">
+    UID:
+    <input name="uid" value="2">
+    uuid:
+    <input name="uuid" value="uuid-uuid">
+    upload_time:
+    <input name="upload_time" value="{:time()}">
+    speed:
+    <input name="speed" value="{:rand(0,100)}">
+    heart_rate:
+    <input name="heart_rate" value="{:rand(0,100)}">
+    distance:
+    <input name="distance" value="{:rand(0,100)}">
+    total_distance:
+    <input name="total_distance" value="{:rand(0,100)}">
+    cost_time:
+    <input name="cost_time" value="{:rand(0,100)}">
+    calorie:
+    <input name="calorie" value="{:rand(0,100)}">
+    <button type="submit" >提交</button>
+
+</form>
+
+</body>
+</html>

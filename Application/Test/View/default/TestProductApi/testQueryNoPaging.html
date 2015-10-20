@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+{:dump($access_token)}
+<div>access_token: {$access_token['access_token']}</div>
+<div>expires_in: {$access_token['expires_in']}</div>
+<div>token_type: {$access_token['token_type']}</div>
+<div>scope: {$access_token['scope']}</div>
+<form action="{:U('Api/Product/queryNoPaging')}?access_token={$access_token['access_token']}" method="post">
+    <input name="pname" value="" placeholder="请输入搜索内容" /><input type="submit" value="搜索"/>
+</form>
+</body>
+</html>

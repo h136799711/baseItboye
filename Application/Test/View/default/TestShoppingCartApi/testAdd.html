@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+{:dump($access_token)}
+<div>access_token: {$access_token['access_token']}</div>
+<div>expires_in: {$access_token['expires_in']}</div>
+<div>token_type: {$access_token['token_type']}</div>
+<div>scope: {$access_token['scope']}</div>
+
+<form action="{:U('Api/ShoppingCart/add')}?access_token={$access_token['access_token']}" method="post">
+    <!--<input type="hidden" name="access_token" value="{$access_token['access_token']}" />-->
+    <input type="text" name="uid" value="95" placeholder="uid" /><br />
+
+    <input type="text" name="store_id" value="1" placeholder="store_id" /><br />
+    <input type="text" name="p_id" value="1" placeholder="p_id" /><br />
+    <input type="text" name="sku_id" value="1:1;2:5;3:8;" placeholder="sku_id"/><br />
+    <input type="text" name="sku_desc" value="品牌:雀巢;xxx:xxx" placeholder="sku_desc"/><br />
+    <input type="text" name="count" value="2" placeholder="count"/><br />
+    <input type="text" name="name" value="name" placeholder="name"/><br />
+    <input type="text" name="icon_url" value="xxxxx" placeholder="icon_url"/><br />
+    <input type="text" name="express" value="23" placeholder="express"/><br />
+    <input type="text" name="price" value="100" placeholder="price"/><br />
+    <input type="text" name="ori_price" value="200" placeholder="ori_price"/><br />
+    <input type="text" name="psku_id" value="88" placeholder="psku_id" /><br />
+    <button type="submit">添加</button>
+</form>
+
+</body>
+</html>

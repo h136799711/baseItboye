@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="keywords" content="{$seo.keywords|default=" "}" />
+    <meta name="description" content="{$seo.description|default=" "}" />
+    <meta name="author" content="{$cfg.owner|default=" Gooraye "}" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="yes" name="apple-touch-fullscreen" />
+    <meta content="telephone=no,email=no" name="format-detection" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+
+
+    <!-- 系统基本样式 -->
+    <link type="text/css" rel="stylesheet" href="__CDN__/amazeui/2.3.0/css/amazeui.min.css" />
+
+    <link type="text/css" rel="stylesheet" href="__CSS__/shop.css?v=__APP_VERSION__" />
+
+    <!-- 脚本 -->
+    <script type="text/javascript" src="__CDN__/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="__CDN__/amazeui/2.3.0/js/amazeui.min.js"></script>
+    <script type="text/javascript" src="__CDN__/common/mobile.js?v=__APP_VERSION__"></script>
+    <style>
+        .ul_exp{
+            list-style: none;
+        }
+        .ul_exp li{
+              border-left:1px solid #ccc;
+              /*border-bottom:1px solid #ccc;*/
+              padding-top: 0px;
+              padding-bottom: 50px;
+          }
+        .div_info{
+            padding-left: 20px;
+            font-size: 12px;
+            color: #ccc;
+        }
+
+        .ul_exp li.active .div_info{
+           color: green;
+        }
+
+        .ul_exp li.active .div_circle{
+            background-color: greenyellow;
+            border:1px solid green;
+        }
+
+        .div_circle{
+            width: 15px;
+            height: 15px;
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            position: relative;
+            margin-left: -9px;
+            margin-top: -30px;
+            background-color: #ccc;
+        }
+
+
+    </style>
+</head>
+<body>
+<h3>物流公司：{$result.result.company}</h3>
+<h3>订单号：{$result.result.no}</h3>
+<h3 style="border-bottom: 1px solid #ccc;padding-bottom: 5px;">物流跟踪</h3>
+<eq name="result.error_code" value="0">
+    <ul class="ul_exp">
+        <volist name="result.result.list" id="l" key="k">
+            <li
+                    <eq name="k" value="1">class="active"</eq>
+                    ><div class="div_info">{$l.remark}<br />{$l.datetime}</div><div class="div_circle"></div></li>
+        </volist>
+        <!--<li class="active"><div class="div_info">杭州市邮政速递物流公司已妥投<br />2015-08-29</div><div class="div_circle"></div></li>
+        <li><div class="div_info">杭州市从站点出发<br />2015-08-29</div><div class="div_circle"></div></li>
+        <li><div class="div_info">南通海门电子商务<br />2015-08-29</div><div class="div_circle"></div></li>
+        <li><div class="div_info">南通上门取件<br />2015-08-29</div><div class="div_circle"></div></li>-->
+    </ul>
+    <else />
+    <h3>获取物流信息获取错误</h3>
+</eq>
+<hr />
+
+<!--{$result}-->
+</body>
+</html>

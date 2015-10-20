@@ -1,0 +1,109 @@
+<extend name="template/base"/>
+<block name="area_header">
+
+</block>
+
+<block name="area_body">
+    <div class="col-lg-10 col-md-10 col-lg-offset-1 col-md-offset-1 clearfix">
+        <h2>Authorizatin Code模式token 获取测试</h2>
+
+        <empty name="code">
+        <form class="form-horizontal authForm" action="{:U('Api/Authorize/index')}" method="get">
+        <else/>
+        <form class="form-horizontal authForm" action="{:U('Api/Token/index')}" method="post">
+        </empty>
+            <div class="form-group">
+                <label class="control-label col-lg-2 col-md-2">Grant_Type</label>
+                <div class="col-lg-10 col-md-10">
+                    <input type="text" name="grant_type" class="form-control" value="authorization_code"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-lg-2 col-md-2">ClientID</label>
+                <div class="col-lg-10 col-md-10">
+                    <input type="text" name="client_id" class="form-control" value="by559a8de1c325c1"/>
+                </div>
+            </div>
+        <div class="form-group">
+            <label class="control-label col-lg-2 col-md-2">redirect_uri</label>
+            <div class="col-lg-10 col-md-10">
+                <input type="text" name="redirect_uri" class="form-control"  value="http://localhost/github/201507lanbao/index.php/Test/OAuth2/auth_code"/>
+            </div>
+        </div>
+            <empty name="code">
+                <div class="form-group">
+                    <label class="control-label col-lg-2 col-md-2">Rseponse_Type</label>
+                    <div class="col-lg-10 col-md-10">
+                        <input type="text" name="response_type" class="form-control" value="code"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-lg-2 col-md-2">state</label>
+                    <div class="col-lg-10 col-md-10">
+                        <input type="text" name="state" class="form-control"  value="xyz"/>
+                    </div>
+                </div>
+                <else/>
+                <div class="form-group">
+                    <label class="control-label col-lg-2 col-md-2">Client Secret</label>
+                    <div class="col-lg-10 col-md-10">
+                        <input type="text" name="client_secret" class="form-control" value="aedd16f80c192661016eebe3ac35a6e7"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-lg-2 col-md-2">Code</label>
+                    <div class="col-lg-10 col-md-10">
+                        <input type="text" name="code" class="form-control" value="{$code}"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-lg-2 col-md-2">state</label>
+                    <div class="col-lg-10 col-md-10">
+                        <input type="text" name="state" class="form-control"  value="{$state}"/>
+                    </div>
+                </div>
+            </empty>
+
+            <div class="form-group">
+                <label class="control-label col-lg-2 col-md-2">&nbsp;</label>
+                <div class="col-lg-10 col-md-10">
+                    <button type="submit" class="btn btn-sm btn-primary "  >提交</button>
+                </div>
+            </div>
+        </form>
+
+        <div class="well js_panel">
+            <pre>使用场景：
+            需要得到长期授权
+            OAuth客户端是Web应用服务器
+            OAuth访问令牌不宜泄露给用户的环境
+            </pre>
+
+        </div>
+    </div>
+</block>
+
+<block name="area_footer">
+    <script type="text/javascript">
+        $(function(){
+            $(".js_submit").click(function(ev){
+                var that = ev.target;
+                $(that).button("loading");
+                var form = $(".authForm");
+                var query = form.serialize();
+                var target = "{:U('Api/Authorize/index')}";
+                $.get(target, query).always(function() {
+                    setTimeout(function(){
+                        $(that).button("reset");
+                    },1400);
+                }).done(function(data) {
+                    console.log(data);
+                }).fail(function(data){
+                    var json = JSON.parseJSON(data.responseText);
+                    console.log(json);
+                });//end post
+
+            })
+        });
+    </script>
+</block>

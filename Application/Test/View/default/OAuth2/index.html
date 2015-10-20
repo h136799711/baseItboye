@@ -1,0 +1,22 @@
+<extend name="template/base"/>
+<block name="area_header">
+
+</block>
+
+<block name="area_body">
+    <div class="col-lg-10 col-md-10 col-lg-offset-1 col-md-offset-1 clearfix">
+        <h2>Token获取测试</h2>
+        <a href="{:U('Test/OAuth2/auth_code')}" class="btn btn-primary">验证码模式</a>
+        <a href="{:U('Test/OAuth2/implicit')}" class="btn btn-primary">隐式模式</a>
+        <a href="{:U('Test/OAuth2/client_credentials')}" class="btn btn-primary">Client_Credentials模式</a>
+        <a href="{:U('Test/OAuth2/user_credentials')}" class="btn btn-primary">User_Credentials</a>
+
+    </div>
+    <div class="col-lg-10 col-md-10 col-lg-offset-1 col-md-offset-1 clearfix">
+        <h2>Api权限测试测试</h2>
+        <a href="{:U('Test/OAuth2/authorize')}" class="btn btn-primary">验证码模式</a>
+    </div>
+</block>
+
+<block name="area_footer">
+</block>

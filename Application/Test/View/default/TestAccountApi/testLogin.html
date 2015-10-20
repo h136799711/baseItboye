@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+{:dump($access_token)}
+<div>access_token: {$access_token['access_token']}</div>
+<div>expires_in: {$access_token['expires_in']}</div>
+<div>token_type: {$access_token['token_type']}</div>
+<div>scope: {$access_token['scope']}</div>
+<form action="{:U('Api/User/login')}?access_token={$access_token['access_token']}" method="post">
+    <!--<input type="hidden" name="access_token" value="{$access_token['access_token']}" />-->
+    <input type="text" name="username" value="itboye">
+    <input type="text" name="password" value="1">
+    <button type="submit">登录</button>
+</form>
+
+
+
+
+</body>
+</html>

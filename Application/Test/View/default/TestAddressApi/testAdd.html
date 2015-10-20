@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+{:dump($access_token)}
+<div>access_token: {$access_token['access_token']}</div>
+<div>expires_in: {$access_token['expires_in']}</div>
+<div>token_type: {$access_token['token_type']}</div>
+<div>scope: {$access_token['scope']}</div>
+
+<form action="{:U('Api/Address/add')}?access_token={$access_token['access_token']}" method="post">
+    <!--<input type="hidden" name="access_token" value="{$access_token['access_token']}" />-->
+    <input type="text" name="uid" value="3" /><br />
+    <input type="text" name="country" value="中国" /><br />
+    <input type="text" name="province" value="杭州" /><br />
+    <input type="text" name="detailinfo" value="金沙湖2号3幢1111号" /><br />
+    <input type="text" name="city" value="杭州" /><br />
+    <input type="text" name="area" value="下沙" /><br />
+    <input type="text" name="contactname" value="隔壁老王" /><br />
+    <input type="text" name="mobile" value="18697893654" /><br />
+
+    <button type="submit">添加</button>
+</form>
+
+</body>
+</html>

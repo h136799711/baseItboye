@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+{:dump($access_token)}
+<div>access_token: {$access_token['access_token']}</div>
+<div>expires_in: {$access_token['expires_in']}</div>
+<div>token_type: {$access_token['token_type']}</div>
+<div>scope: {$access_token['scope']}</div>
+
+<form action="{:U('Api/ShoppingCart/update')}?access_token={$access_token['access_token']}" method="post">
+    <!--<input type="hidden" name="access_token" value="{$access_token['access_token']}" />-->
+    <input type="text" name="id" value="68" /><br />
+    <input type="text" name="count" value="26" placeholder="26" /><br />
+    <input type="text" name="express" value="24" /><br />
+    <input type="text" name="p_id" value="1" /><br />
+    <input type="text" name="psku_id" value="91" /><br />
+    <button type="submit">修改</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<extend name="template/base_index" />
+
+
+<block name="area_header">
+    <link src="__CDN__/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet" type="text/css" />
+
+    <link type="text/css" rel="stylesheet" href="__CDN__/select2/4.0.0/css/select2.min.css" />
+    <script type="text/javascript" src="__CDN__/select2/4.0.0/js/select2.full.js"></script>
+    <script type="text/javascript" src="__CDN__/select2/4.0.0/js/i18n/zh-CN.js"></script>
+    <link type="text/css" rel="stylesheet" href="__CDN__/select2/4.0.0/css/cosmo-skin.css" />
+</block>
+
+<block name="area_body">
+    {:W('Menus/topbar')}
+    <div class="admin-main container-fluid">
+        {:W('Menus/left')}
+        <div class="admin-main-content">
+            {:W('Menus/breadcrumb')}
+            <!-- form -->
+            <form class="form-horizontal well validateForm">
+                <fieldset>
+                    <legend>
+                        发送站内信</legend>
+                    <div class="form-group">
+                        <label for="inputtitle" class="col-md-2 col-lg-2 control-label">发件人ID</label>
+                        <div class="col-md-10 col-lg-10">
+
+                           <input type="text" class="required form-control input-short" name="id" value="{$record.uid}" id="inputtitle" placeholder="请输入用户ID" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputredirect_url" class="col-md-2 col-lg-2 control-label">标题</label>
+                        <div class="col-md-10 col-lg-10">
+                            <input type="text" class="required form-control input-normal" name="title" value="{$record.title}"  id="inputredirect_url" placeholder="请输入标题" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputtitle" class="col-md-2 col-lg-2 control-label">内容</label>
+                        <div class="col-md-10 col-lg-10">
+                            <textarea name="content" class="form-control" rows="5" readonly>{$record.content}</textarea>
+                            <div class="help-block">(您可以输入内容)</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="btns" class="col-md-2 col-lg-2 control-label">&nbsp;</label>
+                        <div class="col-lg-10 col-md-10">
+                            <a class="btn btn-default" href="{:U('Admin/Information/inbox')}"><i class="fa fa-reply"></i>返回</a>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+            <!-- form -->
+        </div>
+
+    </div>
+</block>
+
+<block name="area_footer">
+
+</block>

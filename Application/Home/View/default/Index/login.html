@@ -1,0 +1,43 @@
+<extend name="template/base_index" />
+
+<block name="area_header">
+	<style type="text/css">
+		.am-panel{ width: 550px; text-align: center; margin:10% auto;}
+		.am-panel-hd {height: 80px;padding: 30px;background-color: #FFFFFF !important;text-align: center;}
+		.disanfang{ margin-left: 30px; width: 140px;}
+		a{cursor: pointer;}
+	</style>
+</block>
+
+<block name="area_body">
+	<div class="am-panel am-panel-default">
+		<div class="am-panel-hd"><img src="__PUBLIC__/Home/Index/img/banma.png" height="40px" width="70px" ><font size="5">斑马平台用户登录</font></div>
+			<div class="am-panel-bd">
+			<div class="am-g">
+				<div class="am-u-md-8 am-u-sm-centered">
+					<form class="am-form">
+							<input type="text" placeholder="用户名"><br>
+							<input type="password" placeholder="密码"><br>
+						<button type="submit" class="am-btn am-btn-primary am-btn-block">登陆</button>
+						<br><font size="2"><a id="disanfang" href="javascript:void(0)">第三方应用登录</a><a style="margin-left: 20px;">忘记密码</a></font>
+						<div class="disanfang"><a style="color: orange;"><span class="am-icon-weibo"> </span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a style="color: darkgoldenrod;"><span class="am-icon-qq"></span></a></div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<h4 style="text-align: center;">杭州博也网络科技版权所有<br>{__RUNTIME__}</h4>
+</block>
+
+<block name="area_footer">
+<script type="text/javascript">
+	$(function(){
+		$('.disanfang').hide();
+		$('#disanfang').click(function(){
+			$('.disanfang').toggle(function(){
+				
+			})
+		})
+	})
+</script>
+</block>

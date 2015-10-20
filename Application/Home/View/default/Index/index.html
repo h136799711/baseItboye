@@ -1,0 +1,456 @@
+<extend name="template/base_index" />
+
+<block name="area_header">
+	
+	<link  href="__PUBLIC__/Home/Index/css/index.min.css" type="text/css">
+    <link rel="stylesheet" href="__PUBLIC__/Home/Index/css/base.css">
+	<style type="text/css">
+		.mini-cart {height: 40px !important;}
+		.hd-show-item{height: 170px; width: 330px; float: left; }
+		.top,.hd-show-item,.xm-star-goods-item,.brick-item{border: 1px solid #000000;}
+		.xm-star-goods-item{ width: 309px; height: 309px; float: left; }
+		.brick-item{height: 309px; width: 309px; float: left;}
+		.top{  height: 70px; padding: 16px 30px 16px 65px; list-style: none; margin-top: 20px;}
+		.board-section{height: 80px; text-align: center;}
+	</style>
+</block>
+
+<block name="area_body">
+	
+	<div class="site-topbar">
+		<div class="container">
+			<div class="topbar-nav">
+				<a href="" >小米网</a><span class="sep">|</span>
+				<a href="" >小米网</a><span class="sep">|</span>
+				<a href="" >小米网</a><span class="sep">|</span>
+				<a href="" >小米网</a><span class="sep">|</span>
+				<a href="" >小米网</a><span class="sep">|</span>
+			</div>
+			<div class="topbar-info J_userInfo">
+				<a target="_blank" href="{:U('Home/Index/login')}">登录</a><span class="sep">|</span>
+				<a target="_blank" href="{:U('Home/Index/register')}">注册</a>
+			</div>
+		</div>
+	</div>
+	<!-- .site-topbar END -->
+
+	<div class="site-header container">
+		<div class="site-logo">
+			<a ><img height="70px" width="100px" style="margin-top: -18px; margin-left: 50px;" src="__PUBLIC__/Home/Index/img/banma.png"></a>
+		</div>
+		<div class="header-info">
+			<div class="search-section">
+				<form id="J_searchForm" class="search-form clearfix" action="" method="post">
+					<input class="search-text" type="search" name="keyword" placeholder="搜索您需要的商品">
+					<input type="submit" class="search-btn iconfont" value="">
+					<!--[if IE 6]><div class="ie6-fix"></div><![endif]-->
+					
+				</form>
+			</div>
+			<div class="cart-section">
+				<a  class="mini-cart" href="{:U('Home/ShopCart/shopcart')}" ><i class="iconfont"></i>购物车<span class="mini-cart-num J_cartNum">(1)</span></a>
+				<div id="J_miniCartList" class="mini-cart-list">
+					<p class="loading">数据加载中，请稍后...</p>
+				</div>
+			</div>
+		</div>
+		<div class="header-nav clearfix">
+			<div id="J_categoryContainer" class="nav-category nav-category-toggled">
+				<a class="btn-category-list" >全部商品分类</a>
+				<div class="nav-category-section" style="display: block;">
+					<ul class="nav-category-list">
+						<li class="nav-category-item nav-category-item-first">
+							<div class="nav-category-content">
+								<a class="title" >购买手机</a>
+								<div class="links">
+									<a >小米Note</a>
+									<a>小米4</a>
+									<a >红米</a>
+									<a >红米Note</a>
+								</div>
+							</div>
+						</li>
+						
+					</ul>
+				</div>
+			</div>
+			<div class="nav-main">
+				<ul class="nav-main-list J_menuNavMain clearfix">
+
+					<li class="nav-main-item">
+						<a ><span class="text">首页</span></a>
+					</li>
+
+					<li class="nav-main-item">
+						<a ><span class="text">小米手机</span><span class="arrow"></span></a>
+						
+					</li>
+
+					<li class="nav-main-item">
+						<a ><span class="text">红米</span><span class="arrow"></span></a>
+						
+					</li>
+
+					<li class="nav-main-item">
+						<a><span class="text">小米平板</span></a>
+					</li>
+
+					<li class="nav-main-item">
+						<a ><span class="text">小米电视</span><span class="arrow"></span></a>
+						
+					</li>
+
+					<li class="nav-main-item">
+						<a ><span class="text">盒子</span><span class="arrow"></span></a>
+						
+					</li>
+
+					<li class="nav-main-item">
+						<a ><span class="text">路由器</span><span class="arrow"></span></a>
+						
+					</li>
+
+					<li class="nav-main-item">
+						<a ><span class="text">合约机</span></a>
+					</li>
+
+					<li class="nav-main-item">
+						<a ><span class="text">服务</span></a>
+					</li>
+
+					<li class="nav-main-item">
+						<a ><span class="text">社区</span></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		
+	</div>
+	<!-- .site-header END -->
+	<!-- Main Content START -->
+	<div class="container">
+		<div class="row">
+			<div class="col col-16 offset4">
+				<div class="home-slider">
+					<div id="J_homeSlider" class="xm-slider" >
+						<div class="xm-slider-container" style=" position: relative; width: 992px; height: 420px;">
+							<div class="xm-slider-control" style="position: relative; left: 0px; width: 992px; height: 420px;">
+								<div class="am-slider am-slider-default" data-am-flexslider id="demo-slider-0" style="height: 400px;">
+								  <ul class="am-slides" style="height: 400px;">
+								    <li><img style="height: 400px;" src="http://s.amazeui.org/media/i/demos/bing-1.jpg" /></li>
+								    <li><img style="height: 400px;" src="http://s.amazeui.org/media/i/demos/bing-2.jpg" /></li>
+								    <li><img style="height: 400px;" src="http://s.amazeui.org/media/i/demos/bing-1.jpg" /></li>
+								    <li><img style="height: 400px;" src="http://s.amazeui.org/media/i/demos/bing-2.jpg" /></li>
+								    <li><img style="height: 400px;" src="http://s.amazeui.org/media/i/demos/bing-1.jpg" /></li>
+								    <li><img style="height: 400px;" src="http://s.amazeui.org/media/i/demos/bing-2.jpg" /></li>
+								  </ul>
+								</div>
+							</div>
+						</div>
+
+						
+					</div>
+				</div>
+				
+			</div>
+		</div>
+
+		<div class="home-star-goods">
+			<div class="xm-plain-box J_starGoodsCarousel">
+				<div class="box-hd">
+					<h3 class="title">小米明星单品<a >根据机型选配件</a></h3>
+					<div class="more">
+						
+					</div>
+				</div>
+				<div class="box-bd">
+					<div class="xm-star-goods-list-wrap J_carouselWrap" style="height: 308px;">
+						<div class="xm-star-goods-list clearfix J_carouselList" style="width: 2480px; margin-left: 0px;">
+							<div class="xm-star-goods-item">
+								<div class="item-content">
+									<span class="item-thumb">
+                                  <a ></a>
+                                </span>
+									<span class="item-title"><a></a></span>
+									<span class="item-desc">40/48/49/55英寸 现货购买</span>
+								</div>
+							</div>
+							<div class="xm-star-goods-item">
+								<div class="item-content">
+									<span class="item-thumb">
+                                  <a ></a>
+                                </span>
+									<span class="item-title"><a></a></span>
+									<span class="item-desc">40/48/49/55英寸 现货购买</span>
+								</div>
+							</div>
+							<div class="xm-star-goods-item">
+								<div class="item-content">
+									<span class="item-thumb">
+                                  <a ></a>
+                                </span>
+									<span class="item-title"><a></a></span>
+									<span class="item-desc">40/48/49/55英寸 现货购买</span>
+								</div>
+							</div>
+							<div class="xm-star-goods-item">
+								<div class="item-content">
+									<span class="item-thumb">
+                                  <a ></a>
+                                </span>
+									<span class="item-title"><a></a></span>
+									<span class="item-desc">40/48/49/55英寸 现货购买</span>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- .home-star-goods END -->
+
+		<div class="home-star-goods">
+			<div class="xm-plain-box J_starGoodsCarousel">
+				<div class="box-hd">
+					<h3 class="title">新货上架</h3>
+					<div class="more">
+						<div class="xm-recommend-page clearfix">
+							
+						</div>
+					</div>
+				</div>
+				<div class="box-bd">
+					<div class="xm-star-goods-list-wrap J_carouselWrap" style="height: 308px;">
+						<div class="xm-star-goods-list clearfix J_carouselList" style="width: 2480px; margin-left: 0px;">
+							<div class="xm-star-goods-item">
+								<div class="item-content">
+									<span class="item-thumb">
+                                  <a ></a>
+                                </span>
+									<span class="item-title"><a></a></span>
+									<span class="item-desc">40/48/49/55英寸 现货购买</span>
+								</div>
+							</div>
+							<div class="xm-star-goods-item">
+								<div class="item-content">
+									<span class="item-thumb">
+                                  <a ></a>
+                                </span>
+									<span class="item-title"><a></a></span>
+									<span class="item-desc">40/48/49/55英寸 现货购买</span>
+								</div>
+							</div>
+							<div class="xm-star-goods-item">
+								<div class="item-content">
+									<span class="item-thumb">
+                                  <a ></a>
+                                </span>
+									<span class="item-title"><a></a></span>
+									<span class="item-desc">40/48/49/55英寸 现货购买</span>
+								</div>
+							</div>
+							<div class="xm-star-goods-item">
+								<div class="item-content">
+									<span class="item-thumb">
+                                  <a ></a>
+                                </span>
+									<span class="item-title"><a></a></span>
+									<span class="item-desc">40/48/49/55英寸 现货购买</span>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- .home-new-goods END -->
+
+		<div class="home-hot-goods">
+			<div class="xm-plain-box">
+				<div class="box-hd">
+					<h3 class="title">大家都喜欢</h3>
+				</div>
+				<div class="box-bd">
+					<div class="row">
+						<div class="col col-15">
+							<div class="brick-list">
+
+								<div class="brick-item ">
+									<div class="item">
+										<div class="item-content">
+											<a>
+											<span class="item-thumb">
+                                                <img >
+                                            </span>
+											</a>
+										</div>
+									</div>
+								</div>
+
+								<div class="brick-item ">
+									<div class="item">
+										<div class="item-content">
+											<a>
+											<span class="item-thumb">
+                                                <img >
+                                            </span>
+											</a>
+										</div>
+									</div>
+								</div>
+
+								<div class="brick-item ">
+									<div class="item">
+										<div class="item-content">
+											<a>
+											<span class="item-thumb">
+                                                <img >
+                                            </span>
+											</a>
+										</div>
+									</div>
+								</div>
+
+								<div class="brick-item">
+									<div class="item">
+										<div class="item-content">
+											<a>
+											<span class="item-thumb">
+                                                <img >
+                                            </span>
+											</a>
+										</div>
+									</div>
+								</div>
+
+								<div class="brick-item">
+									<div class="item">
+										<div class="item-content">
+											<a>
+											<span class="item-thumb">
+                                                <img >
+                                            </span>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col col-5">
+							<div class="board-section">
+								<h3><span>HOT</span>热销商品排行</h3>
+								<ul class="board-list">
+
+									<li class="top">
+										<span class="item-info">
+                                        <span class="item-title"><a >标题</a></span>
+										<span class="item-price">14.9元 <del>19.9元</del></span>
+										</span>
+										<span class="item-thumb">
+                                        <a href=''><img src="">图片</a>
+                                    </span>
+										<span class="item-num">1</span>
+									</li>
+
+									<li class="top">
+										<span class="item-info">
+                                        <span class="item-title"><a >标题</a></span>
+										<span class="item-price">14.9元 <del>19.9元</del></span>
+										</span>
+										<span class="item-thumb">
+                                        <a href=''><img src="">图片</a>
+                                    </span>
+										<span class="item-num">1</span>
+									</li>
+									<li class="top">
+										<span class="item-info">
+                                        <span class="item-title"><a >标题</a></span>
+										<span class="item-price">14.9元 <del>19.9元</del></span>
+										</span>
+										<span class="item-thumb">
+                                        <a href=''><img src="">图片</a>
+                                    </span>
+										<span class="item-num">1</span>
+									</li>
+									<li class="top">
+										<span class="item-info">
+                                        <span class="item-title"><a >标题</a></span>
+										<span class="item-price">14.9元 <del>19.9元</del></span>
+										</span>
+										<span class="item-thumb">
+                                        <a href=''><img src="">图片</a>
+                                    </span>
+										<span class="item-num">1</span>
+									</li>
+									<li class="top">
+										<span class="item-info">
+                                        <span class="item-title"><a >标题</a></span>
+										<span class="item-price">14.9元 <del>19.9元</del></span>
+										</span>
+										<span class="item-thumb">
+                                        <a href=''><img src="">图片</a>
+                                    </span>
+										<span class="item-num">1</span>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+	</div>
+	
+	<div class="site-footer">
+		<div class="container">
+			<div class="footer-service">
+				<ul class="list-service clearfix">
+					<li>
+						<a>
+							<i class="iconfont"></i>
+							<strong>1小时快修服务</strong>
+						</a>
+					</li>
+					<li>
+						<a >
+							<i class="iconfont"></i>
+							<strong>7天无理由退货</strong>
+						</a>
+					</li>
+					<li>
+						<a >
+							<i class="iconfont"></i>
+							<strong>15天免费换货</strong>
+						</a>
+					</li>
+					<li>
+						<a >
+							<i class="iconfont"></i>
+							<strong>满150元包邮</strong>
+						</a>
+					</li>
+					<li>
+						<a rel="nofollow" >
+							<i class="iconfont"></i>
+							<strong>520余家售后网点</strong>
+						</a>
+					</li>
+
+				</ul>
+			</div>
+			
+			
+		</div>
+	</div>
+	<h4 style="text-align: center;">杭州博也网络科技版权所有<br>{__RUNTIME__}</h4>
+
+	
+</block>
+
+<block name="area_footer">
+
+</block>

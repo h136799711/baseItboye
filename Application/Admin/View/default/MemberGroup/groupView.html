@@ -1,0 +1,79 @@
+<extend name="template/base_index" />
+
+
+<block name="area_header">
+    <link src="__CDN__/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet" type="text/css" />
+
+    <link type="text/css" rel="stylesheet" href="__CDN__/select2/4.0.0/css/select2.min.css" />
+    <script type="text/javascript" src="__CDN__/select2/4.0.0/js/select2.full.js"></script>
+    <script type="text/javascript" src="__CDN__/select2/4.0.0/js/i18n/zh-CN.js"></script>
+    <link type="text/css" rel="stylesheet" href="__CDN__/select2/4.0.0/css/cosmo-skin.css" />
+</block>
+
+<block name="area_body">
+    {:W('Menus/topbar')}
+    <div class="admin-main container-fluid">
+        {:W('Menus/left')}
+        <div class="admin-main-content">
+            {:W('Menus/breadcrumb')}
+            <!-- form -->
+            <form class="form-horizontal well validateForm">
+                <fieldset>
+                    <legend>
+                        会员等级查看</legend>
+                    <div class="form-group">
+                        <label for="name" class="col-md-2 col-lg-2 control-label">等级名称</label>
+                        <div class="col-md-10 col-lg-10">
+                            <input type="text" class="required form-control input-short" name="name" id="name" value="{$view.name}" placeholder="请输入等级名称" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="remark" class="col-md-2 col-lg-2 control-label">等级描述</label>
+                        <div class="col-md-10 col-lg-10">
+                            <textarea name="remark" id="remark" class="form-control" rows="5" readonly>{$view.remark}</textarea>
+                            <div class="help-block">(您可以输入内容)</div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group " >
+                        <label for="discount_ratio" class="col-md-2 col-lg-2 control-label">优惠比例</label>
+                        <div class="col-md-10 col-lg-10" >
+                            <input type="text" class="required input-short" style="padding: 6px;border-radius: 5px;border: 1px solid #ccc" name="discount_ratio" id="discount_ratio" value="{$view['discount_ratio']*100}"  placeholder="请输入优惠比例" disabled>%
+                            <span class="help-block" style="clear: both">(请输入返佣比例,单位%)</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="commission_ratio" class="col-md-2 col-lg-2 control-label">返佣比例</label>
+                        <div class="col-md-10 col-lg-10">
+                            <input type="text" class="required input-short" style="padding: 6px;border-radius: 5px;border: 1px solid #ccc;" name="commission_ratio" id="commission_ratio"  value="{$view['commission_ratio']*100}"  placeholder="请输入返佣比例" disabled>%
+                            <span class="help-block" style="clear: both">(请输入返佣比例,单位%)</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="conditions" class="col-md-2 col-lg-2 control-label">条件</label>
+                        <div class="col-md-10 col-lg-10">
+                            <input type="text" class="required input-normal" style="padding: 6px;border-radius: 5px;border: 1px solid #ccc" name="conditions" id="conditions" value="{$view.conditions}" placeholder="请输入达成成交单数" disabled>
+                            <span class="help-block" style="clear: both">(请输入达成成交单数)</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="btns" class="col-md-2 col-lg-2 control-label">&nbsp;</label>
+                        <div class="col-lg-10 col-md-10">
+                            <a class="btn btn-default" href="{:U('Admin/MemberGroup/groupIndex')}"><i class="fa fa-times-circle"></i>{:L('BTN_BACK')}</a>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+            <!-- form -->
+        </div>
+
+    </div>
+</block>
+
+<block name="area_footer">
+
+</block>

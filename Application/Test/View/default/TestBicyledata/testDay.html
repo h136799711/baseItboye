@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+{:dump($access_token)}
+<form method="post" action="{:U('Api/Bicyle/day')}?access_token={$access_token}">
+    UID:
+    <input name="uid" value="2">
+    uuid:
+    <input name="uuid" value="uuid-uuid">
+    time:
+    <input name="time" value="{:strtotime(date('Y-m-d',time()))}">
+
+    <button type="submit" >提交</button>
+
+</form>
+
+</body>
+</html>

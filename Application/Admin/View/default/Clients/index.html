@@ -1,0 +1,85 @@
+<extend name="template/base_index" />
+
+
+<block name="area_header">
+
+    <script type="text/javascript" src="__CDN__/zeroclipboard/2.2.0/ZeroClipboard.min.js" ></script>
+
+
+</block>
+
+<block name="area_body">
+    {:W('Menus/topbar')}
+    <div class="admin-main container-fluid">
+        {:W('Menus/left')}
+        <div class="admin-main-content">
+            {:W('Menus/breadcrumb')}
+
+            <div class="filter-controls">
+
+            </div>
+            <div class="form-control-static">
+                <a href="{:U('Admin/Clients/add')}" class="btn btn-primary btn-sm" ><i class="fa fa-plus"></i>添加</a>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped table table-hover  table-condensed">
+                    <thead>
+                    <tr>
+                        <th>
+                            <input type="checkbox" class="selectall" onclick="myUtils.selectall(this,'.selectitem');" />client_id
+                        <th>
+                            应用名称
+                        </th>
+                        <th>
+                            secret
+                        </th>
+                        <th>
+                            {:L('OPERATOR')}
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <empty name="list">
+                        <tr>
+                            <td colspan="4" class="text-center">{:L('NO_DATA')}</td>
+                        </tr>
+                    </empty>
+                    <volist name="list" id="vo">
+                        <tr>
+                            <td>
+                                <input type="checkbox" value="{$vo.id}" name="ids[]" class="selectitem" />{$vo.client_id}<a href="javascript:void(0)" data-clipboard-text="{$vo.client_id}" class="btn btn-sm btn-primary js_copy" data-id="{$vo.client_id}">复制Client_ID</a></td>
+                            <td>{$vo.client_name}</td>
+                            <td>{$vo.client_secret}<a data-clipboard-text="{$vo.client_secret}"  href="javascript:void(0)" class="btn btn-sm btn-primary js_copy" >复制Client_Secret</a></td>
+
+                            <td>
+                                <a href="{:U('Admin/Clients/view',array('client_id'=>$vo['client_id']))}" class="btn btn-default btn-sm"><i class="fa fa-eye"></i>{:L('BTN_VIEW')}</a>
+                                <if condition=" is_administrator() ">
+                                <a href="{:U('Admin/Clients/delete',array('client_id'=>$vo['client_id']))}" class="btn btn-danger btn-sm ajax-get confirm"><i class="fa fa-trash-o"></i> {:L('BTN_DELETE')}</a>
+                                </if>
+                            </td>
+                        </tr>
+                    </volist>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</block>
+
+<block name="area_footer">
+
+    <script >
+        var client = new ZeroClipboard( $(".js_copy") );
+
+        client.on( "ready", function( readyEvent ) {
+
+            client.on( "aftercopy", function( event ) {
+//                console.log(event);
+                alert("复制成功  " + event.data["text/plain"] );
+            } );
+        } );
+
+    </script>
+</block>

@@ -1,0 +1,72 @@
+<extend name="template/base_index" />
+
+
+<block name="area_header">
+    <link src="__CDN__/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet" type="text/css" />
+
+    <link type="text/css" rel="stylesheet" href="__CDN__/select2/4.0.0/css/select2.min.css" />
+    <link type="text/css" rel="stylesheet" href="__CDN__/select2/4.0.0/css/cosmo-skin.css" />
+</block>
+
+<block name="area_body">
+    {:W('Menus/topbar')}
+    <div class="admin-main container-fluid">
+        {:W('Menus/left')}
+        <div class="admin-main-content">
+            {:W('Menus/breadcrumb')}
+            <!-- form -->
+            <form class="form-horizontal well validateForm">
+                <fieldset>
+                    <legend>
+                        客户端应用查看</legend>
+                    <div class="form-group">
+                        <label for="inputtitle" class="col-md-2 col-lg-2 control-label">应用\客户端名称</label>
+                        <div class="col-md-10 col-lg-10">
+                            {$vo.client_name}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputredirect_url" class="col-md-2 col-lg-2 control-label">回调URL</label>
+                        <div class="col-md-10 col-lg-10">
+                            {$vo.redirect_uri}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputscope" class="col-md-2 col-lg-2 control-label">权限范围</label>
+                        <div class="col-md-10 col-lg-10 ">
+                            {$vo.scope}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputgranttypes" class="col-md-2 col-lg-2 control-label">支持授权类型</label>
+                        <div class="col-md-10 col-lg-10 ">
+                            <select multiple="multiple" name="grant_types" class="form-control">
+                                <option value="password">password</option>
+                                <option value="client_credentials">client_credentials</option>
+                                <option value="refresh_token">refresh_token</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="btns" class="col-md-2 col-lg-2 control-label">&nbsp;</label>
+                        <div class="col-lg-10 col-md-10">
+                            <a target-form="validateForm" class="ajax-post btn btn-primary" href="{:U('Admin/Clients/add')}" autofocus="autofocus"><i class="fa fa-save"></i> {:L('BTN_SAVE')}</a>
+                            <a class="btn btn-default" href="{:U('Admin/Clients/index')}"><i class="fa fa-times-circle"></i>{:L('BTN_CANCEL')}</a>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+            <!-- form -->
+        </div>
+
+    </div>
+</block>
+
+<block name="area_footer">
+
+    <script>
+        $(function() {
+
+        });
+    </script>
+</block>

@@ -1,0 +1,173 @@
+<extend name="template/base_index" />
+
+
+<block name="area_header">
+  <link src="__CDN__/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet" type="text/css" />
+<!--
+ <link type="text/css" rel="stylesheet" href="__CDN__/select2/4.0.0/css/select2.min.css" />
+    <script type="text/javascript" src="__CDN__/select2/4.0.0/js/select2.full.js"></script>
+    <script type="text/javascript" src="__CDN__/select2/4.0.0/js/i18n/zh-CN.js"></script>-->
+    <link type="text/css" rel="stylesheet" href="__CDN__/select2/4.0.0/css/cosmo-skin.css" />
+    <link rel="stylesheet" type="text/css" href="__CDN__/comp/wxuploader.css" />
+    <link type="text/css" rel="stylesheet" href="__CDN__/jquery-uploadify/3.2.1/uploadify.css" />
+    <script type="text/javascript" src="__CDN__/jquery-uploadify/3.2.1/jquery.uploadify.min.js"></script>
+</block>
+
+<block name="area_body">
+    {:W('Menus/topbar')}
+    <div class="admin-main container-fluid">
+        {:W('Menus/left')}
+        <div class="admin-main-content">
+            {:W('Menus/breadcrumb')}
+            <!-- form -->
+            <form class="form-horizontal well validateForm">
+                <fieldset>
+                    <legend>
+                        会员等级添加</legend>
+                    <div class="form-group">
+                        <label for="name" class="col-md-2 col-lg-2 control-label">等级名称</label>
+                        <div class="col-md-10 col-lg-10">
+                            <input type="text" class="required form-control input-short" name="name" id="name" placeholder="请输入等级名称">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="remark" class="col-md-2 col-lg-2 control-label">等级描述</label>
+                        <div class="col-md-10 col-lg-10">
+                            <textarea name="remark" id="remark" class="form-control" rows="5"></textarea>
+                            <div class="help-block">(您可以输入内容)</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="iconurl" class="col-md-2 col-lg-2 control-label">图片地址</label>
+                        <div class="col-md-10 col-lg-10">
+                            <input type="hidden" class="" name="iconurl" id="iconurl" placeholder="请给图片起个标题或默认">
+                            <!-- 图片选择DOM结构 -->
+                            <div class="wxuploaderimg clearfix banner" data-maxitems="1">
+                                <div class="img-preview clearfix" >
+
+                                </div>
+                                <div class="add">
+                                    <i class="fa fa-plus"></i>
+                                </div>
+                            </div>
+                            <!-- 图片选择DOM结构 -->
+
+                            <div class="help-block">(上传等级图标)</div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group " >
+                        <label for="discount_ratio" class="col-md-2 col-lg-2 control-label">优惠比例</label>
+                        <div class="col-md-10 col-lg-10" >
+                            <input type="text" class="required input-short" style="padding: 6px;border-radius: 5px;border: 1px solid #ccc" name="discount_ratio" id="discount_ratio"  placeholder="请输入优惠比例" >%
+                            <span class="help-block" style="clear: both">(请输入返佣比例,单位%)</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="commission_ratio" class="col-md-2 col-lg-2 control-label">返佣比例</label>
+                        <div class="col-md-10 col-lg-10">
+                            <input type="text" class="required input-short" style="padding: 6px;border-radius: 5px;border: 1px solid #ccc" name="commission_ratio" id="commission_ratio" placeholder="请输入返佣比例">%
+                            <span class="help-block" style="clear: both">(请输入返佣比例,单位%)</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="conditions" class="col-md-2 col-lg-2 control-label">条件</label>
+                        <div class="col-md-10 col-lg-10">
+                            <input type="text" class="required input-normal" style="padding: 6px;border-radius: 5px;border: 1px solid #ccc" name="conditions" id="conditions" placeholder="请输入达成成交单数">
+                            <span class="help-block" style="clear: both">(请输入达成成交单数)</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="btns" class="col-md-2 col-lg-2 control-label">&nbsp;</label>
+                        <div class="col-lg-10 col-md-10">
+                            <a target-form="validateForm" class="ajax-post btn btn-primary" href="{:U('Admin/MemberGroup/addGroup')}" onclick="return getData();"  autofocus="autofocus"><i class="fa fa-save"></i> {:L('BTN_SAVE')}</a>
+                            <a class="btn btn-default" href="{:U('Admin/MemberGroup/groupIndex')}"><i class="fa fa-times-circle"></i>{:L('BTN_CANCEL')}</a>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+            <!-- form -->
+            <include file="template/wxpicture" />
+        </div>
+
+    </div>
+
+</block>
+
+<block name="area_footer">
+    <!--
+    <script type="text/javascript">
+
+        $(function(){
+
+
+
+            $("#groups").change(function(){
+                $(".groupForm").submit();
+            });
+            $("#addtogroup").text("添加到"+$("#groups").find("option:selected").text());
+            $("#user_select2").select2({
+                placeholder: "输入用户uid或昵称查询"
+                ,
+                language: "zh-CN",
+                ajax: {
+                    url: "{:U('Member/select')}",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        var queryParameters = {
+                            q: params.term
+                        }
+
+                        return queryParameters;
+
+                    },
+                    processResults: function (data, page) {
+                        if(!data.info){
+                            data.info = new Array();
+                            data.info['nodata']="无相关数据";
+                        }
+                        // parse the results into the format expected by Select2.
+                        // since we are using custom formatting functions we do not need to
+                        // alter the remote JSON data
+                        return {
+                            results: data.info
+                        };
+                    },
+                    cache: true
+                },
+                minimumInputLength: 0,
+                templateSelection: function (repo) {
+                    return repo.nickname || repo.text;
+                },
+                templateResult: function (repo) {
+
+                    if (repo.loading) return repo.text;
+                    if(repo.nodata) return repo.nodata;
+//    				var markup = '<div>'+repo.nickname+'</div>';
+                    var markup = '<div>[uid:'+repo.uid+'] '+repo.nickname+'</div>';
+                    return markup;
+                },
+            });
+
+
+        })
+    </script>
+-->
+    <script type="text/javascript">
+        function getData(){
+            var img = $(".wxuploaderimg img").attr("data-imageid");
+            $("#iconurl").val(img);
+            return true;
+        }
+
+        $(function(){
+            wxuploadimg.init({cont:".wxuploaderimg"});
+        });
+    </script>
+</block>

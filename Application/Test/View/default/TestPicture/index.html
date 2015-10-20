@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<for start="1" end="30">
+    <img src="{:U('Api/Picture/index')}?access_token={$access_token['access_token']}&id={:($i+270)}&size=60" alt="60" />
+    <img src="{:U('Api/Picture/index')}?access_token={$access_token['access_token']}&id={:($i+270)}&size=120" alt="120" />
+    <img src="{:U('Api/Picture/index')}?access_token={$access_token['access_token']}&id={:($i+270)}&size=360" alt="360" />
+    <img src="{:U('Api/Picture/index')}?access_token={$access_token['access_token']}&id={:($i+270)}&size=480" alt="480" />
+    <img src="{:U('Api/Picture/index')}?access_token={$access_token['access_token']}&id={:($i+270)}&size=960" alt="960" />
+</for>
+
+<!--<form enctype="multipart/form-data" action="{:U('Api/File/upload')}?access_token={$access_token['access_token']}" method="post">-->
+
+    <!--<input type="text" name="type" value="other">-->
+    <!--<input type="text" name="uid" value="70"/>-->
+    <!--<input type="file" name="image" />-->
+    <!--<button type="submit" value="提交">提交</button>-->
+<!--</form>-->
+
+<!--<img src="http://localhost/github/itboye20150817/api.php/Picture/index?id=0">-->
+
+<!--<form action="{:U('Api/Picture/index')}">-->
+    <!--<input type="text" name="id" value="10"/>-->
+    <!--<input type="text" name="size" value="0"/>-->
+    <!--<input type="submit"  value="提交"/>-->
+<!--</form>-->
+<!--<img src="{:U('Api/Picture/index',array('id'=>10,'size'=>0))}" />-->
+</body>
+</html>
