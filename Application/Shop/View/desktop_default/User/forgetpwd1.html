@@ -1,0 +1,51 @@
+<extend name="desktop_default/template/base_index2" />
+
+<block name="area_header">
+	<link rel="stylesheet" href="__PUBLIC__/Home/Index/css/base.css">
+	<style type="text/css">
+	body {
+			background-color: #F5F5F5;
+		}
+		.am-panel{ width: 550px; text-align: center; margin:10% auto;}
+		.am-panel-hd {height: 80px;padding: 30px;background-color: #FFFFFF !important;text-align: center;}
+		.disanfang{ margin-left: 30px; width: 140px;}
+		.fm a{cursor: pointer; color: orangered;}
+		
+		.container{height: 80px; background-color: white; width: 100%; min-width: 1100px;}
+		.fm input{ height: 50px; width: 300px;}
+	</style>
+</block>
+
+<block name="area_body">
+	<include file="desktop_default/width/right" />
+	<include file="desktop_default/width/top"/>
+		<div class=" container">
+		<include file="desktop_default/width/daohang"/>
+	</div><br>
+	<div style="  width: 1080px; margin: 0 auto; height: 50px; background-color: white; ">
+		<a href="{:U('Shop/User/index')}"><img height="70px" style="margin-left: -3px; margin-top: -5px;" src="__IMG__/userinfo.png"></a>
+		<font color="#8C8C8C">找回您丢失的密码!</font>
+	</div><br>
+	<div style="background-color: white; font-size: 14px; height: 400px; width: 600px; text-align: center; margin: 0 auto; padding: 20px;">
+		<br><br>
+		<form class="fm" method="post" action="{:U('Shop/User/forgetpwd2')}">
+			<input type="text" name="uname" placeholder="  用户名"><br><br>
+			<button  style="width: 300px; height: 50px;"  class="btn btn-primary am-btn am-btn-primary am-btn-block" autofocus="autofocus">下一步</button>
+		</form>
+	</div>
+	<br>		
+		 <include file="desktop_default/width/floor" />
+</block>
+
+<block name="area_footer">
+<script type="text/javascript">
+	$(function(){
+		$('.disanfang').hide();
+		$('#disanfang').click(function(){
+			$('.disanfang').toggle(function(){
+				
+			})
+		})
+	})
+</script>
+</block>

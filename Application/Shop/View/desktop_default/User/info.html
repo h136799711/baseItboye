@@ -1,0 +1,101 @@
+<extend name="desktop_default/template/base_index2" />
+
+<block name="area_header">
+	<link  href="__PUBLIC__/Home/Index/css/index.min.css" type="text/css">
+	<link rel="stylesheet" href="__PUBLIC__/Home/Index/css/base.css">
+	<style type="text/css">
+		.all {
+			width:70%;
+			margin: 0 auto;
+			background-color: #F5F5F5;
+			margin-left: 25%;
+		}
+		body{background-color: #F5F5F5;}
+		.tp {
+			padding: 80px;
+		}
+		.div_left{width: 20%;margin: 20px;float: left;background:white}
+			.div_left dl{margin:0 auto; width:70%;margin-top:50px;margin-bottom:50px;}
+				.div_left dl dt{font-size: 20px;font-weight: 100; color: orangered;}
+				.div_left dl dd{padding-left:25px;font-size: 16px;padding-top: 10px;}
+					.div_left dl dd a:visited{color:#ccc}
+					.div_left dl dd a:hover{color:#FF6700}
+					.div_left dl dd a.dd_search{color:#FF6700}
+		.all font {
+		
+			margin-left: 40px;
+		}
+		.tab {
+			padding: 30px;
+			
+		}
+		.tabs{
+			padding: 30px;
+			background-color: #FFFFFF;}
+		.all a {
+			color: #000000;
+		}
+		.all a:hover {
+			color: orangered;
+		}
+		.sed {
+			color: orangered;
+		}
+		.am-tab-panel {
+			background-color: #FFFFFF;
+		}
+		.mm{margin-top: 32px; margin-left: 110px;}
+		.headimg{ float: right; position: relative; float: right; margin-right: 8%; margin-top: -4%; font-size: 12px;}
+		.userinfo{float: left; margin-left: -100px; margin-top: 30px;}
+		.container{height: 80px; background-color: white; width: 100%; min-width: 1100px;}
+	</style>
+</block>
+
+<block name="area_body">
+	<include file="desktop_default/width/right" />
+	<include file="desktop_default/width/top"/>
+	<div class="container">
+		<include file="desktop_default/width/daohang"/>
+	</div><br>
+	<div style="  width: 1080px; margin: 0 auto; height: 50px; background-color: white; ">
+		<a href="{:U('Shop/User/index')}"><img height="70px" style="margin-left: -3px; margin-top: -5px;" src="__IMG__/userinfo.png"></a>
+		<font color="#8C8C8C">个人信息很重要哦!</font>
+	</div><br>
+	
+	<div style="width: 1100px; margin: 0 auto;">
+		<div class="div_left" style="">
+			<include file="desktop_default/width/list"/>
+		</div><br>
+		<div class="all">
+			<div class="tab" style="background-color: white;">
+	
+				<a href="{:U('Shop/User/info')}"><font class="sed">账号安全</font></a>
+				<a href="{:U('Shop/User/infoview')}"><font>个人信息</font></a>
+				<!--<font>绑定授权</font>
+				<font>斑马服务</font>-->
+			</div>
+			<div class="headimg">
+				<div class="userinfo">用户名:{$user['username']}<br>
+					ID码:<font size="4" color="orangered">{$user['idcode']}</font>
+				</div>
+			</div>
+			<div class="tabs">
+				<font size="4">安全等级</font>
+				<font size="3" color="red">50分(存在风险)</font><hr>
+				<font color="orangered" style="float: left;" size="7"><i class="am-icon-unlock-alt"></i></font>
+				<div class="mm">账号密码<br><span style="padding-left: 0; font-size: 12px; color: #8C8C8C" >用于保护账号安全和登录安全</span></div><hr>
+				<font color="orangered" style="float: left;" size="7"><i class="am-icon-envelope-o"></i></font>
+				<div class="mm">认证邮箱<empty name="user"><font color="orangered">(未设置)</font><else/>({$user['email']})</empty><br><span style="padding-left: 0; font-size: 12px; color: #8C8C8C" >用于验证用户信息,建议立即设置</span></div><hr>
+				<font color="orangered" style="float: left;" size="7"><i class="am-icon-mobile-phone"></i></font>
+				<div class="mm">认证手机<empty name="phone"><font color="orangered">(未设置)</font><else/>({$phone})</empty><br><span style="padding-left: 0; font-size: 12px; color: #8C8C8C" >用户登录账户和重置密码等操作</span></div><hr>
+					<h2 style="color: #008200;">以上信息建议立即认证,以便很好的保障您的账号安全</h2>
+			</div>
+	
+		</div>
+	</div>
+	 <include file="desktop_default/width/floor" />
+</block>
+
+<block name="area_footer">
+
+</block>

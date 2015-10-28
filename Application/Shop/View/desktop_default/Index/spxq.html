@@ -1,0 +1,269 @@
+<extend name="desktop_default/template/base_index2" />
+
+<block name="area_header">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Shop/css/index.css" />
+	<link  href="__PUBLIC__/Home/Index/css/index.min.css" type="text/css">
+    <link rel="stylesheet" href="__PUBLIC__/Home/Index/css/base.css">
+	<style type="text/css">
+		* {
+			font-family: "微软雅黑" !important;
+		}
+		body{background-color: #F5F5F5;}
+		.daohang{height: 40px;background-color: #FAFAFA;  font-size: 13px; padding: 10px; padding-left: 23%;}
+		.daohang a{}
+		.detail{font-size: 18px; margin-top: 200px; margin-left: 50px; }
+		.show-a{width: 60%;  margin: 0 auto;}
+		.inf h1{display:inline;}
+		.inf span{margin-left: 20px;}
+		.am-btn{font-size: 17px;}
+		.font_time_style{color:red}
+		.am-slider{height: 420px; width: 400px;}
+		.am-slider-default .am-control-thumbs li{height: 80px;}
+		.container{height: 80px; background-color: white; width: 100%; min-width: 1100px;}
+		.lbimg a img:hover,.lbimg a img:checked{border: 1px solid orangered;}
+		.gg{width: 500px; height: 300px; float: left; padding-left: 40px;}
+		/*.gg table {padding-left: 40px;}*/
+		.gg table tr{line-height: 30px;}
+		.gg table tr td{width: 250px;}
+		.am-tabs-default .am-tabs-nav>.am-active a{background-color: orangered; color: white;}
+		.guige table tr td{width: 100px;}
+		
+	</style>
+	<script type="text/javascript" src="__JS__/sco.countdown2.js"></script>
+	
+</block>
+
+<block name="area_body">
+	<include file="desktop_default/width/right" />
+	<include file="desktop_default/width/top"/>
+	<div class=" container">
+		<include file="desktop_default/width/daohang"/>
+	</div><br>
+	<div style="  width: 1080px; margin: 0 auto; height: 50px; background-color: white; ">
+		<img height="70px" style="margin-left: -3px; margin-top: -5px;" src="__IMG__/goodinfo.png">
+		<font color="#8C8C8C">买东西必须注册登录哦!</font>
+	</div><br>
+	
+	<div id="div_main" style="">
+			<div class="div_info" >
+				<div class="div_spxq_info1" >
+					<div style=" width: 1000px; padding: 10px; margin: 0 auto; background-color: white;">
+						<!--<div style="float: left;"
+						  class="am-slider am-slider-default" data-am-flexslider="{controlNav: 'thumbnails', directionNav: false, slideshow: false}">
+							<ul class="am-slides">
+								<volist name="detailimg" id="vo">
+								<li data-thumb="{$vo}">
+									<img src="{$vo}" style="height: 340px;float: left;" /></li>
+								</volist>
+							</ul>
+							</div>-->
+							<div style="float: left; margin-top: 40px;">
+								<img src="{:U('Api/Picture/index',array('id'=>$product['main_img'],'size'=>640))}" id="zhutu" style="height:300px; width: 400px;" />
+								<br  />
+								<div style=" height: 110px; width: 400px; margin-top: 2px;" class="am-slider am-slider-default am-slider-carousel"  data-am-flexslider="{itemWidth: 100, itemMargin: 5, slideshow: false}">
+								  <ul class="am-slides">
+								  	
+								  	<volist name="detailimg" id="vo">
+										<li class="lbimg" style="border: 1px solid #F5F5F5; width: 25%;">
+											<a href="javascript:void(0)" class="suolve"><img name="imgs" src="{:U('Api/Picture/index',array('id'=>$vo,'size'=>640))}" style="height: 100px; width: 99%; float: left; " /></a> 
+										</li>
+									</volist>
+								  </ul>
+								</div>
+							</div> <br>
+						<div class="inf" style=" padding: 20px; min-width: 1000px;">
+							<form class="fm" method="post">
+							<input type="hidden" name="pid" id="pid" value="{$product.id}" />
+							<input type="hidden" name="skuvalue" id="skuvalue" value="" />
+							<input type="hidden" name="skuprice" id="skuprice" value="" />
+							<input type="hidden" name="qgprice" id="qgprice" value="" />
+							<input type="hidden" name="shuilv" id="shuilv" value="{$cate['taxrate']}" />
+							<span style="margin-left: 40px; font-size: 18px; font-weight: bold;">{$product.name}</span><hr>
+							
+							<div class="gg">
+								
+								
+								<table>
+									<eq name="isFlashSale" value="0">
+									<tr>
+										<td colspan="2">商品价格:<font id="pris" style="font-size: 30px; color: red;">{$product.price}</font>元<del>{$product.ori_price}元</del></td>
+										
+									</tr>
+									<else />
+									<tr>
+										<td colspan="2" style="padding-bottom: 30px;">
+											倒计时：<span class="div_time"  data-until="{$endtime}" style="margin-left: 20px;font-size:40px; color:#999"></span>
+										</td>
+									</tr>
+									<tr>
+										<td>限时抢购:<font id="xsqg" name="" style="font-size: 30px; color: red;">{$saleprice}</font>元&nbsp;&nbsp;&nbsp;<del style="color:#ccc">{$product.ori_price}元</del></td>
+										<td ></td>
+									</tr>
+									</eq>
+									<tr>
+										<td>商品货号：BANMA{$product.id}</td>
+										<td>商品库存：{$product.quantity}</td>
+									</tr>
+									<tr>
+										<td>上架时间：{$product.createtime|date='Y-m-d',###}</td>
+										<td>商品重量：{$product.weight}g</td>
+									</tr>
+									<tr>
+										<td>浏览次数：3</td>
+										<td>税率：{$cate['taxrate']*100}%</td>
+									</tr>
+								</table>
+								
+							
+							<div class="guige" style="">
+								<volist name="skuList" id="sl">
+									<input name="skuList" type="hidden" sid="{$sl['id']}" data_price="{$sl['price']}" data_url="{$sl.icon_url}" value="{$sl.sku}"/>
+								</volist>
+								
+								<table>
+								<volist name="skuInfo" id="si">
+									<tr class="tr_sku">
+										<td style="" sid="{$si.key}" >{$si.name}:</td>
+										<td style="width: 90%; padding-top: 5px; ">
+											<volist name="si.value" id="sv">
+												<font class="font_sku" style="padding-left: 10px;" index="0" sid="{$sv.key}" onmouseover="overSku(this)" onclick="selectSku(this)" onmouseout="outSku(this)">{$sv.value}</font>
+											</volist>
+										</td>
+									</tr>
+								</volist>
+								</table>
+								<br>
+								<!--<input type="radio" checked="checked" name="" id="" value="" />统一规格<br><br>-->
+								<input type="hidden" name="kucun" value="{$product.quantity}" />
+								购买数量：<input class="gmcount" type="number" name="counts" min="1"  style="width: 50px; height: 30px;" value="1" />个
+							</div>
+							</div>
+							<br style="clear: both;" />
+							<div style="margin-top: 20px;width: 100%;text-align: center; margin-left: 200px;">
+
+								<button url="{:U('Shop/Index/savecookie')}" target-form="fm" class="ajax-post am-btn am-btn-warning savecookie" style="margin-left: 80px; width: 200px font-size: 17px !important; " ><i class="am-icon-shopping-cart"></i>加入购物车</button>
+								<button url="{:U('Shop/Index/buynow')}" target-form="fm" style=" font-size: 17px; margin-left: 20px; width: 200px;" class="ajax-post am-btn am-btn-success">立即购买</button><hr>
+							</div>
+							</form>
+							<!--<font size="3" style="margin-left: 120px;"><i class="am-icon-comment-o"></i>评论：<font color="orangered">243</font></font>-->
+							<!--<span style="margin-left: 50px;">|</span>-->
+							<!--<font size="3" style="margin-left: 60px;"><i class="am-icon-thumbs-o-up"></i>满意度：<font color="orangered">99.3%</font></font>-->
+						</div>
+					</div>
+				</div>
+			</div>
+	</div>
+	<hr>
+		
+		
+		<div class="am-g" style=" width: 1000px; margin: 0 auto;  margin-top: 20px;">
+					<div class="am-u-sm-8" >
+						<div data-am-widget="tabs" class="am-tabs am-tabs-default" style="margin: 0;">
+						  <ul class="am-tabs-nav am-cf" style="width: 1000px; background-color: white; margin-left: -25px;">
+						    <li class="am-active" style="">
+						      <a href="[data-tab-panel-0]">商品展示</a>
+						    </li>
+						    <!--<li class="">
+						      <a href="[data-tab-panel-1]">商品属性</a>
+						    </li>-->
+						    <!--<li class="">
+						      <a href="[data-tab-panel-2]"></a>
+						    </li>-->
+						  </ul><br>
+						  <div class="am-tabs-bd" style="width: 1000px; margin-left: -25px; border: none; background-color: white;">
+						    <div data-tab-panel-0 class="am-tab-panel am-active" style="margin: 0 auto; width: 800px;float: none;">
+						    	<empty name="product.detail">
+                        			<center style="color:#999">暂无详情</center>
+		                        <else />
+								 {:htmlspecialchars_decode($product['detail'])}
+								</empty>
+						    </div>
+						   <div data-tab-panel-1 class="am-tab-panel " style="height: 800px;">
+						   <h3>	商品属性：</h3>
+						  		暂无商品信息
+						   </div>
+						  
+						</div>
+						</div>
+					</div>
+	<br><br>
+	
+	
+	<!--<div style="margin-top: 100px; ">
+			<hr>
+			<h1 style="margin-top: -43px; text-align: center; margin-left: 47%; position: relative; background-color: #FFFFFF; width: 180px;"  >晒&nbsp;&nbsp;货&nbsp;&nbsp;分&nbsp;&nbsp;享</h1>
+	</div>				
+				-->
+	</div>
+		<include file="desktop_default/width/floor" />
+</block>
+
+<block name="area_footer">
+	<script type="text/javascript">
+		$(function(){
+			$('#qgprice').val($('#xsqg').text());
+			$(".div_time").each(function(){
+				var until = $(this).data("until");
+				until = parseInt(until);
+				//thid = parseInt(thid);
+				$(this).scojs_countdown({until: until});
+			})
+			$('.suolve').click(function(){
+				var srcs=$(this).find("img[name='imgs']").attr("src");
+				$('#zhutu').attr('src',srcs);
+			})
+			$('.gmcount').change(function(){
+				var kucun=$(this).parent().find("input[name='kucun']").val();
+				var sl=$(this).val();
+				if(Number(sl)>=Number(kucun)){
+					alert('库存不足！');
+				}
+			})
+			
+		})
+		function overSku(font){
+			$(font).addClass("sku_style");
+		}
+		
+		function outSku(font){
+			if($(font).attr("index")==0){
+				$(font).removeClass("sku_style");
+			}
+		}
+		
+		
+		/**
+		 * 
+		 * @param {Object} font
+		 */
+		function selectSku(font){
+			$(font).siblings().removeClass("sku_style");
+			$(font).siblings().attr("index",0);
+			$(font).attr("index")==0?$(font).attr("index",1):$(font).attr("index",0);
+			//当被选中
+			if($(font).attr("index")==1){
+				//如果每个规格都有被选
+				if($(".sku_style").size()==$(".tr_sku").size()){ 
+					var skuValues="";
+					$(".sku_style").each(function(i,n){
+						skuValues+=$(n).parent().siblings().eq(0).html()+$(n).html()+";";
+						
+					});
+					var sky=skuValues;
+					
+					$('#sinfo').val(sky);
+					$("input[name='skuList']").each(function(i,n){
+						
+						if($(n).val()==sky){
+							$("#zhutu").attr('src',$(n).attr('data_url'));
+							$("#pris").html($(n).attr('data_price'));//alert();
+							$('#skuprice').val($(n).attr('data_price'));
+							$('#skuvalue').val($(n).attr('value'));
+						}
+					})
+					
+				}
+			}
+		}
+	</script>
+</block>

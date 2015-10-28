@@ -1,0 +1,224 @@
+<extend name="desktop_default/template/base_index2" />
+
+<block name="area_header">
+	<link rel="stylesheet" href="__PUBLIC__/Home/Index/css/base.css">
+	<style type="text/css">
+		body{background-color: #F5F5F5;}
+		.all {
+			
+			height: 1100px;
+		}
+		.tops{
+			height: 100px;
+			background-color: #FFFFFF;
+			border-bottom: 2px solid orangered;
+		}
+		.userinfo{margin-left: 65%; margin-top: -25px; font-size: 13px;}
+			.all a{ color: #000000;}
+		 .order-info{ height: 150px;background-color: #FFFFFF; margin: 0 auto; width: 990px; padding: 30px;}
+		 .fl{float: left; height: 100%; float: 60%; margin-left: 20px;}
+		 .fr{float: right; height: 100%; width: 30%; }
+		 .order-detail{background-color: #FFFFFF; margin: 0 auto; width: 990px; padding-left: 80px; padding-top: 20px; padding-bottom: 20px;}
+		 .order-detail ul li{ list-style: none;}
+		 .content{padding-left: 30px; padding-top: 5px; }
+		 .container{height: 80px; background-color: white; width: 100%; min-width: 1100px;}
+		 .paytype{margin-top: 20px; padding: 30px;background-color: #FFFFFF;margin: 0 auto; height: 500px; width: 990px;}
+		 .clearfix{margin-top: 8px;   /* border: 1px dashed #000000;*/}
+		 .jindu{background: url(__IMG__/jdt1.png) no-repeat;}
+		.jindus{background: url(__IMG__/jdt.png) no-repeat;}
+	</style>
+</block>
+
+<block name="area_body">
+	<include file="desktop_default/width/right" />
+	<div class="site-topbar" style="width: 100%;">
+		<div class="containers" style="margin: 0 auto; width: 1100px; background-color: #F2F2F2;">
+			<div class="topbar-nav">
+				<empty name="user">
+				亲!欢迎来到斑马商城,请&nbsp;&nbsp;&nbsp;<a style="color: #B02751;" target="_blank" href="{:U('Shop/Index/login')}">登录</a><span class="sep">|</span><a target="_blank" style="color: #B02751;" href="{:U('Shop/Index/register')}">注册</a>
+				<else/>
+					欢迎你！<a>{$user['username']}</a> &nbsp; &nbsp; &nbsp; &nbsp;<a href="{:U('Shop/User/index',array('id'=>$user['id']))}">个人中心</a>
+					&nbsp; &nbsp; &nbsp; &nbsp;<a href="{:U('Shop/Index/loginout')}">退出登录</a>
+				</empty>
+			</div>
+			<div class="topbar-info J_userInfo">
+				<a class="" style="color: orangered;" href="{:U('Shop/Index/phoneapp')}">手机APP</a><span class="sep">|</span>
+				<a class="" style="color: orangered;" href="{:U('Shop/ShopCart/shopcart')}"> <i class="iconfont"></i>购物车</a><span class="sep">|</span>
+		
+				<a class="kfzx" href="JavaScript:void(0)">客服中心</a><span class="sep">|</span>
+				<a class="jht" href="{:U('Shop/User/order')}"> 我的订单</a><span class="sep">|</span>
+				<a class="jhta" href="{:U('Shop/Article/index')}">帮助</a>
+				<!--<br>
+				<div style="color: #000000; padding-top: 10px;" class="t_tp" >
+					<ul>
+						<li><a href="{:U('Shop/User/order')}">待付款</a> </li>
+						<li><a href="{:U('Shop/User/order')}">待收货</a> </li> 
+						<li><a href="{:U('Shop/User/order')}">已完成</a> </li>
+					</ul>
+				</div>-->
+				
+			</div>
+		</div>
+	</div>
+	<div style="width:100%;  height: 100px;background-color: white; min-width: 1100px;">
+		<div style="width: 1100px; margin: 0 auto;  ">
+			<img src="__IMG__/logo.png"><img src="__IMG__/lgwb.jpg">
+				
+			<div class="stepCarNew">
+                <ul>
+                    <li id="stepCar_1" class="jindu"><p>1</p><span>我的购物车</span></li>
+                    <li id="stepCar_2" class="jindu"><p>2</p><span>订单确认</span></li>
+                    <li id="stepCar_3" class="jindu"><p>3</p><span>付款</span></li>
+                    <li id="stepCar_4" class="jindus"><p>4</p><span>购买完成</span></li>
+                </ul>
+            </div>
+			
+		</div>
+		<!--<img height="100" style="width: 100%;" src="__IMG__/guanggao.jpg">-->
+	</div>
+	<div class=" container">
+		<include file="desktop_default/width/daohang"/>
+	</div><br>
+	<div style="  width: 1080px; margin: 0 auto; height: 50px; background-color: white; ">
+		<img height="70px" style="margin-left: -3px; margin-top: -5px;" src="__IMG__/paytype.png">
+		<font color="#8C8C8C">支付完成我们会很快发货的哦!</font>
+	</div><br>
+	<div class="all">
+		
+		<div class="order-info clearfix">
+			<i class="am-icon-check-square-o" style="font-size: 53px; float: left; color: green;"></i>
+			<div class="fl">
+				
+				<font size="5" class="title">您的订单已提交成功！付款咯～成功付款后，7天发货</font>
+				<p class="order-time"></p>
+				<p class="post-info" id="J_postInfo">
+					收货信息：{$address.contactname} {$address.mobile} &nbsp;&nbsp; {$address.province}&nbsp;&nbsp;{$address.city}&nbsp;&nbsp;{$address.area}&nbsp;&nbsp;{$address.detailinfo} </p>
+			</div>
+			<div class="fr">
+				<p class="total">
+					应付总额：<span class="money"><em style="color: orangered; font-size: 25px;">{$zongjia+$youfei}</em>元</span>&nbsp;&nbsp;优惠：<font color="red">{$youhui}</font>元
+				</p>
+				<a href="javascript:void(0);" class="show-detail" id="J_showDetail" >订单详情<i class="am-icon-chevron-down"></i></a>
+			</div>
+		</div>
+		<div class="order-detail" style="display: none;" >
+			<ul>
+				<li class="clearfix">
+					<div class="label">订单号：</div>
+					<div class="content">
+						<span class="order-num">
+                           {$ordercode}                                
+						</span>
+					</div>
+				</li>
+				<li class="clearfix">
+					<div class="label">收货信息：</div>
+					<div class="content">
+						{$address.contactname} {$address.mobile} &nbsp;&nbsp; {$address.province}&nbsp;&nbsp;{$address.city}&nbsp;&nbsp;{$address.area}&nbsp;&nbsp;{$address.detailinfo}</div>
+				</li>
+				<li class="clearfix" style="border: 1px dashed #F5F5F5;">
+					<div class="label">商品名称：</div>
+					<table>
+					<volist name="items" id="vo">
+						<tr>
+							<td><img style=""
+								<if condition="$isnull eq 0">
+								 src="{:U('Api/Picture/index',array('id'=>$vo['icon_url']))}"
+								 <else/>
+								 src="{:U('Api/Picture/index',array('id'=>$vo['img']))}"
+								 </if>
+								 height="80" width="80"></td>
+							<td>{$vo.name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td>{$vo.sku_desc}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td style="color: red;">{$vo.price}元</td>
+							<td>x{$vo.count}</td>
+						</tr>
+					</volist>
+						</table>
+				</li>
+				<li class="clearfix">
+					<div class="label">配送时间：</div>
+					<div class="content">
+						不限送货时间 </div>
+				</li>
+				<li class="clearfix">
+					<div class="label">发票信息：</div>
+					<div class="content">
+						个人 </div>
+				</li>
+			</ul>
+		</div><br><button id="ispay" style="opacity: 0;" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0, width: 480, height: 325}"></button>
+		<div class="paytype">
+			<h2>请选择支付方式</h2>
+			<hr>
+			<h3>支付平台(目前仅支持支付宝)</h3>
+			<div style="height: 70px; width: 160px; float: left; ">
+				<!--<form id="payForm" action="{:U('Api/Alipay/confirm_pay')}" method="post"  target="_blank">
+
+					<input  type="hidden" name="WIDout_trade_no" value="{$paycode}"/>
+
+					<input  type="hidden" name="WIDsubject" value="{$name|subtext=120}"/>
+
+					<input  type="hidden" name="WIDtotal_fee" value="{$zongjia+$youfei}"/>
+
+					<input  type="hidden" name="WIDbody" value=""/>
+
+					<input  type="hidden" name="WIDshow_url" value="http://www.itboye.com/"/>
+					<img height="100%" width="100%" onclick="toPay()" style="cursor: pointer" src="__IMG__/182x64.png" />
+				</form>
+				-->
+				<!-- 商品展示页面 需以http://开头的完整路径，例如：http://www.商户网址.com/myorder.html    {$od.price}-->
+				<form id="payForm" action="{:U('Api/InternationalAlipay/confirm_pay')}" method="post"  target="_blank">
+					<!--商品订单号 -->
+					<input  type="hidden" name="WIDout_trade_no" value="{$paycode}"/>
+					<!--订单名称-->
+					<input  type="hidden" name="WIDsubject" value="www.bammar.com"/>
+					<!--付款金额 -->
+					<input  type="hidden" name="WIDrmb_fee" value="{$zongjia+$youfei}"/>
+					<!--订单描述 -->
+					<input  type="hidden" name="WIDbody" value=""/>
+					<!--币类型，美元-->
+					<input  type="hidden" name="WIDcurrency" value="USD"/>
+
+					<img height="100%" width="100%" onclick="toPay()" style="cursor: pointer" src="__IMG__/182x64.png" />
+				</form>
+			</div>
+			
+		</div><br><br>
+	</div>
+	
+	<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-1">
+  <div class="am-modal-dialog">
+    <div class="am-modal-hd">正在支付...
+      <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+    </div>
+    <div class="am-modal-bd">
+      <img style="height: 150px; width: 150px; float: left; margin-top: 30px;" src="__IMG__/mitu.png">
+      	<div style="height: 250px; width: 250px; float: right; padding: 30px;">
+      		支付成功了？<br><a style="color: orangered;" href="{:U('Shop/User/order')}">查看订单信息>></a>
+      		<hr>
+      		支付失败了？<br><a style="color: orangered;" href="{:U('Shop/Article/index')}">查看支付失败常见问题>></a>
+      	</div>
+    </div>
+  </div>
+</div>
+	<include file="desktop_default/width/floor" />
+</block>
+
+<block name="area_footer">
+	<script type="text/javascript">
+		$(function(){
+			$('.order-detail').hide();
+			$('#J_showDetail').click(function(){
+				$('.order-detail').toggle(function(){
+					
+				})
+			})
+		})
+
+		function toPay(){
+			$("#ispay").click();
+			$("#payForm").submit();
+		}
+	</script>
+</block>

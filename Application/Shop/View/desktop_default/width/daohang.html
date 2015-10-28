@@ -1,0 +1,55 @@
+
+			<div class="dhlist">
+				<ul>
+				<li class="ck" style="margin-left: -55px; padding-left: -10px; ">
+						<a style="color: white;" href="{:U('Shop/Index/index')}">首页</a>
+					</li>
+					<volist name="group" id="v">
+						<li>
+							<a href="{:U('Shop/Index/lists',array('id'=>$v['id']))}">德国专场</a>
+						</li>
+						<li>
+							<a href="{:U('Shop/Index/lists',array('id'=>$v['id']))}">日本专场</a>
+						</li>
+						<li>
+							<a href="{:U('Shop/Index/lists',array('id'=>$v['id']))}">新西兰专场</a>
+						</li>
+						<li>
+							<a href="{:U('Shop/Index/lists',array('id'=>$v['id']))}">澳洲专场</a>
+						</li>
+						<li>
+							<a href="{:U('Shop/Index/lists',array('id'=>$v['id']))}">美国专场</a>
+						</li>
+						<li>
+							<a href="{:U('Shop/Index/lists',array('id'=>$v['id']))}">{$v['name']}</a>
+						</li>
+							
+					</volist>
+					<!--<li style="float: right; font-size: 14px; height: 100%;  width: 96px; margin-top: 1px;">
+						<a style="background-color: #444; height: 40px; width: 100%; color: white; padding:11px; " href="{:U('Shop/ShopCart/shopcart')}" ><i class="iconfont"></i>购物车<span class="mini-cart-num J_cartNum">(<empty name="count">0<else/>{$count}</empty>)</span></a>
+						
+					</li>-->
+				</ul>
+			
+			
+		</div>
+		<style type="text/css">
+			.dhlist{ width: 1100px; margin: 0 auto; height: 40px; min-width: 1100px;}
+			.dhlist ul{  height: 38px;  min-width: 1100px;}
+			.dhlist ul li{ list-style: none; float: left;padding-top:8px; height: 40px; width: 100px; text-align: center;}
+			.dhlist ul li a{color: white; }.dhlist ul li a:hover{color: white; }
+			.cart-section{padding-top: 5px; }
+			.header-info{ }
+			.mini-cart,.mini-cart:hover{ padding: 5px; margin-top: ; font-size: 13px; background-color: orange; color: #FFFFFF; float: right;}
+			.container{height: 40px; background-color: #ff4c66; width: 100%; min-width: 1100px;}
+		</style>
+		<script type="text/javascript">
+			$(function(){
+				$('.dhlist ul li').mouseover(function(){
+				$(this).css('border-bottom','2px solid #B02751')
+			})
+			$('.dhlist ul li').mouseout(function(){
+				$(this).css('border-bottom','0')
+			})
+			})
+		</script>

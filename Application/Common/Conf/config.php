@@ -6,14 +6,14 @@
 
 return array(
 
-    'DEFAULT_MODULE'=>'Shop',
+    'DEFAULT_MODULE'=>'Admin',
     'SHOW_PAGE_TRACE'=>false,
      //自动载入
     'AUTOLOAD_NAMESPACE'=>array('Addons' => ADDON_PATH),
-	'LOAD_EXT_CONFIG' => 'datatree,appmeta,express,phpqrcode',	'LOAD_EXT_CONFIG' => 'datatree,appmeta,express,phpqrcode',
+	'LOAD_EXT_CONFIG' => 'datatree,appmeta,express,phpqrcode',
     'IMGURL'=>'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC',
-    'SITE_URL'=>'http://192.168.0.100/github/itboye20150817',
-    'API_URL'=>'http://192.168.0.100/github/itboye20150817/api.php',
+    'SITE_URL'=>'http://gd.itboye.com',
+    'API_URL'=>'http://gd.itboye.com/api.php',
 	//在线升级配置 APP_KEY,APP_ID,AUTH_DOMAIN
 	'UPGRADE_AUTH_KEY'=>'[APP_KEY]',//授权码，用于在线升级
 	'UPGRADE_URL'=>'http://appcenter.itboye.com/index.php/Home/Index/upgrade_check/app_id/[APP_ID]/2.json',
@@ -26,7 +26,7 @@ return array(
 	// 程序版本
 	// DONE:移到数据库中
 	// 显示运行时间
-//	'SHOW_RUN_TIME'=>true,
+	'SHOW_RUN_TIME'=>true,
 //	'SHOW_ADV_TIME'=>true,
 	// 显示数据库操作次数
 //	'SHOW_DB_TIMES'=>true,
@@ -42,10 +42,10 @@ return array(
     'URL_MODEL'                 =>  1, // 如果你的环境不支持PATHINFO 请设置为3
     // 数据库配置
     'DB_TYPE'                   =>  'mysql',
-    'DB_HOST'                   =>  '192.168.0.100',//rdsrrbifmrrbifm.mysql.rds.aliyuncs.com
+    'DB_HOST'                   =>  '127.0.0.1',//rdsrrbifmrrbifm.mysql.rds.aliyuncs.com
     'DB_NAME'                   =>  'boye_2015gd', //boye_ceping
     'DB_USER'                   =>  'root',//boye
-    'DB_PWD'                    =>  '1',//bo-ye2015BO-YE
+    'DB_PWD'                    =>  'fdc656d3e7',//bo-ye2015BO-YE
     'DB_PORT'                   =>  '3306',
     'DB_PREFIX'                 =>  'itboye_',
     
@@ -56,7 +56,7 @@ return array(
     'LOG_TYPE'              =>  'Db',
 	'LOG_LEVEL'  =>'EMERG,ALERT,CRIT,ERR', // 只记录EMERG ALERT CRIT ERR 错误
     'LOG_DB_CONFIG'=>array(
-		'dsn'=>'mysql://root:1@192.168.0.100:3306/boye_2015gd' //本地日志数据库
+		'dsn'=>'mysql://root:fdc656d3e7@127.0.0.1:3306/boye_2015gd' //本地日志数据库
 	),
 	
     // Session 配置

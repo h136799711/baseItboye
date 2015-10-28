@@ -1,0 +1,380 @@
+<extend name="desktop_default/template/base_index2" />
+
+<block name="area_header">
+	<link href="__PUBLIC__/Home/ShopCart/css/shopCart.min.css" type="text/css">
+	<link rel="stylesheet" href="__PUBLIC__/Home/Index/css/base.css">
+	<style type="text/css">
+	body{background-color: #F5F5F5;}
+		.carttitle{  width: 1100px; margin: 0 auto; margin-top: 20px;}
+		table tr td{}
+		.lft{padding-left: 5px;}
+		.goods-num { width: 80px;}
+		.change-goods-num{padding: 2px !important; margin-left: -26px;  width: 180px; text-align: center; padding: 3px; }
+		.change-goods-num input{text-align: center; height: 30px; margin-top: -5px;}
+		.am-btn{font-size: 13px !important;}
+		.daohangs{width: 1000px; margin: 0 auto; height: 40px; margin-top: -25px; }
+		
+		.jht:hover{color:#B02751 ;}
+			/*.daohangs ul{ margin-top: -80px;}*/
+			.daohangs ul li{float: left; list-style: none;width: 100px; text-align: center; height: 40px; padding-top: 8px; font-size: 14px;  font: "微软雅黑"; }
+			.daohangs ul li a{color: white; }.daohangs ul li a:hover{color: white;}
+			.cart-section{ }
+			.header-info{ }
+			.mini-cart,.mini-cart:hover{ padding: 10px; background-color: orange; color: #FFFFFF; float: right;}
+			.container{width: 100%; height: 40px; background-color: #ff4c66; min-width: 1100px;}
+			.stepCarNew{width: 600px; height: 30px; text-align: center; float: right; margin-top: 20px;}
+		.stepCarNew ul li{width: 25%;  list-style: none; float: left;height: 30px; }
+		.stepCarNew ul li p{padding-top: 5px; padding-left: 7px;color: white;}
+		.jindu{background: url(__IMG__/jdt1.png) no-repeat;}
+		.jindus{background: url(__IMG__/jdt.png) no-repeat;}
+	</style>
+</block>
+
+<block name="area_body">
+	<include file="desktop_default/width/right" />
+	<div class="site-topbar" style="width: 100%;">
+		<div class="containers" style="margin: 0 auto; width: 1100px; background-color: #F2F2F2;">
+			<div class="topbar-nav">
+				<empty name="user">
+				亲!欢迎来到斑马商城,请&nbsp;&nbsp;&nbsp;<a style="color: #B02751;" target="_blank" href="{:U('Shop/Index/login')}">登录</a><span class="sep">|</span><a target="_blank" style="color: #B02751;" href="{:U('Shop/Index/register')}">注册</a>
+				<else/>
+					欢迎你！<a>{$user['username']}</a> &nbsp; &nbsp; &nbsp; &nbsp;<a href="{:U('Shop/User/index',array('id'=>$user['id']))}">个人中心</a>
+					&nbsp; &nbsp; &nbsp; &nbsp;<a href="{:U('Shop/Index/loginout')}">退出登录</a>
+				</empty>
+			</div>
+			<div class="topbar-info J_userInfo">
+				<a class="" style="color: orangered;" href="{:U('Shop/Index/phoneapp')}">手机APP</a><span class="sep">|</span>
+				<a class="" style="color: orangered;" href="{:U('Shop/ShopCart/shopcart')}"> <i class="iconfont"></i>购物车</a><span class="sep">|</span>
+			
+				<a class="kfzx" href="JavaScript:void(0)">客服中心</a><span class="sep">|</span>
+				<a class="jht" href="{:U('Shop/User/order')}"> 我的订单</a><span class="sep">|</span>
+				<a class="jhta" href="{:U('Shop/Article/index')}">帮助</a>
+				
+				
+				<!--<br>
+				<div style="color: #000000; padding-top: 10px;" class="t_tp" >
+					<ul>
+						<li><a href="{:U('Shop/User/order')}">待付款</a> </li>
+						<li><a href="{:U('Shop/User/order')}">待收货</a> </li> 
+						<li><a href="{:U('Shop/User/order')}">已完成</a> </li>
+					</ul>
+				</div>-->
+				
+			</div>
+		</div>
+	</div>
+	<div style="width:100%;  height: 100px;background-color: white; min-width: 1100px;">
+		<div style="width: 1100px; margin: 0 auto;  ">
+			<a href="{:U('Shop/Index/index')}"><img src="__IMG__/logo.png"><img src="__IMG__/lgwb.jpg"></a>
+				
+			<div class="stepCarNew">
+                <ul>
+                    <li id="stepCar_1" class="jindu"><p>1</p><span>我的购物车</span></li>
+                    <li id="stepCar_2" class="jindus"><p>2</p><span>订单确认</span></li>
+                    <li id="stepCar_3" class="jindus"><p>3</p><span>付款</span></li>
+                    <li id="stepCar_4" class="jindus"><p>4</p><span>购买完成</span></li>
+                </ul>
+            </div>
+			
+		</div>
+		<!--<img height="100" style="width: 100%;" src="__IMG__/guanggao.jpg">-->
+	</div>
+	
+	<div class=" container">
+		
+		<div class="header-info">
+			<div class="daohangs">
+				<ul>
+					<li class="">
+						<a href="{:U('Shop/Index/index')}">首页</a>
+					</li>
+
+					<volist name="group" id="v">
+						<li>
+							<a href="{:U('Shop/Index/lists',array('id'=>$v['id']))}">德国专场</a>
+						</li>
+						<li>
+							<a href="{:U('Shop/Index/lists',array('id'=>$v['id']))}">日本专场</a>
+						</li>
+						<li>
+							<a href="{:U('Shop/Index/lists',array('id'=>$v['id']))}">新西兰专场</a>
+						</li>
+						<li>
+							<a href="{:U('Shop/Index/lists',array('id'=>$v['id']))}">澳洲专场</a>
+						</li>
+						<li>
+							<a href="{:U('Shop/Index/lists',array('id'=>$v['id']))}">美国专场</a>
+						</li>
+						<li>
+							<a href="{:U('Shop/Index/lists',array('id'=>$v['id']))}">{$v['name']}</a>
+						</li>
+					</volist>
+					<!--<li style="float: right; font-size: 14px; height: 100%;  width: 108px;">
+						<a style="background-color: #444; height: 40px; width: 100%; color: white; padding:11px;" href="{:U('Shop/ShopCart/shopcart')}" ><i class="iconfont"></i>购物车<span class="mini-cart-num J_cartNum">(<empty name="count">0<else/>{$count}</empty>)</span></a>
+						
+					</li>-->
+				</ul>
+			</div>
+
+		</div>
+		
+	</div><br>
+	<div style="width: 1100px; margin: 0 auto; height: 59px;  padding: 10px; background-color: #FFFFFF; ">
+		<img style="margin-top: -15px; margin-left: -20px;" style="float: left;" src="__IMG__/sc.png">
+			
+		</div>
+	<div style="background-color: #FFFFFF; width: 1100px; margin: 0 auto;">
+		<empty name="products">
+			<br><br><br><br>
+			<font size="5" style="margin-left: 200px; padding-top: 100px;">暂无记录,请<a href="{:U('Shop/Index/index')}">前往购物</a></font>
+			<br><br><br><br>
+			<else/>
+			<div class="carttitle">
+				<table style="width: 1000px; margin: 0 auto;">
+					<tr style="">
+						<td class="lft"><input type="checkbox" id="ckall" checked="checked"></td>
+						<td class="lft" style="padding-left: 15px;" width="60%">商品</td>
+						<td class="lft" style="padding-left: -50px;">规格</td>
+						<td class="lft">单价</td>
+						<td class="lft" style="padding-left: 60px;">数量</td>
+						<td class="lft">小计</td>
+						<td class="lft">操&nbsp;作</td>
+					</tr>
+					<form class="fm" method="post">
+					<volist name="products" id="v">
+						<empty name="user">
+							<tr class="items">
+								<td >
+									<input type="checkbox" name="ids[]" class="idss" checked="checked"  value="{$v['id']}" />
+								</td>
+								<td>
+									<img height="100" width="120" src="{:U('Api/Picture/index',array('id'=>$v['main_img']))}">
+									<font size="3">{$v['name']}</font>
+								</td>
+								<td>
+									<input type="hidden" name="skuval[]" id="skuvalue" value="{$v['skuvalue']}" />
+									<span><if condition="$v['skuvalue'] eq ''">暂无<else/>{$v['skuvalue']}</if></span>
+								</td>
+								<td><span name="danjia" class="danjia">
+									<if condition="$v['skuprice'] eq 0">{$v['price']}<input type="hidden" name="prices[]" id="" value="{$v['price']}" />
+										<else/>
+									{$v['skuprice']}
+									<input type="hidden" name="prices[]" id="" value="{$v['skuprice']}" />
+									</if></span>元
+								</td>
+								<td>
+									<div class="change-goods-num">
+										<input type="hidden" name="kucun" id="kucun" value="{$v.quantity}" />
+										<a href="javascript:void(0)" class="J_minus">
+											<i class="iconfont reducecount"></i>
+										</a>
+										<input type="hidden" name="counts[]"  value="{$v['count']}" />
+										<input type="number" name="count" value="{$v['count']}" readonly="readonly" class="goods-num J_goodsNum count">
+										<a href="javascript:void(0)" class="J_plus"> <i class="iconfont addcount">
+								</i> </a>
+									</div>
+								</td>
+								<td><font class="xiaoji" name="xiaoji" color="orangered">{$v['price']}</font>元</td>
+								<td>
+									<a class="del ajax-post"  ><i class="am-icon-times"></i></a>
+									
+										<input type="hidden" name="cid" id="cid" value="{$v['id']}" />
+									
+								</td>
+							</tr>
+							<tr>
+								<td colspan="5">
+									<hr>
+								</td>
+							</tr>
+						<else/>
+							<tr class="items">
+								<td >
+									<input type="checkbox" name="ids[]" class="idss" checked="checked"  value="{$v['p_id']}" />
+								</td>
+								<td>
+									<img height="100" width="120" src="{:U('Api/Picture/index',array('id'=>$v['icon_url']))}">
+									<font size="3">{$v['name']}</font>
+								</td>
+								<td>
+									<input type="hidden" name="skuval[]" id="skuvalue" value="{$v['sku_desc']}" />
+									<span><if condition="$v['sku_desc'] eq ''">暂无<else/>{$v['sku_desc']}</if></span>
+								</td>
+								<td><span name="danjia" class="danjia">
+									
+									{$v['price']}
+									<input type="hidden" name="prices[]" id="" value="{$v['price']}" />
+									</if></span>元
+								</td>
+								<td>
+									<div class="change-goods-num">
+										<input type="hidden" name="kucun" id="kucun" value="{$v.quantity}" />
+										<a href="javascript:void(0)" class="J_minus">
+											<i class="iconfont reducecount"></i>
+										</a>
+										<input type="hidden" name="counts[]"  value="{$v['count']}" />
+										<input type="number" name="count" value="{$v['count']}" readonly="readonly" class="goods-num J_goodsNum count">
+										<a href="javascript:void(0)" class="J_plus"> <i class="iconfont addcount">
+								</i> </a>
+									</div>
+								</td>
+								<td><font class="xiaoji" name="xiaoji" color="orangered">{$v['price']}</font>元</td>
+								<td>
+									<a class="del ajax-post"  ><i class="am-icon-times"></i></a>
+										<input type="hidden" name="cid" id="cid" value="{$v['p_id']}" />
+									
+								</td>
+							</tr>
+							<tr>
+								<td colspan="5">
+									<hr>
+								</td>
+							</tr>
+						</empty>
+					</volist>
+					
+					<input type="hidden" name="allmoney" id="allmoney"  value="" />
+					</form>
+				</table>
+				<div id="ddmoney" style="width: 300px; height: 200px;  margin-left: 70%; padding: 10px;">
+					<h2>商品总价：<font color="orangered" name="zongjia" class="zongjia" style="margin-left: 60px;">0</font>元</h2>
+					<h2>商品总计：<font color="orangered" name="zongji" class="zongji" style="margin-left: 60px;" size="6">0</font>元</h2>
+					<font style="float: right;">
+				<button type="button" id="jixu" style="width: 120px;" class="am-btn am-btn-default am-round">继续购物</button>
+				<button url="{:U('Shop/Orders/gopay')}" target-form="fm" style="width: 120px;" class="am-btn ajax-post am-btn-warning am-round" style="width: 120px;">去结账</button></font>
+				</div>
+				
+			</div>
+		</empty>
+	</div><br>
+		<include file="desktop_default/width/floor" />
+</block>
+
+<block name="area_footer">
+	<script type="text/javascript">
+		var zmon=0;
+		$(function(){
+//			$('.fm').click(function(){
+//				alert()
+//			})
+//			
+			$('.daohangs ul li').mouseover(function(){
+				$(this).css('border-bottom','2px solid #B02751')
+			})
+			$('.daohangs ul li').mouseout(function(){
+				$(this).css('border-bottom','0')
+			})
+			$('.del').click(function(){
+				var id=$(this).parent().find("input[name='cid']").val();
+				$.getJSON("{:U('Shop/ShopCart/delcookie')}",{id:id},function(json){ 
+					if(json==1){
+						alert('删除成功!');
+						history.go(0);
+					}
+				}); 
+			})
+			$('#ckall').click(function(){
+				  
+				if($(this).prop('checked')){
+					$('.idss').prop('checked',true);
+				}else{
+					$('.idss').prop('checked',false);
+				}
+				//alert();
+				priceAll();
+			})
+			$('.idss').click(function(){
+				 priceAll();
+			})
+			
+			
+			
+			$('#jixu').click(function(){
+				window.location.href="{:U('Shop/Index/index')}";
+			})
+			$('.J_plus').click(function(){
+				var countInput=$(this).parent().find("input[name='count']");
+				var count=countInput.val();
+				var zong=Number(countInput.val())+1;
+				var maxcount=$(this).parent().find("input[name='kucun']").val();
+				if(count==Number(maxcount)){
+					alert('最大了！');
+				}else{
+					countInput.val(parseInt(countInput.val())+1);
+					var danjia=$(this).parent().parent().parent().find("span[name='danjia']").text();
+					var zongjia=Number(danjia)*Number(zong);
+					$(this).parent().parent().parent().find("font[name='xiaoji']").text(zongjia);
+					zmon=0;
+					$('.items').each(function(index){
+						var money=$(this).find("font[name='xiaoji']").text();
+						zmon=zmon+Number(money);
+						$('#ddmoney').find("font[class='zongjia']").text(zmon);
+					})
+					$('#ddmoney').find("font[class='zongjia']").text(zmon);
+					$('#ddmoney').find("font[class='zongji']").text(zmon);
+					$('#allmoney').val(zmon);
+					$(this).parent().find("input[name='counts[]']").val(zong);
+				}
+			})
+			$('.J_minus').click(function(){
+				var countInput=$(this).parent().find("input[name='count']");
+				var count=countInput.val();
+				var zong=Number(countInput.val())-1;
+				if(count==1){
+					alert('最小了！');
+				}else{
+					countInput.val(parseInt(countInput.val())-1);
+					var danjia=$(this).parent().parent().parent().find("span[name='danjia']").text();
+					var zongjia=Number(danjia)*Number(zong);
+					$(this).parent().parent().parent().find("font[name='xiaoji']").text(zongjia);
+					zmon=0;
+					$('.items').each(function(index){
+						var money=$(this).find("font[name='xiaoji']").text();
+						zmon=zmon+Number(money);
+						$('#ddmoney').find("font[class='zongjia']").text(zmon);
+					})
+					$('#ddmoney').find("font[class='zongjia']").text(zmon);
+					$('#ddmoney').find("font[class='zongji']").text(zmon);
+					$(this).parent().find("input[name='counts[]']").val(zong);
+					$('#allmoney').val(zmon);
+				}
+			})
+			var zj=$('#ddmoney').find("font[name='zongji']").text();
+			$('#allmoney').val(zj);
+			 priceAll();
+		})
+		
+		function priceAll(){
+			//alert();
+			zmon=0;
+			$('.items').each(function(index){
+				if($(this).find("input[type='checkbox']").prop('checked')){
+					var danjia=$(this).find("span[name='danjia']").text();
+					var shuliang=$(this).find("input[name='count']").val();
+					var xiaoji=Number(danjia)*Number(shuliang);
+					$(this).find("font[name='xiaoji']").text(xiaoji);
+					var money=$(this).find("font[name='xiaoji']").text();
+					zmon=zmon+Number(money);
+				}
+			})
+			$('#ddmoney').find("font[class='zongjia']").text(zmon);
+			$('#ddmoney').find("font[class='zongji']").text(zmon);
+			$('#allmoney').val(zmon);
+		}
+	</script>
+	
+	<script type="text/javascript">
+		$('.jht,.t_tp').mouseover(function(){
+			$('.t_tp').show();
+			$('.t_tp2').hide();
+		})
+		
+		$('.t_tp').mouseout(function(){
+			$('.t_tp').hide();
+		})
+		$('#sch').click(function(){
+			$('#schfm').submit();
+		})
+		
+	</script>
+</block>

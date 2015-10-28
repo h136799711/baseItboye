@@ -1,0 +1,59 @@
+<extend name="desktop_default/template/base_index2" />
+
+<block name="area_header">
+	<link href="__PUBLIC__/Home/Index/css/index.min.css" type="text/css">
+	<link rel="stylesheet" href="__PUBLIC__/Home/Index/css/base.css">
+	<style type="text/css">
+		body{background: #F5F5F5}
+		.am-footer-default{background: #F5F5F5}
+		.div_main{width:1130px;margin: 0 auto; background: #F5F5F5;}
+		.div_left{margin: 20px;float: left;background:white}
+		.div_left dl{margin:0 auto; width:70%;margin-top:50px;margin-bottom:50px;}
+		.div_left dl dt{font-size: 20px;font-weight: 100;}
+		.div_left dl dd{padding-left:25px;font-size: 16px;padding-top: 10px;}
+		.order-items{ width: 65%;}
+		.div_left dl dd a:visited{color:#ccc}
+		.div_left dl dd a:hover{color:#FF6700}
+		.div_left dl dd a.dd_search{color:#FF6700}
+		.div_right{margin: 20px;border: 1px solid #ccc;float: left;padding: 20px;background:white}
+		.goods-list li{float: left; width: 30%;}
+		li{list-style: none;}
+		.num{font-size: 17px; }
+		.dd_search{color:#FF6700}
+		.am-tabs-default .am-tabs-nav>.am-active a{background-color: orangered; color: white;}
+		.container{height: 80px; background-color: white; width: 100%; min-width: 1100px;}
+		.content{ margin-left: 50px;}
+	</style>
+
+</block>
+
+<block name="area_body">
+	<include file="desktop_default/width/top" />
+	<div class=" container">
+		<include file="desktop_default/width/daohang" />
+	</div><br>
+	<div style="  width: 1080px; margin: 0 auto; height: 50px; background-color: white; ">
+		<img height="70px" style="margin-left: -3px; margin-top: -5px;" src="__IMG__/userinfo.png">
+		<font color="#8C8C8C">个人信息很重要哦!</font>
+	</div><br>
+	<div class="div_main">
+		<div class="div_left" style="width: 200px;">
+			<include file="desktop_default/width/list" />
+		</div>
+		<div class="div_right" style="width: 830px">
+			<font style="font-size: 30px">我的订单</font> <font style="font-size: 12px">请谨防钓鱼链接或诈骗电话</font>
+			<br />
+			<div  class="">
+				<div class="order-detail" style="" >
+			
+		</div><br>
+			</div>
+		</div>
+
+	</div>
+<hr  style="border: none; clear:both"/>
+</block>
+
+<block name="area_footer">
+
+</block>

@@ -1,0 +1,73 @@
+<extend name="desktop_default/template/base_index2" />
+
+<block name="area_header">
+	<link rel="stylesheet" href="__PUBLIC__/Home/Index/css/base.css">
+	<style type="text/css">
+		body {
+			background-color: #f9f9f9;
+		}
+		.level .li .current {
+  background: #ff5783;
+}
+		.logo {
+			/*border: 1px solid #000000;*/
+			color: orangered;
+			height: 100px;
+			width: 180px;
+			margin-left: 25%;
+			margin-top: 2%;
+		}
+		.fm a{color: orangered;}
+		.am-panel {
+			width: 800px;
+			margin-left: 28%;
+			margin-top: 2%;
+		}
+		.dv font{margin-left: 100px;}
+		.am-panel-hd {
+			height: 80px;
+			padding: 20px;
+			background-color: #FFFFFF !important;
+			text-align: center;
+		}
+		 .level .li span {
+  width: 60%;
+  display: table;
+}
+		.level{margin-bottom: 10px; width:350px ;  }
+		.am-form-set div{margin-top: 15px;}
+		 .level .li { margin-top: -5px; background: none repeat scroll 0 0 #eaeaea; color: #fff;display: inline;float: left;height: 18px;line-height: 18px; margin-right: 1px; text-align: center; width: 33%;
+}
+.container{height: 80px; background-color: white; width: 100%; min-width: 1100px;}
+		.fm input{ height: 50px; width: 350px;}
+		.tishi{font-size: 12px; color: darkgray; padding-left: 5px;}
+	</style>
+</block>
+
+<block name="area_body">
+	<include file="desktop_default/width/right" />
+	<include file="desktop_default/width/top"/>
+		<div class=" container">
+		<include file="desktop_default/width/daohang"/>
+	</div><br>
+	<div style="  width: 1080px; margin: 0 auto; height: 50px; background-color: white; ">
+		<img height="70px" style="margin-left: -3px; margin-top: -5px;" src="__IMG__/yjfk.png">
+		<font color="#8C8C8C">意见反馈!</font>
+	</div><br>
+	<div style="background-color: white; font-size: 14px; height: 200px; width: 600px;  margin: 0 auto; padding: 20px; padding-left: 40px;">
+		
+		意见建议：<textarea cols="35" rows="3" placeholder="请填写您的意见或建议">
+			
+		</textarea><br><br>
+			联系方式： <input type="text" name="lxfs" />
+		<br><br>
+		<a href="javascript:void(0)" style="padding: 8px; " class="am-btn-danger ">提交</a><a style="margin-left: 100px; margin-top: 20px; padding: 8px;" href="{:U('Shop/Index/index')}" class="am-btn-primary">继续逛逛</a>
+	</div>
+	<br>		
+	 <include file="desktop_default/width/floor" />
+	
+</block>
+
+<block name="area_footer">
+
+</block>

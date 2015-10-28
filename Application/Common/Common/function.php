@@ -806,3 +806,7 @@ function addLog($api_uri,$get,$post,$notes){
         $model->add();
     }
 }
+
+function getWxAccountID(){
+
+}

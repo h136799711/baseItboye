@@ -1,0 +1,42 @@
+<extend name="desktop_default/template/base_index2" />
+
+<block name="area_header">
+	<link rel="stylesheet" href="__PUBLIC__/Home/Index/css/base.css">
+	<style type="text/css">
+		body {
+			background-color: ;
+		}
+		
+	</style>
+</block>
+
+<block name="area_body">
+	<div style="width: 900px; border-bottom: 1px solid hotpink; margin: 0 auto; height: 50px; padding: 20px;">
+		<font size="3" color="hotpink">斑马全球购</font>
+		<a href="{:U('Shop/Article/index',array('id'=>5))}"><font size="2" style="float: right;" color="hotpink">关于我们（about us）</font></a>
+	</div>
+	<div style="width: 700px;height: 600px;  background-color: white; margin: 0 auto;  padding: 10px;" >
+		<div style="height: 600px; width: 250px; margin-top: 50px; float: left; ">
+			<img src="__IMG__/12.png" style=""><br><br>
+			<a href="{:U('Shop/Index/index')}"><img src="__IMG__/iphone.png" style=""></a><br><br>
+			<a href="{:U('Shop/Index/index')}"><img src="__IMG__/android.png" style=""></a><br><br>
+			<a href="{:U('Shop/Index/index')}"><button type="button" class="am-btn-danger am-round" style="height: 50px; background-color: #FF3674; border: 0; width: 235px;">立即去bammar购物</button></a><br><br>
+			<img src="__IMG__/banmayzm.png" style="margin-left: 20px; height: 180px; width: 180px;"><br><br>
+		</div>
+		<div style="width: 410px;  float: right; ">
+			<img style="width: 410px;" src="__IMG__/15.jpg">
+		</div>
+	</div>
+	<include file="desktop_default/width/floor" />
+	
+</block>
+
+<block name="area_footer">
+<script type="text/javascript">
+	$(function(){
+		
+		
+	})
+</script>
+
+</block>

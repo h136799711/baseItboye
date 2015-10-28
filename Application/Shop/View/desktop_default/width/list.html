@@ -1,0 +1,44 @@
+			<style type="text/css">
+				.div_userInfo ul li{list-style: none;}
+				.div_left dl dt {color: orangered; font-weight: 700}
+				.div_left dl dd a{color: #B02550;}
+				/*.div_left dl dt*/
+				.div_left dl dd a:visited{color:#B02550 ;}
+			</style>
+			<div class="div_userInfo" style="text-align: center;">
+				<div style="text-align: center; margin-top: 15px;">
+					<a href="{:U('Shop/User/infoview')}"><img 
+						<if condition="$userinfo['head'] eq ''">
+						src="__IMG__/head.jpg"
+						<else/>
+					src="{$userinfo['head']}" 
+					</if>
+						 style="border-radius: 50%;border: 1px solid #ccc; height: 120px;width: 120px;"/></a><br>
+
+				</div>
+			
+			</div>
+			<dl>
+				<dt>分销中心</dt>
+				<dd><a href="{:U('Shop/User/distribution')}">我的分销</a></dd>
+				<dd><a href="{:U('Shop/User/mylevel')}">我的级别</a></dd>
+				<dd><a target="_blank" href="{:U('Shop/User/show')}">邀请好友</a></dd>
+			</dl>
+			<dl>
+				<dt>订单中心</dt>
+				<dd><a href="{:U('Shop/User/order')}">我的订单</a></dd>
+				
+			</dl>
+			<dl>
+				<dt>个人中心</dt>
+				<dd><a href="{:U('Shop/User/info')}">个人信息</a></dd>
+				<dd><a href="{:U('Shop/User/truename')}">实名认证</a></dd>
+				<dd><a href="{:U('Shop/User/moneymanager')}" >资金管理</a></dd>
+				<dd><a href="{:U('Shop/User/address')}">收货地址</a></dd>
+			</dl>
+			<dl>
+				<dt>帮助中心</dt>
+				<dd><a href="{:U('Shop/Article/index')}">常见问题帮助</a></dd>
+				
+			</dl>
+			

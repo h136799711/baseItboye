@@ -1,0 +1,46 @@
+<style>
+    .div_floor{width: 100%; min-width:1150px;height: 200px;background-color: #3b3b3b;clear: both; margin-top: 20px;}
+    .div_floor dl{width:150px;height: 250px;float: left;margin-top: 20px;margin-left:10px;text-align: center}
+    .div_floor dl dt{margin-left:20px; color: white;}
+    .div_floor dl dd{margin-left:20px;margin-top: 10px;}
+    .div_floor dl dd a:hover{color: white;}
+    
+    .div_floor dl.dl_last{width: 300px;}
+    .div_floor dl.dl_last dt{float: left}
+    .div_floor dl.dl_last dd{margin-left: 80px; color: white;}
+</style>
+<br>
+<div class="div_floor" style="float: left;border-top: 2px solid orangered; margin-top:20px ;">
+	<div style="width: 1200px; margin:0 auto;">
+    <dl style="">
+        <dt>帮助中心</dt>
+        <dd><a href="{:U('Shop/Article/index',array('id'=>1))}">购物指南</a></dd>
+        <dd><a href="{:U('Shop/Article/index',array('id'=>2))}">支付方式</a></dd>
+        <dd><a href="{:U('Shop/Article/index',array('id'=>3))}">配送方式</a></dd>
+    </dl>
+    <dl>
+        <dt>服务支持</dt>
+        <dd><a href="{:U('Shop/Article/index',array('id'=>4))}">自助服务</a></dd>
+        <dd><a href="{:U('Shop/Index/phoneapp')}">相关下载</a></dd>
+    </dl>
+    <dl>
+        <dt>关于斑马</dt>
+        <dd><a href="{:U('Shop/Article/index',array('id'=>5))}">了解斑马</a></dd>
+        <dd><a href="{:U('Shop/Article/index',array('id'=>1))}">加入斑马</a></dd>
+        <dd><a href="{:U('Shop/Article/index',array('id'=>6))}">联系我们</a></dd>
+    </dl>
+    <dl style="width: 30%;">
+        <dt>关注我们</dt>
+        <dd><img src="__IMG__/banmayzm.png" alt="二维码" style="width: 100px;height: 100px;"/></dd>
+
+    </dl>
+    <dl class="dl_last">
+        <dt ><i class="am-icon-phone" style="font-size: 80px;color:#FF5497"></i></dt>
+       <img  style="CURSOR: pointer" onclick="javascript:window.open('http://wpa.qq.com/msgrd?v=3&uin=99701759&site=qq&menu=yes', '_blank', 'height=502, width=644,toolbar=no,scrollbars=no,menubar=no,status=no');"  border="0" SRC=http://wpa.qq.com/pa?p=1:99701759:1 alt="点击这里给我发消息">
+        <dd>QQ在线客服</dd>
+        <dd>周一至周六：09:00-17:00</dd>
+    </dl>
+    </div>
+    
+</div>
+<hr  style="border: none; clear:both"/>

@@ -1,0 +1,65 @@
+<div style="background-color: #444851; height: 1000px; width: 40px; position: fixed; z-index: 9999;right:0;" >
+		<div class="r-gwc" style="margin: 0 auto; width: 40px; height: 40px; margin-top: 200px; padding: 2px; ">
+			<a href="{:U('Shop/User/index')}"><i class="am-icon-user" style="color: white; font-size: 22px; margin-left: 10px;"></i></a>
+		</div>
+		
+		<a style="color: white; " href="{:U('Shop/ShopCart/shopcart')}" >
+		<div class="r-gwc" style="padding-left: 13px;  width: 50px; height: 150px; padding-top: 15px; ">
+			<i class="iconfont"></i><br>购<br>物<br>车<br><span class="mini-cart-num J_cartNum">(<empty name="count">0<else/>{$count}</empty>)</span>
+			
+		</div>
+		</a>
+		<div class="r-gwcc" style=" height: 35px; margin-top: 200px;">
+			<a title="客服中心" href="{:U('Shop/User/index')}"><i  class="am-icon-reddit" style="color: white; float: left; font-size: 22px; margin-left: 5px;"></i></a>
+			<font color="white" style="display: none; font-size: 14px; padding-left: 20px; padding-top: 5px;">客服电话：400-899-9999</font>
+		</div>
+		<div class="r-gwcc" style=" height: 35px; margin-top: 10px;">
+			<a title="意见反馈" href="{:U('Shop/Index/yjfk')}"><i class="am-icon-edit" style="color: white; float: left; font-size: 22px; margin-left: 8px;"></i>
+			<font color="white" style="display: none; font-size: 14px; padding-left: 20px; padding-top: 5px;">意见反馈</font></a>
+		</div>
+		<div class="r-rwm" style=" margin-top: 10px;">
+			<a title="二维码" href="{:U('Shop/User/index')}"><i class="am-icon-barcode" style="color: white; font-size: 22px; margin-left: 8px;"></i></a>
+			
+		</div>
+		<font id="erweima" color="white" style="display: none; right: 50px; font-size: 14px;  padding-top: 5px;"><img style="height: 200px; width: 200px;" src="__IMG__/banmayzm.png"></font>
+		<div data-am-widget="gotop" style="margin-left:10px; right: 0;" class="am-gotop r-gwc am-gotop-fixed">
+		  <a href="#top" title="回到顶部">
+		    <span class="am-gotop-title">顶部</span>
+		    <i class="am-gotop-icon am-icon-chevron-up"></i>
+		  </a>
+		</div>
+	</div>
+	<style type="text/css">
+		.r-gwcs{background-color: red;}
+	</style>
+	<script type="text/javascript">
+		$(function(){
+			$('.r-gwc').mouseover(function(){
+				$(this).addClass('r-gwcs');
+			})
+			$('.r-gwc').mouseout(function(){
+				$(this).removeClass('r-gwcs');
+			})
+			$('.r-rwm').mouseover(function(){
+				$('#erweima').css('position','relative');
+				$('#erweima').css('display','block');
+				$('#erweima').css('margin-left','-150px');
+				$('#erweima').css('margin-top','-90px');
+			})
+			$('.r-rwm').mouseout(function(){
+//				$('#erweima').addClass('r-gwcs');
+				$('#erweima').css('display','none');
+				$('#erweima').css('margin-left','0');
+			})
+			$('.r-gwcc').mouseover(function(){
+				$(this).addClass('r-gwcs');
+				$(this).find('font').css('display','block');
+				$(this).css('margin-left','-160px');
+			})
+			$('.r-gwcc').mouseout(function(){
+				$(this).removeClass('r-gwcs');
+				$(this).find('font').css('display','none');
+				$(this).css('margin-left','0');
+			})
+		})
+	</script>

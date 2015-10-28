@@ -1,0 +1,436 @@
+<extend name="desktop_default/template/base_index2" />
+
+<block name="area_header">
+	<link rel="stylesheet" href="__PUBLIC__/Shop/css/style.css">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Shop/css/settings.css" media="screen" />
+	<link rel="stylesheet" href="__PUBLIC__/Home/Index/css/base.css">
+	<style type="text/css">
+		body {
+			background-color: #F5F5F5 ;
+			padding: 0;
+		}
+		.yinying{box-shadow: 0 0 40px #8C8C8C;}
+		.xm-star-goods-item{ width: 23%; margin-left: 12px; background-color: #FFFFFF;}
+		.current_page_item {
+			z-index: 9999;
+		}
+		.columns {
+			background-color: #ff4c66;
+			height: 40px;
+			width: 100%;
+			min-width: 1100px;
+			font-size: 14px;
+		}
+		
+		.hr {} .main_menu {
+			margin-left: 100px;
+		}
+		
+		.box-bd {
+			height: 300px;
+			width: 1000px;
+			/*background-color: #FFFFFF;*/
+			margin: 30px auto;
+			padding: 10px;
+		}
+		.titles {
+			height: 100px;
+			float: left;
+			width:500px;
+			padding: 10px;
+			font-size: 17px;
+			margin-top: 20px;
+			margin-left: 20px;
+			/*border: 1px solid #cccc77;*/
+			/*text-align: center;*/
+		}
+		.fx{width: 460px;float: left; background-color: white; margin-left: 15px; padding: 10px; height: 560px;}
+		.font_time_style{color:red}
+		.dhlist{ width: 1100px; margin: 0 auto; height: 40px; min-width: 1100px;}
+		.dhlist ul{  height: 38px;  min-width: 1100px;}
+		.dhlist ul li{ list-style: none; float: left;padding-top:8px; height: 40px; width: 100px; text-align: center;}
+		.dhlist ul li a{color: white; }.dhlist ul li a:hover{color: white; }
+		.ck{background-color: #B02751;}
+		.ck a:hover{color: white;}
+	</style>
+	<script type="text/javascript" src="__JS__/sco.countdown2.js"></script>
+</block>
+
+<block name="area_body">
+	<include file="desktop_default/width/right" />
+	<header class="header">
+		<include file="desktop_default/width/top" />
+		<div class="twelve columns">
+
+			<div class="dhlist" style="">
+
+				<!--<div class="site-logo" style="float: left; margin-top: 20px; ">
+				
+			</div>-->
+				<ul>
+					<!--<li style="margin-left: -100px;">
+						<a href="javascript:window.history.go(0)"><img height="35px" width="70px" style="margin-top: -8px; " src="__PUBLIC__/Home/Index/img/banma.png"></a>
+					</li>-->
+					<li  style="margin-left: -55px; padding-left: -10px; ">
+						<a style="color: white;" href="javascript:void(0)">首页</a>
+					</li>
+
+					<volist name="group" id="v">
+						<li>
+							<a href="{:U('Shop/Index/lists',array('id'=>$v['id']))}">德国专场</a>
+						</li>
+						<li>
+							<a href="{:U('Shop/Index/lists',array('id'=>$v['id']))}">日本专场</a>
+						</li>
+						<li>
+							<a href="{:U('Shop/Index/lists',array('id'=>$v['id']))}">新西兰专场</a>
+						</li>
+						<li>
+							<a href="{:U('Shop/Index/lists',array('id'=>$v['id']))}">澳洲专场</a>
+						</li>
+						<li>
+							<a href="{:U('Shop/Index/lists',array('id'=>$v['id']))}">美国专场</a>
+						</li>
+						<li>
+							<a href="{:U('Shop/Index/lists',array('id'=>$v['id']))}">{$v['name']}</a>
+						</li>
+
+					</volist>
+					<!--<li style="float: right; font-size: 14px; height: 100%;margin-top: 1px; ">
+						<a style="background-color:#ff4c66; height: 40px; color: white; padding: 12px;" href="{:U('Shop/ShopCart/shopcart')}"><i class="iconfont"></i>购物车<span class="mini-cart-num J_cartNum">(<empty name="count">0<else/>{$count}</empty>)</span></a>
+
+					</li>-->
+					<!--<li class=""><a href="#">更多</a>
+						<ul style="z-index: 9999;margin-left:-45px;">
+							<volist name="group" id="v" key="k">
+								<gt name="k" value="6">
+									<if condition="$v['level'] eq 2">
+										<li>
+											<a href="{:U('Shop/Index/lists',array('id'=>$v['id']))}">{$v['name']}</a>
+										</li>
+									</if>
+								</gt>
+							</volist>
+						</ul>
+					</li>-->
+					<!--
+					<volist name="biggroup" id="v">
+						<if condition="$v['level'] eq 1">
+							<li><a href="{:U('Shop/Index/lists',array('id'=>$v['id']))}">{$v['name']}</a>
+								
+								<ul style="z-index: 9999; margin-left:-30px; ">
+									<volist name="group" id='g'>
+									<if condition="$g['parent'] eq $v['id'] ">
+										<li><a href="portfolio-1-column.html">{$g['name']}</a></li>
+									</if>
+									</volist>
+								</ul>
+							</li>
+						</if>
+					</volist>-->
+				</ul>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+
+	</header>
+	<!--<div class="hr" style="border-bottom: 2px solid orangered; width: 100%;  min-width: 1100px;"></div>-->
+	<div class="fullwidthbanner-container top-shadow" style="min-width: 1100px; padding-top: -1px;">
+		<div class="fullwidthbanner" style="min-width: 1100px;">
+			<ul>
+				<volist name="banners" id="b">
+
+					<li data-transition="boxfade" data-slotamount="5" data-masterspeed="300">
+						<img onclick="toUrl(this)" src="{:C('SITE_URL')}{$b['path']}" data-url="{:C('A_URL')}{$b['url']}" alt=""  style="cursor: pointer;">
+						
+					</li>
+
+				</volist>
+				<!--
+				<li data-transition="boxfade" data-slotamount="2" data-masterspeed="300">
+					<img src="__IMG__/Slider-1.jpg" alt="">
+				</li>
+				<li data-transition="boxfade" data-slotamount="3" data-masterspeed="300">
+					<img src="__IMG__/Slider-2.jpg" alt="">
+				</li>
+				<li data-transition="boxfade" data-slotamount="4" data-masterspeed="300">
+					<img src="__IMG__/Slider-3.jpg" alt="">
+				</li>
+				<li data-transition="boxfade" data-slotamount="5" data-masterspeed="300">
+					<img src="__IMG__/Slider-4.jpg" alt="">
+				</li>
+				-->
+			</ul>
+		</div>
+	</div>
+	<div></div>
+	<div style="width: 1100px; margin: 0 auto;">
+		<img data-original="__IMG__/hh1.png" class="lazy" src="{:C('IMGURL')}"  style="margin-top: -50px;">
+	</div>
+	<div class="container">
+		<div class="home-hot-goods">
+			<div class="xm-plain-box">
+				<div class="box-hd" style=" background-color: white; height: 55px; width: 1000px; margin: 0 auto;">
+					<img style="margin-top: -5px;" src="__IMG__/new.png">
+					<font size="3" color="#8C8C8C">近期新鲜上架的商品</font>
+
+				</div>
+
+				<div class="box-bd" style=" height: 330px;">
+					<div class="row">
+						<div class="col col-15" style="width: 100%; ">
+							<div class="brick-list" style="">
+
+								<volist name='new' id='vo'>
+									<div class="xm-star-goods-item lista">
+										<div class="item-content" style="text-align: center;">
+											<span class="item-thumb">
+			                                  <a href="{:U('Shop/Index/spxq',array('id'=>$vo['id']))}"><img height="220px" width="220px" data-original="{:U('Api/Picture/index',array('id'=>$vo['main_img']))}" class="lazy" src="{:C('IMGURL')}" ></a>
+			                                </span>
+											<span class="item-title"><a></a></span>
+											<br><span class="item-desc">{$vo.name|subtext=10}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<br><span class="item-price" style="color: red;">{$vo.price}元&nbsp;&nbsp;&nbsp; </span><del style="color: #ccc">{$vo.ori_price}元</del>
+										</div>
+									</div>
+								</volist>
+
+							</div>
+						</div>
+						<div class="col col-5">
+							<div class="board-section">
+								<!--<h3><span>HOT</span>热销商品排行</h3>-->
+								<!--<ul class="board-list">
+									<volist name='new' id='vo'>
+										<li class="top">
+											<a href="{:U('Shop/Index/spxq',array('id'=>$vo['id']))}"><img height="60px" width="80px" src="{$vo.main_img}"></a>
+											<span class="item-info">
+	                                        <span class="item-title"><a >{$vo.name}</a></span>
+											<span class="item-price">{$vo.price}元 <del>{$vo.ori_price}</del></span>
+											</span>
+											<span class="item-thumb">
+	                                        
+	                                    </span>
+											<span class="item-num"></span>
+										</li>
+									</volist>
+								</ul>-->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<img src="__IMG__/hds.png" id="app" style="float: left;  margin-top: -450px;">
+		<div class="home-star-goods">
+
+			<div class="xm-plain-box J_starGoodsCarousel">
+				<neq name="flash_sales" value="">
+					<div class="box-hd" style="background-color: white; height: 55px;width: 1000px; margin: 0 auto; text-align: left;clear: both;">
+
+						<img style="margin-top: -5px;" src="__IMG__/hd.png">
+						<font size="3" color="#8C8C8C">近期热门活动</font>
+					</div>
+					<else />
+					<h1 style="text-align: center;padding: 100px;font-size:80px;color: #ccc">暂无活动,敬请期待</h1>
+				</neq>
+				<volist name="flash_sales" id="fs">
+					<div class="box-bd" style="background-color: white;">
+						<a href="{:U('Shop/Index/spxq',array('id'=>$fs['product']['id']))}"><img style="float: left; height: 280px; width: 40%;"  data-original="{:U('Api/Picture/index',array('id'=>$fs['product']['main_img']))}" class="lazy" src="{:C('IMGURL')}" ></a>
+						<div class="titles">
+							<font size="4">{$fs.product.name}</font>
+							<br>
+								<font size="2" color="#CCCCCC">{$fs.synopsis}</font>
+							<br>
+							<span style="color: #8C8C8C; font-size: 14px;">限时价：￥<font size="5" color="orange" id="xsj" style="color: red;">{$fs.price}</font>元<br>
+								原价：<del id="yj">{$fs.product.ori_price}</del>元<div  style="background: url(__IMG__/zk1.png); padding: 2px; margin-left: 200px; margin-top: -20px; border: 0; padding-right: 1px; color: white; text-align: right; height: 23px; width: 65px;"><b id="zks">7.6</b>折</div>
+							</span>
+
+							<div style="border-bottom: 1px solid #F5F5F5; border-top: 1px solid #F5F5F5; width: 150%; height: 62px;">
+								<div style="float: left; width: 130px;">
+									<br><span style=" font-size: 14px; color: #8C8C8C;   padding-left: 20px;"></span></div>
+								<div style="float: left;  height: 66px;">
+									<a href="{:U('Shop/Index/spxq',array('id'=>$fs['product']['id']))}"> <img style="margin-left: 190px; height: 70px;" alt="" src="__IMG__/buynow.png"></a>
+								</div>
+							</div>
+
+							<br><i style="color: red;" class="am-icon-volume-up">距离活动结束剩余：</i><span class="div_time" data-until="{$fs.end_time}" style="margin-left: 80px;font-size: 20px;color:#999"></span>
+
+						</div>
+
+					</div>
+				</volist>
+
+				<!--
+				<div class="box-bd">
+					<div class="titles">
+						距离活动结束还有
+						<br>
+						<br>
+						<hr style="border: 0.5px solid #000000; margin-top: 10px;">
+						<font color="red" style="">1天19小时</font>
+
+					</div>
+					<img class="am-round" style="float: right; height: 280px; width: 40%;" src="__IMG__/a2.jpg">
+				</div>
+				<div class="box-bd">
+					<div class="titles">
+						距离活动结束还有
+						<br>
+						<br>
+						<!--<hr style="border: 0.5px solid #000000; margin-top: 10px;">
+						<font color="red" style="">1天19小时</font>
+
+					</div>
+					<img class="am-round" style="float: right; height: 280px; width: 40%;" src="__IMG__/a3.jpg">
+				</div>-->
+			</div>
+		</div>
+		<div class="home-hot-goods">
+			<div class="xm-plain-box">
+				<div class="box-hd" style=" background-color: white; height: 55px; width: 1000px; margin: 0 auto;">
+					<img style="margin-top: -5px;" src="__IMG__/hot.png">
+					<font size="3" color="#8C8C8C">热门商品</font>
+
+				</div>
+
+				<div class="box-bd" style=" height: 330px;">
+					<div class="row">
+						<div class="col col-15" style="width: 100%; ">
+							<div class="brick-list" style="padding: 15px;">
+								<volist name="hot" id="vo">
+									<div class="fx" style="">
+										<a class="pic" href="{:U('Shop/Index/spxq',array('id'=>$vo['product']['id']))}" target="_blank" title="{$vo['product']['name']}">
+											<img data-original="{:U('Api/Picture/index',array('id'=>$vo['product']['main_img'],size=>480))}" class="lazy" src="{:C('IMGURL')}"   alt="{$vo['product']['name']}" title="{$vo['product']['name']}"
+											width="535px" height="330px">
+										</a>
+										<div class="" style="padding: 10px;">
+											<div class="">
+												<div class="">
+													<!--<img src="http://haitao.nos.netease.com/1077833fa2854dcb97502084f24f449d1419659976324i46kw8bh10001.png" width="28px">-->
+													<span>杭州保税仓发货</span>
+												</div>
+												<h3 class="">
+										<a target="_blank" href="{:U('Shop/Index/spxq',array('id'=>$vo['product']['id']))}" title="{$vo['product']['name']}">
+										<strong style="color: #000000; font-size: 16px;">{$vo['product']['name']}</strong>
+										</a>
+										<p class="" title="synopsis">{$vo['product']['synopsis']}</p>
+										</h3>
+												<p class="">
+													<label class="">单价:</label><strong><span class="symbol" style="font-size: 18px; color: red;">¥{$vo['product']['price']}</span></strong>
+													<br><del>国内参考价 ¥{$vo['product']['ori_price']}</del>
+												</p>
+	
+											</div>
+										</div>
+									</div>
+								</volist>
+								
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<include file="desktop_default/width/floor" />
+</block>
+
+<block name="area_footer">
+	<script type="text/javascript">
+		function toUrl(aaa){
+			var urls=$(aaa).attr("data-url");
+			window.location.href=urls;
+		}
+		
+		$(window).scroll(function() {
+			$('.columns').css('position', 'fixed');
+			$('.columns').css('z-index', '9999');
+			$('.columns').css('margin-top', '-136px');
+			$('.hr').css('position', 'fixed');
+			$('.hr').css('z-index', '9990');
+			$('.hr').css('margin-top', '-95px');
+			if($(document).scrollTop()>=800){
+				$('#app').css('position', 'fixed');
+				$('#app').css('z-index', '9999');
+				$('#app').css('margin-top', '-936px');
+				$('#app').css('margin-left', '-436px');
+			}else if($(document).scrollTop()<=300){
+				$('#app').css('position', '');
+				$('#app').css('z-index', '9999');
+				$('#app').css('margin-top', '-400px');
+				$('#app').css('margin-left', '0');
+			}
+			
+			if ($(document).scrollTop() <= 50) {
+				$('.columns').css('position', '');
+				$('.columns').css('z-index', '9999');
+				$('.columns').css('margin-top', '0');
+				$('.hr').css('position', 'relative');
+				$('.hr').css('z-index', '0');
+				$('.hr').css('margin-top', '0');
+				
+			}
+		})
+		$(function(){
+			
+			
+			$('#zks').text(($('#xsj').text()/$('#yj').text()*10).toFixed(2));
+		
+			$('.lista').mouseover(function(){
+				$(this).addClass('yinying');
+//				$(this).find('.jg').hide();
+			})
+			$('.lista').mouseout(function(){
+				$(this).removeClass('yinying');
+//				$(this).find('.jg').show();
+			})
+			$('.dhlist ul li').mouseover(function(){
+				$(this).css('border-bottom','2px solid #B02751');
+			})
+			$('.dhlist ul li').mouseout(function(){
+				$(this).css('border-bottom','0');
+			})
+		})
+	</script>
+
+	<script src="__JS__/custom.js" type="text/javascript"></script>
+
+	<script src="__JS__/jquery.meanmenu.js"></script>
+	<script>
+		jQuery(document).ready(function() {
+			jQuery('header nav').meanmenu();
+		});
+
+
+		function toDetail(url){
+			window.location.href=url;
+		}
+	</script>
+
+	<script src="__JS__/jquery.themepunch.plugins.min.js"></script>
+	<script src="__JS__/jquery.themepunch.revolution.min.js"></script>
+	<script src="__JS__/revolution-slider-options.js"></script>
+
+	<script src="__JS__/jquery.prettyPhoto.js"></script>
+	<script>
+		$(document).ready(function() {
+			$("a[data-gal^='prettyPhoto']").prettyPhoto();
+
+
+			$(".div_time").each(function(){
+				var until = $(this).data("until");
+				until = parseInt(until);
+				//thid = parseInt(thid);
+				$(this).scojs_countdown({until: until});
+			})
+
+		});
+	</script>
+
+	<script src="__JS__/tooltip.js"></script>
+
+	<script type="text/javascript" src="__JS__/jquery.flexisel.js"></script>
+</block>

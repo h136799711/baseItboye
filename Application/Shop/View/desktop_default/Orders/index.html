@@ -1,0 +1,387 @@
+<extend name="desktop_default/template/base_index2" />
+
+<block name="area_header">
+	<link rel="stylesheet" href="__PUBLIC__/Home/Index/css/base.css">
+	<style type="text/css">
+		body{background-color: #F5F5F5;  }
+		.top{ height: 100px; background-color: #FFFFFF; border-bottom: 2px solid orangered;}
+		.main{ width: 1100px;  background-color: #FFFFFF; margin: 0 auto; padding: 38px;}
+		.main a{ margin-left: 50px; font-size: 18px;color: #000000;}
+		.userinfo{margin-left: 65%; margin-top: -25px; font-size: 13px;}
+		.dizhi { background: url(__IMG__/wxz.png); cursor: pointer; height: 106px; margin-top: 5px;margin-left: 5px; font-size: 13px; width: 238px; float: left; padding: 15px;}
+		.dizhi i{font-size: 33px; display:flex; justify-content:center; }
+		.count{ height: 200px;  width: 250px; margin-left: 73%; }
+		.count table tr td{padding-top: 22px; width: 99px; }
+		.count table tr td font{color: orangered; font-size: 18px;}
+		.am-modal-bd{padding: 10px;}
+		.am-modal-bd table tr td{padding-top: 10px;}
+		 a{ color: #000000;}
+		 a:hover{color: #000000;}
+		 a:checked{color: #000000;}
+		 .container{width: 100%; height: 100px; background-color: #FFFFFF;}
+		 #addressform tr{padding-top: 10px;}
+		 .am-modal-bd table tr td{padding-top: 20px;}
+		 .ckadd{background: url(__IMG__/xz.png);}
+		  .ckadd1{background: url(__IMG__/xz.png);}
+		  .jindu{background: url(__IMG__/jdt1.png) no-repeat;}
+		.jindus{background: url(__IMG__/jdt.png) no-repeat;}
+		.am-btn{font-size: 13px;}
+		.am-selected-list{font-size: 13px;}
+	</style>
+</block>
+
+<block name="area_body">
+	<include file="desktop_default/width/right" />
+	<div class="site-topbar" style="width: 100%;">
+		<div class="containers" style="margin: 0 auto; width: 1100px; background-color: #F2F2F2;">
+			<div class="topbar-nav">
+				<empty name="user">
+				亲!欢迎来到斑马商城,请&nbsp;&nbsp;&nbsp;<a style="color: #B02751;" target="_blank" href="{:U('Shop/Index/login')}">登录</a><span class="sep">|</span><a target="_blank" style="color: #B02751;" href="{:U('Shop/Index/register')}">注册</a>
+				<else/>
+					欢迎你！<a>{$user['username']}</a> &nbsp; &nbsp; &nbsp; &nbsp;<a href="{:U('Shop/User/index',array('id'=>$user['id']))}">个人中心</a>
+					&nbsp; &nbsp; &nbsp; &nbsp;<a href="{:U('Shop/Index/loginout')}">退出登录</a>
+				</empty>
+			</div>
+			<div class="topbar-info J_userInfo">
+				<a class="" style="color: orangered;" href="{:U('Shop/Index/phoneapp')}">手机APP</a><span class="sep">|</span>
+				<a class="" style="color: orangered;" href="{:U('Shop/ShopCart/shopcart')}"> <i class="iconfont"></i>购物车</a><span class="sep">|</span>
+			
+				<a class="kfzx" href="JavaScript:void(0)">客服中心</a><span class="sep">|</span>
+				<a class="jht" href="{:U('Shop/User/order')}"> 我的订单</a><span class="sep">|</span>
+				<a class="jhta" href="{:U('Shop/Article/index')}">帮助</a>
+				<!--<br>
+				<div style="color: #000000; padding-top: 10px;" class="t_tp" >
+					<ul>
+						<li><a href="{:U('Shop/User/order')}">待付款</a> </li>
+						<li><a href="{:U('Shop/User/order')}">待收货</a> </li> 
+						<li><a href="{:U('Shop/User/order')}">已完成</a> </li>
+					</ul>
+				</div>-->
+				
+			</div>
+		</div>
+	</div>
+	<div style="width:100%;  height: 100px;background-color: white; min-width: 1100px;">
+		<div style="width: 1100px; margin: 0 auto;  ">
+			<img src="__IMG__/logo.png"><img src="__IMG__/lgwb.jpg">
+				
+			<div class="stepCarNew">
+                <ul>
+                    <li id="stepCar_1" class="jindu"><p>1</p><span>我的购物车</span></li>
+                    <li id="stepCar_2" class="jindu"><p>2</p><span>订单确认</span></li>
+                    <li id="stepCar_3" class="jindus"><p>3</p><span>付款</span></li>
+                    <li id="stepCar_4" class="jindus"><p>4</p><span>购买完成</span></li>
+                </ul>
+            </div>
+			
+		</div>
+		<!--<img height="100" style="width: 100%;" src="__IMG__/guanggao.jpg">-->
+	</div>
+	<div class=" container">
+		<include file="desktop_default/width/daohang"/>
+	</div><br>
+	<div style="  width: 1080px; margin: 0 auto; height: 50px; background-color: white; ">
+		<img height="70px" style="margin-left: -3px; margin-top: -5px;" src="__IMG__/ordercreate.png">
+		<font color="#8C8C8C">订单创建完成请尽快支付哦!</font>
+	</div><br>
+	<div class="all">
+		
+		
+		<div class="main">
+			<font size="4">收货地址</font>
+			<br><br><br>
+			
+			<volist name="address" id="vo" >
+					<div class="dizhi" name="dizhi">
+						<font name="city">{$vo['city']}</font><b><font name="sheng">{$vo['province']}</font></b>&nbsp;&nbsp;&nbsp;<font name="username">{$vo['contactname']}</font>(收)
+						<div style="height: 2px; border: 1px dashed #F5F5F5;"></div><font name="area">{$vo['area']}</font> <font name="details">{$vo['detailinfo']}</font>，<font name="userphone">{$vo['mobile']}</font>
+						<i class="" style="color: orangered;"></i>
+					</div>
+				
+				
+				<input type="button" style="display: none;" id="show"  data-am-modal="{target: '#doc-modal-2', closeViaDimmer: 0, width: 500, height: 355}"/>
+			</volist>
+			<div class="dizhi">
+				<a href="JavaScript:void(0)"><i id="divcount" style="color: orangered;" class="am-icon-plus-square-o" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0, width: 500, height: 355}"></i></a>
+			</div >
+			<!--添加地址-->
+			<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-1">
+				<div class="am-modal-dialog">
+					<div class="am-modal-hd" style="color: orangered;">收货地址添加
+						<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+					</div>
+					<div class="am-modal-bd" style="text-align: left;">
+						<form class="fm" method="post">
+						<table id="addressform" style="margin-left: 56px;">
+							<tr>
+								<td>收货人：</td>
+								<td><input type="text" name="uname" id="uname" value="" /></td>
+							</tr>
+							<tr>
+								<td>联系电话：</td>
+								<td><input type="text" name="phone" id="phone" value="" /><br><span></span></td>
+							</tr>
+							<tr>
+								<td>所在地区：</td>
+								<td><select id="loc_province" style="width:80px;">
+										<volist name="pro" id="vo">
+											<option value="{$vo['provinceid']}">{$vo['province']}</option>
+										</volist>
+									</select>
+									<input type="hidden" name="sheng" class="sheng" />
+									<input type="hidden" name="shi" class="shi" />
+									<input type="hidden" name="qu" class="qi" />
+									<input type="hidden" name="shengid" class="shengid" />
+									<input type="hidden" name="shiid" class="shiid" />
+									<input type="hidden" name="quid" class="qiid" />
+									<select id="loc_city" style="width:80px; margin-left: 10px">
+									</select>
+									<select id="loc_town" style="width:80px;margin-left: 10px">
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td >详细地址：</td>
+								<td>
+									<textarea name="address" cols="35" rows="3" style=" border-color: #ccc; border-radius:3px;"></textarea>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<button url="{:U('Shop/User/address')}" style="margin-left: 150px; width: 60px;" target-form="fm"  class="ajax-post am-btn-warning" style="width: 100px; font-size: 15px;" >保存</button>
+								</td>
+							</tr>
+						</table>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div  style="clear: both; margin-top: 20px;">
+				<br>
+					<h4>确认商品信息</h4>
+					<table class="am-table am-table-bordered am-table-radius am-table-striped" style="width: 100%;">
+						<tr >
+							<td>商品编号</td>
+							<td>商品名称</td>
+							<td>商品规格</td>
+							<td>商品价格</td>
+							<td>商品数量</td>
+						</tr>
+						<volist name="items" id="vo">
+						<tr >
+							<td>{$vo.p_id}</td>
+							<td>
+								<img style="height: 40px; width: 50px;" src="{:U('Api/Picture/index',array('id'=>$vo['icon_url'],'size'=>240))}">
+								{$vo.name}</td>
+							<td><if condition="$vo['skuvalue'] eq ''">无 <else/>{$vo.sku_desc}</if></td>
+							<td>{$vo.price}</td>
+							<td>{$vo.count}</td>
+						</tr>
+						</volist>
+					</table>
+				<br>
+				<!--<font size="4" >支付方式</font>
+				<font color="orangered" size="3" style="margin-left: 60px;">目前仅支持支付宝(更多支付方式待增加)</font><hr>
+				<font size="4">配送方式</font>
+				<font color="orangered" size="3" style="margin-left: 60px;">快递配送(包邮)</font><hr>
+				<font size="4">商品发票</font>
+				<font color="orangered" size="3" style="margin-left: 60px;">纸质发票(支持)</font><hr>-->
+				<form class="fms" method="post" onsubmit="">
+				<font size="4">订单备注（留言）</font><a id="showmess" style="font-size: 15px;color: orangered;" href="javascript:void(0)">我要留言(请戳这里-_,-)</a> 
+					<div id="mess" style="margin-top: 40px;">
+						<textarea style="border: 1px solid orange;" name="mess" placeholder="如果订单需要备注，请在这里填写哦" cols="45" rows="2"></textarea>
+					</div>
+					<hr>		
+				<font size="4">商品优惠ID码</font><a id="showidcode" style="font-size: 15px; color: orangered;" href="javascript:void(0)">使用优惠ID码(请戳这里-_,-)</a> <br>
+					<div id="idcode" style="margin-top: 40px;">
+						<input style="width: 250px; height: 50px; margin-top: -1px; border: 1px solid orange; " placeholder="输入您的优惠码可以优惠哦!" type="text"  id="idcodes" value="" />
+						<font id="pld" style="color: green; font-size: 16px;"></font><!--<a id="clic" href="javascript:void(0)" class="am-btn-warning" style="padding: 5px; font-size: 13px; color: white;">点击使用优惠码!</a>-->
+						<select id="lishi" style="height: 49px; width: 150px; border: 0;" >
+							<empty name="lishiid">
+								<option >暂无历史记录</option>
+								<else/>
+								<option >请选择</option>
+								<volist name="lishiid" id="vo">
+									<option >{$vo.idcode}</option>
+								</volist>
+							</empty>
+						</select>
+					</div>
+				<hr>
+			</div>
+			
+				<input type="hidden" name="username" id="username" value="" required/>
+				<input type="hidden" name="userphone" id="userphone" value="" required/>
+				<input type="hidden" name="sheng" id="sheng" value="" required/>
+				<input type="hidden" name="shi" id="shi" value="" required/>
+				<input type="hidden" name="qu" id="qu" value="" required/>
+				<input type="hidden" name="details" id="details" value="" required/>
+			<div class="count">
+				<table style="text-align: right; ">
+					<tr>
+						<td>商品件数：</td>
+						<td><font>{$procount}</font>件</td>
+					</tr>
+					<tr>
+						<td>商品优惠：</td>
+						<td>
+							<input type="hidden" name="zj" id="zj" value="{$allmoney}" />
+							<input type="hidden" name="idcode" id="idcodea" value="" />
+							<input type="hidden" name="zk" id="zk" value="0" />
+							<input type="hidden" name="zhekoumoney" id="zhekoumoney" value="0" />
+							<font id="spyh">{$youhui}</font>元
+						</td>
+					</tr>
+					<tr>
+						<td>商品运费：</td>
+						<td><font>{$post_price}</font>元</td>
+					</tr>
+					<tr>
+						<td>商品总计：</td>
+						<td><font id="ddzj">{$allmoney}</font>元</td>
+					</tr>
+					<input type="hidden" name="dingdanprice" id="dingdanprice" value="{$allmoney}" />
+				</table>
+			</div><hr>
+			<button url="{:U('Shop/Orders/addorder')}" id="gopay" target-form="fms"  class="ajax-post am-btn am-btn-warning am-round" style="width: 150px; margin-top: -10px; float: right; font-size: 15px;" >确认结算</button>
+			</form>
+		</div>
+	</div><br><br><br>
+	
+	<include file="desktop_default/width/floor" />
+</block>
+
+<block name="area_footer">
+	<script type="text/javascript">
+		$(function(){
+			$('#idcodes').focus(function(){
+				$('#gopay').addClass('am-disabled');
+			})
+			$('#lishi').change(function(){
+				$('#idcodes').val($(this).val());
+				$('#idcodes').blur();
+			})
+			$('#idcodes').blur(function(){
+				var code=$(this).val();
+				$.getJSON("{:U('Shop/Orders/getidcode')}",{idcode:$(this).val(),price:$('#zj').val()},function(json){ 
+					if(json==0){
+						$('#pld').text('当前优惠ID码不可用!');
+					}else if(json==1){
+						
+						$('#pld').text('不可以输入自己的优惠ID码哦!');
+					}else{
+						var zk=Number(json.discount_ratio);
+						var zj=$('#zj').val();
+						var ddje=zj-(zj*zk).toFixed(2);
+						var zhekou=$('#spyh').text();
+						$('#zk').val(zk);
+						$('#spyh').text((Number(zhekou)+Number(zj*zk)).toFixed(2));
+						$('#zhekoumoney').val(zhekou+(zj*zk).toFixed(2));
+						$('#ddzj').text(ddje.toFixed(2));
+						$('#dingdanprice').val(ddje);
+						$('#idcodea').val(code);
+						$('#pld').text("恭喜您优惠码可用,当前折扣"+json.discount_ratio+"%,已优惠"+json.prices+"元");
+					}
+					$('#gopay').removeClass('am-disabled');
+				}); 
+			})
+			$('#clic').click(function(){
+				$('#idcodes').show();
+				$(this).hide();
+				$('#gopay').addClass('am-disabled');
+			})
+			$('.dizhi').mouseover(function(){
+				$(this).addClass('ckadd');
+			}) 
+			$('.dizhi').mouseout(function(){
+				$(this).removeClass('ckadd');
+			})
+			$('.dizhi').click(function(){
+				
+					$('#username').val($(this).find("font[name='username']").text());
+					$('#userphone').val($(this).find("font[name='userphone']").text());
+					$('#sheng').val($(this).find("font[name='sheng']").text());
+					$('#shi').val($(this).find("font[name='city']").text());
+					$('#qu').val($(this).find("font[name='area']").text());
+					$('#details').val($(this).find("font[name='details']").text());
+					$(this).addClass('ckadd1');
+					$(this).siblings().removeClass('ckadd1');
+				
+			})
+			
+			$('#okpay').click(function(){
+				window.location.href="{:U('Shop/Orders/paytype')}";
+			})
+			$('#loc_province').change(function(){
+//			alert($('#loc_province option:selected').val());
+			$.getJSON("{:U('Shop/User/getcity')}",{sno:$('#loc_province option:selected').val()},function(json){ 
+				$('#loc_city').empty();
+				for (var a=0;a<json.length;a++) {
+					$('#loc_city').append("<option value='"+json[a].cityid+"'>"+json[a].city+"</option>");
+				}
+			}); 
+			var shengid=$('#loc_province option:selected').val();
+			$('.shengid').val(shengid);
+			var sheng=$('#loc_province option:selected').text();
+			$('.sheng').val(sheng);
+			})
+			$('#loc_city').change(function(){
+				$.getJSON("{:U('Shop/User/getarea')}",{cno:$('#loc_city option:selected').val()},function(json){ 
+					$('#loc_town').empty();
+					for (var a=0;a<json.length;a++) {
+						
+						$('#loc_town').append("<option value='"+json[a].areaid+"'>"+json[a].area+"</option>");
+					}
+				}); 
+				var shiid=$('#loc_city option:selected').val();
+				var shi=$('#loc_city option:selected').text();
+				$('.shiid').val(shiid);
+				$('.shi').val(shi);
+			})
+			$('#loc_town').change(function() {
+					//$('input[@name=location_id]').val($(this).val());
+				var quid=$('#loc_town option:selected').val();
+				$('.qiid').val(quid);
+				var qu=$('#loc_town option:selected').text();
+				$('.qi').val(qu);
+				
+			})
+				
+			$('#mess').hide();
+			$('#showmess').click(function(){
+				$('#mess').toggle(function(){
+					
+				})
+			})
+			
+//			$('#divcount').hover(function(){
+//				if($('.dizhi').length>=4){
+//					var a=$(this).attr('data-am-modal',null);
+//				}
+//			})
+			$('.jht,.t_tp').mouseover(function(){
+			$('.t_tp').show();
+			$('.t_tp2').hide();
+		})
+		
+		$('.t_tp').mouseout(function(){
+			$('.t_tp').hide();
+		})
+		$('#sch').click(function(){
+			$('#schfm').submit();
+		})
+			/*$('#gopay').click(function(){
+				var name=$('#username').val();
+				if(name=='' || name==null){
+					alert('请选择收货地址!');
+					return false;
+				}
+			})*/
+			
+			
+		})
+		
+		
+	
+	</script>
+</block>

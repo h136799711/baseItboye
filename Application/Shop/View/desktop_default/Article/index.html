@@ -1,0 +1,61 @@
+<extend name="desktop_default/template/base_index2" />
+
+<block name="area_header">
+    <link  href="__PUBLIC__/Home/Index/css/index.min.css" type="text/css">
+    <link rel="stylesheet" href="__PUBLIC__/Home/Index/css/base.css">
+    <style type="text/css">
+        body{background: #F5F5F5}
+        .am-footer-default{background: #F5F5F5}
+        .div_main{width:1080px;margin: 0 auto; background: #F5F5F5 }
+        .div_left{width: 20%;margin: 20px;float: left;background:white}
+        .div_left dl{margin:0 auto; width:70%;margin-top:50px;margin-bottom:50px;}
+        .div_left dl dt{font-size: 20px;font-weight: 100; color: orangered;}
+        .div_left dl dd{padding-left:25px;font-size: 16px;padding-top: 10px;}
+        .div_left dl dd a:visited{color:#ccc}
+        .div_left dl dd a:hover{color:#FF6700}
+        .div_left dl dd a.dd_search{color:#FF6700}
+        .div_right{width: 70%;margin: 20px;border: 1px solid #ccc;float: left;padding: 20px;background:white}
+        .div_right .div_userInfo{width: 90%;margin-left:5%;border-bottom: 1px solid #ccc;padding: 50px;float: left}
+        .div_right .div_userInfo ul{list-style: none;float: left}
+        .div_right .div_userInfo ul.ul_info{margin-left:20%;margin-top:0px;}
+        .div_right .div_userInfo ul.ul_info li{margin-top:10px; width: 100%; }
+        .div_right .div_orderInfo{ width: 90% ; margin: 0 auto;}
+        .div_right .div_orderInfo ul{width: 100%;margin-top:20px;float: left;list-style: none}
+        .div_right .div_orderInfo ul li{width: 50%;float: left;padding: 50px;}
+        .div_right .div_orderInfo ul li p{margin-left: 120px;}
+        .div_right .div_orderInfo ul li{}
+        .div_right .div_orderInfo ul li{}
+        .dd_search{color:#FF6700}
+         .container{height: 80px; background-color: white; width: 100%; min-width: 1100px;}
+
+    </style>
+</block>
+
+<block name="area_body">
+	<include file="desktop_default/width/right" />
+    <include file="desktop_default/width/top"/>
+    <div class=" container">
+		<include file="desktop_default/width/daohang"/>
+	</div><br>
+    <div style="  width: 1080px; margin: 0 auto; height: 50px; background-color: white; ">
+		<img height="70px" style="margin-left: -3px; margin-top: -5px;" src="__IMG__/help.png">
+		<font color="#8C8C8C">买东西必须注册哦!</font>
+	</div>
+    <div class="div_main" >
+        <div class="div_left">
+            <include file="desktop_default/width/left"/>
+        </div>
+        <div class="div_right">
+            <!--{$article.post_content}-->
+            <h1 style="color:#ff5097">{$article.post_title}</h1>
+            <font color="#999">{$article.post_modified|date='Y-m-d H:i',###}</font>
+            {:htmlspecialchars_decode($article['post_content'])}
+        </div>
+    </div>
+	<hr  style="border: none; clear:both"/>
+	<include file="desktop_default/width/floor" />
+</block>
+
+<block name="area_footer">
+
+</block>

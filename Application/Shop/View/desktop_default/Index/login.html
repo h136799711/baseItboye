@@ -1,0 +1,55 @@
+<extend name="desktop_default/template/base_index2" />
+
+<block name="area_header">
+	<link rel="stylesheet" href="__PUBLIC__/Home/Index/css/base.css">
+	<style type="text/css">
+	body {
+			background-color: #F5F5F5;
+		}
+		.am-panel{ width: 550px; text-align: center; margin:10% auto;}
+		.am-panel-hd {height: 80px;padding: 30px;background-color: #FFFFFF !important;text-align: center;}
+		.disanfang{ margin-left: 30px; width: 140px;}
+		.fm a{cursor: pointer; color: orangered;}
+		
+		.container{height: 80px; background-color: white; width: 100%; min-width: 1100px;}
+		.fm input{ height: 50px; width: 300px;}
+	</style>
+</block>
+
+<block name="area_body">
+	<include file="desktop_default/width/right" />
+	<include file="desktop_default/width/top"/>
+		<div class=" container">
+		<include file="desktop_default/width/daohang"/>
+	</div><br>
+	<div style="  width: 1080px; margin: 0 auto; height: 50px; background-color: white; ">
+		<img height="70px" style="margin-left: -3px; margin-top: -5px;" src="__IMG__/zc.png">
+		<font color="#8C8C8C">买东西必须注册登录哦!</font>
+	</div><br>
+	<div style="background-color: white; font-size: 14px; height: 400px; width: 600px; text-align: center; margin: 0 auto; padding: 20px;">
+		<br><br>
+		<form class="fm" method="post" action="{:U('Shop/Index/login')}">
+			<input type="text" name="uname" placeholder="  用户名"><br><br>
+			<input type="password" name="pwd" placeholder="  密码"><br><br>
+			<button url="{:U('Shop/Index/login')}" target-form="fm" style="width: 300px; height: 50px;"  class="ajax-post btn btn-primary am-btn am-btn-primary am-btn-block" autofocus="autofocus">登录</button>
+			<br><br><font color="black" size="2">没有账号？请<a href="{:U('Shop/Index/register')}">前往注册</a>斑马账号</font>
+			<br><br><font size="2"><!--<a id="disanfang" href="javascript:void(0)">第三方应用登录</a>--><a style="margin-left: 20px; " href="{:U('Shop/User/forgetpwd1')}">忘记密码</a></font>
+			<div class="disanfang"><a style="color: orange;"><span class="am-icon-weibo"> </span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a style="color: darkgoldenrod;"><span class="am-icon-qq"></span></a></div>
+		</form>
+	</div>
+	<br>		
+		 <include file="desktop_default/width/floor" />
+</block>
+
+<block name="area_footer">
+<script type="text/javascript">
+	$(function(){
+		$('.disanfang').hide();
+		$('#disanfang').click(function(){
+			$('.disanfang').toggle(function(){
+				
+			})
+		})
+	})
+</script>
+</block>

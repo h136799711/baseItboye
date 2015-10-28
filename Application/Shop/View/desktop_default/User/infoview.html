@@ -1,0 +1,262 @@
+<extend name="desktop_default/template/base_index2" />
+
+<block name="area_header">
+<link rel="stylesheet" href="__PUBLIC__/Home/Index/css/base.css">
+	
+	<link type="text/css" rel="stylesheet" src="__UPLOAD__/jquery-uploadify/3.2.1/uploadify.css" />
+	<script type="text/javascript" src="__UPLOAD__/jquery-uploadify/3.2.1/jquery.uploadify.min.js"></script>
+	<style type="text/css">
+		.all {
+			width:70%;
+			background-color: #F5F5F5;
+			margin-left: 25%;
+		}
+		.tp {
+			width: 50%;
+			margin: 0 auto;
+			padding: 80px;
+		}
+		.all font {
+			margin-left: 40px;
+		}
+		.div_left{width: 20%;margin: 20px;float: left;background:white}
+			.div_left dl{margin:0 auto; width:70%;margin-top:50px;margin-bottom:50px;}
+				.div_left dl dt{font-size: 20px;font-weight: 100; color: orangered;}
+				.div_left dl dd{padding-left:25px;font-size: 16px;padding-top: 10px;}
+					.div_left dl dd a:visited{color:#ccc}
+					.div_left dl dd a:hover{color:#FF6700}
+					.div_left dl dd a.dd_search{color:#FF6700}
+		.tab {
+			padding: 30px;
+		}
+		.tabs {
+			height: 466px;
+			padding: 30px;
+			background-color: #FFFFFF;
+		}
+		body{background-color: #F5F5F5;}
+		.all a {
+			color: #000000;
+		}
+		.all a:hover {
+			color: orangered;
+		}
+		.sed {
+			color: orangered;
+		}
+		.am-tab-panel {
+			background-color: #FFFFFF;
+		}
+		.mm {
+			margin-top: 32px;
+			margin-left: 110px;
+		}
+		.headimg {
+			float: left;
+			font-size: 12px;
+			margin-top: 130px;
+			margin-left: 100px;
+		}
+		.tabs-right {
+			width: 60%;
+			float: right;
+			padding: 10px;
+		}
+		.tabs-right button{float: right;}
+		.info{  }
+		.info table{margin: 0 auto;}
+		.info table tr td{padding: 10px;}
+		.container{height: 80px; background-color: white; width: 100%; min-width: 1100px;}
+	</style>
+</block>
+
+<block name="area_body">
+	<include file="desktop_default/width/right" />
+	<include file="desktop_default/width/top"/>
+	<div class="container">
+		<include file="desktop_default/width/daohang"/>
+	</div><br>
+	<div style="  width: 1080px; margin: 0 auto; height: 50px; background-color: white; ">
+		<a href="{:U('Shop/User/index')}"><img height="70px" style="margin-left: -3px; margin-top: -5px;" src="__IMG__/userinfo.png"></a>
+		<font color="#8C8C8C">个人信息很重要哦!</font>
+	</div><br>
+		<div style="width: 1100px; margin: 0 auto;">
+		<div class="div_left" style="">
+			<include file="desktop_default/width/list"/>
+		</div><br>
+		<div class="all">
+			
+			<div class="tab" style="background-color: white;">
+	
+				<a href="{:U('Shop/User/info')}"><font >账号安全</font></a>
+				<a href="{:U('Shop/User/infoview')}"><font class="sed">个人信息</font></a>
+				<!--<font>绑定授权</font>
+				<font>斑马服务</font>-->
+			</div>
+			<div class="tabs">
+				<div class="headimg">
+					<img class="c" 
+						<if condition="$userinfo['head'] eq ''">
+							src="__IMG__/head.jpg"
+							<else/>
+						src="{$userinfo['head']}" 
+						</if>
+						width="100" height="100" />
+					<br>
+					<button style="height: 25%; width: 100%; font-size: 13px; opacity: 0.2;" type="button" value="" data-am-modal="{target: '#doc-modal-a', closeViaDimmer: 0, width:600, height: 300}" class="icon-edit">点此更换头像</button>
+				</div>
+				<div class="tabs-right">
+					<font size="3">基本资料</font>
+					<a href="javascript:void(0)"  data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0, width: 400, height: 325}"> <font size="2" color="#0055AA" style="float: right;"><i class="am-icon-pencil"></i>编辑</font></a>
+					<hr> 姓名：<if condition="$userinfo['realname'] eq ''">未设置<else/>{$userinfo['realname']}</if>
+					<hr> 生日：<if condition="$userinfo['birthday'] eq 0">未设置<else/>{$userinfo.birthday|date='Y-m-d',###}</if>
+					<hr> 性别：<if condition="$userinfo['sex'] eq 0">女</if><if condition="$userinfo['sex'] eq 1">男</if>
+					<hr> 手机：{$phone} <button type="" data-am-modal="{target: '#doc-modal-2', closeViaDimmer: 0, width: 400, height: 260}" class="am-btn-warning">更换验证手机</button>
+					<hr> 邮箱：{$user['email']} <button type="" data-am-modal="{target: '#doc-modal-3', closeViaDimmer: 0, width: 400, height: 260}" class="am-btn-warning">更换验证邮箱</button>
+					<hr>
+				</div>
+			</div>
+			<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-a">
+									<div class="am-modal-dialog" style="border-radius:12px ;">
+										<div class="am-modal-hd" style="text-align: left; border-bottom: 1px solid #ccc; font-weight: bold;">
+											<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>头像上传
+										</div>
+										<div class="am-modal-bd" style="text-align: center;">
+											<div style=" background: lightgoldenrodyellow; margin-top: 5px; color: red;">用户头像上传</div>
+											<form class="headfm" action="{:U('Shop/User/uploadheadimg')}" method="post">
+												<div class="controls">
+													<input type="file" id="upload_picture">
+													<input type="hidden" name="picurl" id="cover_id" value="" />
+													<div class="upload-img-box">
+													</div>
+													<button class="btn-success ajax-post" target-form="headfm" url="{:U('Shop/User/uploadheadimg')}" type="button">确认上传</button>
+												</div>
+											</form>
+											<script type="text/javascript">
+												 //上传图片
+												/* 初始化上传插件  */
+												$("#upload_picture").uploadify({
+													"height": 30,
+													"swf": "__UPLOAD__/jquery-uploadify/3.2.1/uploadify.swf",
+													"fileObjName": "download",
+													"buttonText": "上传头像",
+													"uploader": "{:U('Shop/Index/uploadPicture',array('session_id'=>session_id()))}",
+													"width": 120,
+													'removeTimeout': 1,
+													'fileTypeExts': '*.jpg; *.png; *.gif;',
+													"onUploadSuccess": uploadPicture
+												});
+	
+												function uploadPicture(file, data) {
+													var data = $.parseJSON(data);
+													var src = '';
+													if (data.status) {
+														$("#cover_id").val("{:C('SITE_URL')}/Uploads/" + data.path);
+	//													alert($("#cover_id").val());
+														src = "{:C('SITE_URL')}/Uploads/" + data.path;
+	//													alert(src);
+														$("#cover_id").parent().find('.upload-img-box').html(
+															'<div class="upload-pre-item"><img width=' + 100 + ' height=' + 100 + ' src="' + src + '"/></div>'
+														);
+														//console.info('http://localhost/github/201506bbjie'+data.path);
+														//alert($("#cover_id").val());
+													} else {
+														//alert(data.status);
+														$.scojs_message(data.info, $.scojs_message.TYPE_OK);
+													}
+												}
+											</script>
+	
+										</div>
+									</div>
+								</div>
+		</div>
+		</div>
+	<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-1">
+		<div class="am-modal-dialog">
+			<div class="am-modal-hd"><font color="orangered">修改用户信息</font>
+				<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+			</div>
+			<div class="am-modal-bd">
+				<div class="info">
+				<form class="fms" method="post">
+					<table >
+						<input type="hidden" name="uid" id="uid" value="{$userinfo['uid']}" />
+						<tr >
+							<td>姓名：</td>
+							<td><input type="text" name="username" id="name" value="{$userinfo['realname']}" /></td>
+						</tr>
+						<tr >
+							<td>身份证号：</td>
+							<td><input type="text" name="usernum" id="usernum" value="{$userinfo['idnumber']}" /></td>
+						</tr>
+						<tr >
+							<td>昵称：</td>
+							<td><input type="text" name="nickname" id="nickname" value="{$userinfo['nickname']}" /></td>
+						</tr>
+						<tr>
+							<td>生日：</td>
+							<td><input type="date" style="width: 175px;" name="bdate" id="birday" value="{$userinfo.birthday|date='Y-m-d h:i:s',###}" /></td>
+						</tr>
+						<tr>
+							<td>性别：</td>
+							<td><input type="radio" name="sex" id="sex" value="1" />男&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="radio" name="sex" id="sex" value="0" />女</td>
+						</tr>
+						<tr><td colspan="2"><button url="{:U('Shop/User/edituser')}" target-form="fms" type="submit" class="ajax-post am-btn-primary">保存</button></td></tr>
+					</table>
+				</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--更换手机-->
+	<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-2">
+		<div class="am-modal-dialog">
+			<div class="am-modal-hd"><font color="orangered">更换认证手机</font>
+				<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+			</div>
+			<div class="am-modal-bd">
+				<form class="ghmobile" method="post">
+				<div style="text-align: left; margin-left: 80px;">
+					<form class="tomes" method="post">
+					<input type="hidden" name='mobile' value="{$mobile}" />
+					</form>
+				原手机：{$phone}<button type="button" url="{:U('Shop/User/toMessage')}" target-form="tomes"  class="ajax-post am-btn-warning tomessage">获取验证码</button><br><br>
+				验证码：<input type="text" name="code" /><br><br>
+				新手机：<input type="tel" name="newmobile"/><br><br>
+				<button url="{:U('Shop/User/checkCode')}" target-form="ghmobile" type="button" style="margin-left: 80px;" class="ajax-post am-btn-primary">保存</button>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!--更换邮箱-->
+	<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-3">
+		<div class="am-modal-dialog">
+			<div class="am-modal-hd"><font color="orangered">更换认证邮箱</font>
+				<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+			</div>
+			<div class="am-modal-bd">
+				<div style="text-align: left; margin-left: 80px;">
+					
+				原邮箱：{$user['email']}<button type="submit" class="am-btn-warning">获取验证码</button><br><br>
+				验证码：<input type="text" /><br><br>
+				新邮箱：<input type="tel" /><br><br>
+				<button type="submit" style="margin-left: 80px;" class="am-btn-primary">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	 <include file="desktop_default/width/floor" />
+</block>
+
+<block name="area_footer">
+	<script type="text/javascript">
+	$(function(){
+		$('.tomessage').click(function(){
+		})
+		
+	})
+	</script>
+</block>

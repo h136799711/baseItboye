@@ -45,21 +45,50 @@ class BannersController extends ApiController{
     public function query(){
         $notes = "应用".$this->client_id."，调用Banners分页查询接口";
         addLog("Banners/query",$_GET,$_POST,$notes);
-        $postion = I('position', 18);
+        $arr = array(
+            'app_carousel'=>6009,
+            'app_index'=>6007,
+            'app_life'=>6010,
+            'app_finance'=>6008,
+        );
+        $position = $this->_post('position', '',"位置参数必须");
+
+        if(!isset($arr[$position])){
+            $this->apiReturnErr("不支持的位置参数!");
+        }
+        $position = $arr[$position];
+        $curpage = $this->_post('curpage',0);
+        $pagesize = $this->_post('pagesize',10);
+
         $map=array(
-            'position' => $postion,
+            'position' => $position,
         );
 
-        $page = array('curpage'=>I('pageNo',0),'size'=>I('pageSize',10)); //分页
+        $page = array('curpage'=>$curpage,'size'=>$pagesize); //分页
 
         $result=apiCall(BannersApi::QUERY,array($map,$page));
+
         if($result['status']){
-            $this->apiReturnSuc($result['info']['list']);
+            $list = $result['info']['list'];
+
+            $list = $this->convertImgUrl($list);
+
+            $this->apiReturnSuc($list);
         }else{
-            $this->apiReturnErr("暂无广告");
+            $this->apiReturnErr("没有相关数据!");
         }
     }
 
+
+    private function convertImgUrl($list){
+
+        foreach($list as &$vo){
+            $vo['img_url'] = getImageUrl($vo['img']);
+        }
+
+        return $list;
+
+    }
 
 
 }

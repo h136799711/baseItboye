@@ -19,6 +19,6 @@ return array(
 
     //测试用
 
-    'CLIENT_ID'=>'by559a8de1c325c1',
-    'CLIENT_SECRET'=>'aedd16f80c192661016eebe3ac35a6e7',
+    'CLIENT_ID'=>'by56308c60c09521',
+    'CLIENT_SECRET'=>'aea0129a6acf48b4613f9f9c6c9c6bb3',
 );

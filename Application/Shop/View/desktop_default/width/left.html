@@ -1,0 +1,10 @@
+
+
+<volist name="articletitles" id="ats">
+    <dl>
+        <dt>{$ats.name}</dt>
+        <volist name="ats.list" id="al">
+            <dd><a href="{:U('Shop/Article/index',array('id'=>$al['id']))}">{$al.title}</a></dd>
+        </volist>
+    </dl>
+</volist>

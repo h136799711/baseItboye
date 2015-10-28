@@ -1,0 +1,24 @@
+<div class="site-logo">
+			<a href="{:U('Shop/Index/index')}"><img height="70px" width="100px" style=" margin-left: 50px;" src="__PUBLIC__/Home/Index/img/banma.png"></a>
+		</div>
+		<div class="header-info">
+			<div class="search-section">
+				<form id="J_searchForm" class="search-form clearfix" action="{:U('Shop/Index/sousuo')}" method="post">
+					<input class="search-text" type="search" name="name" placeholder="搜索您需要的商品">
+					<input type="submit" class="search-btn iconfont" value="">
+					<!--[if IE 6]><div class="ie6-fix"></div><![endif]-->
+					
+				</form>
+			</div>
+			<div class="cart-section">
+				<a  class="mini-cart" href="{:U('Shop/ShopCart/shopcart')}" ><i class="iconfont"></i>购物车<span class="mini-cart-num J_cartNum">(<empty name="count">0<else/>{$count}</empty>)</span></a>
+				<div id="J_miniCartList" class="mini-cart-list">
+					<p class="loading">数据加载中，请稍后...</p>
+				</div>
+			</div>
+			
+		</div>
+		<style type="text/css">
+			.mini-cart,.mini-cart:hover{background-color: orange !important; color: #FFFFFF !important;
+			}
+		</style>

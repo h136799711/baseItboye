@@ -1,0 +1,106 @@
+<extend name="desktop_default/template/base_index2" />
+
+<block name="area_header">
+	
+	
+	<link  href="__PUBLIC__/Home/Index/css/index.min.css" type="text/css">
+	<link rel="stylesheet" href="__PUBLIC__/Home/Index/css/base.css">
+	<style type="text/css">
+		body{background: #F5F5F5}
+		.am-footer-default{background: #F5F5F5}
+		.div_main{width:1100px;margin: 0 auto; background: #F5F5F5 }
+		.div_left{width: 20%;margin: 20px;float: left;background:white}
+		.div_left dl{margin:0 auto; width:70%;margin-top:50px;margin-bottom:50px;}
+		.div_left dl dt{font-size: 20px;font-weight: 100; color: orangered;}
+		.div_left dl dd{padding-left:25px;font-size: 16px;padding-top: 10px;}
+		.div_left dl dd a:visited{color:#ccc}
+		.div_left dl dd a:hover{color:#FF6700}
+		.div_left dl dd a.dd_search{color:#FF6700}
+		.div_right{width: 70%;margin: 20px;border: 1px solid #ccc;float: left;padding: 20px;background:white}
+		.dizhi { margin-left: 10px; margin-top: 10px; height: 170px; width: 200px;border: 1px solid #F5F5F5; float: left; padding: 20px;}
+		.dizhi i{font-size: 33px; display:flex; justify-content:center; padding-top: 25%;}
+		.am-modal-bd{padding: 20px;}
+		.am-modal-bd table tr td{padding-top: 20px;}
+		.container{height: 80px; background-color: white; width: 100%; min-width: 1100px;}
+	</style>
+</block>
+
+<block name="area_body">
+	<include file="desktop_default/width/right" />
+	<include file="desktop_default/width/top"/>
+	<div class="container">
+		<include file="desktop_default/width/daohang"/>
+	</div><br>
+	<div style="  width: 1080px; margin: 0 auto; height: 50px; background-color: white; ">
+		<a href="{:U('Shop/User/index')}"><img height="70px" style="margin-left: -3px; margin-top: -5px;" src="__IMG__/userinfo.png"></a>
+		<font color="#8C8C8C">个人信息很重要哦!</font>
+	</div><br>
+	<div class="div_main">
+		<div class="div_left" style="width: 200px;">
+			<include file="desktop_default/width/list"/>
+		</div>
+		<if condition="$cfg['identity_validate'] eq 0">
+			<div class="div_right" style="width: 800px; text-align: center;">
+				<font size="5" color="red">实名认证(未认证)
+					
+				</font><br><br>
+				<hr>
+				<form method="post" class="smfm">
+				<font>真实姓名：<input type="text" id="realname" name="realname" style="height: 30px; width: 250px;" /><br><span></span></font><br>
+				<font>身份证号：<input type="text" id="idnum" name="idnum" style="height: 30px; width: 250px;" /><br><span></span></font><br><br>
+				<font size="3" color="red">此信息必须为真实有效且与收货联系人身份一致,否则将导致无法发货!</font><br><br>
+				<button class="am-btn-primary ajax-post" target-form="smfm" url="{:U('Shop/User/truename')}" style="border: 0; padding: 5px;">确认提交</button>
+				</form>
+			</div>
+		</if>
+		<if condition="$cfg['identity_validate'] eq 1">
+			<div class="div_right" style="width: 800px; text-align: center;">
+				<font size="5" color="green">实名认证(已认证)
+				</font><br>
+					<font size="4" color="green">{$realname}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					{$user['realname']}</font><br>
+				<hr>
+				<form method="post" class="smfm">
+					<font>真实姓名：<input type="text" id="realname" name="realname" style="height: 30px; width: 250px;" /><br><span></span></font><br>
+					<font>身份证号：<input type="text" id="idnum" name="idnum" style="height: 30px; width: 250px;" /><br><span></span></font><br><br>
+					<font size="3" color="red">此信息必须为真实有效且与收货联系人身份一致,否则将导致无法发货!</font><br><br>
+					<button class="am-btn-primary ajax-post" target-form="smfm" url="{:U('Shop/User/truename')}" style="border: 0; padding: 5px;">重新提交</button>
+				</form>
+			</div>
+		</if>
+		<if condition="$cfg['identity_validate'] eq 2">
+			<div class="div_right" style="width: 800px; text-align: center;">
+				<font size="5" color="blue">实名认证(等待审核)
+				</font><br><br>
+					请耐心等待后台审核
+			</div>
+		</if>
+	</div>
+	 <include file="desktop_default/width/floor" />
+	<hr  style="border: none; clear:both"/>
+</block>
+
+<block name="area_footer">
+<script type="text/javascript">
+	$(function(){
+		$('#realname').blur(function(){ 
+			if($(this).val()==''){
+				$(this).parent().find("span").html("<font color='red'>姓名不能为空！</font>");
+			}else{
+				$(this).parent().find("span").html("<font color='green'>姓名正确！</font>");
+			}
+		})
+		$('#idnum').blur(function(){
+			var num=/^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$/;
+			if(num.test($(this).val())){
+				$(this).parent().find("span").html("<font color='green'>正确！</font>");
+			}else{
+				$(this).parent().find("span").html("<font color='red'>不正确！</font>");
+			}
+		})
+		
+		
+				
+	})
+</script>
+</block>

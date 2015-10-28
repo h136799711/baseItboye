@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+        <base href="{:C('SITE_URL')}" />
+        <link href="/favicon.ico" rel="icon" type="image/x-icon" />
+        <link href="{:C('SITE_URL')}/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+		<meta charset="utf-8">
+		<title>{:C('WEBSITE_TITLE')}</title>
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="keywords" content="{$seo.keywords|default=" "}" />
+		<meta name="description" content="{$seo.description|default=" "}" />
+		<meta name="author" content="{$cfg.owner|default=" itboye "}" />
+	    <meta content="yes" name="apple-mobile-web-app-capable" />
+	    <meta content="yes" name="apple-touch-fullscreen" />
+	    <meta content="telephone=no,email=no" name="format-detection" />
+	    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+	    
+		
+		<!-- 系统基本样式 -->
+		<link type="text/css" rel="stylesheet" href="__CDN__/amazeui/2.3.0/css/amazeui.min.css" />
+
+
+		<!-- 脚本 -->
+        <!--[if !IE]><!-->
+        <script type="text/javascript" src="__CDN__/jquery/2.1.1/jquery.min.js"></script>
+        <!--<![endif]-->
+
+        <!--[if gte IE 9]>
+        <script type="text/javascript" src="__CDN__/jquery/2.1.1/jquery.min.js"></script>
+        <![endif]-->
+
+        <!--[if lt IE 9]>
+        <script type="text/javascript" src="__CDN__/jquery/1.11.0/jquery.min.js"></script>
+        <![endif]-->
+
+		<script type="text/javascript" src="__CDN__/amazeui/2.3.0/js/amazeui.min.js"></script>
+		<script type="text/javascript" src="__CDN__/common/mobile.js?v=__APP_VERSION__"></script>
+		<script type="text/javascript" src="__CDN__/amazeui-lazyload/1.9.3/amazeui.lazyload.min.js"  ></script>
+		
+
+		<block name="area_header">
+			<!--顶部区域 -->
+		</block>
+
+	</head>
+	
+	<body class="theme-default theme-shop">
+    <!--[if lt IE 9]>
+        <div style="position:relative;top:0px;background: #ff0000;color:#ffffff;pading:10px;font-size:12px;width:100%;text-align:center;margin-bottom:5px;">您使用的是IE低版本浏览器，本网站还未适配该版本，请见谅!</div>
+    <![endif]-->
+
+    <block name="area_body">
+        <!--内容区域 -->
+		</block>
+		<block name="area_footer">
+			<!--底部区域 -->
+		</block>
+
+		<footer data-am-widget="footer" class="am-footer am-footer-default" data-am-footer="{  }">
+			<div class="am-footer-switch">
+			</div>
+			<div class="am-footer-miscs ">
+				<p>由
+					<a href="http://www.itboye.com" title="杭州博也网络科技" target="_blank" class="">杭州博也网络科技</a>提供技术支持</p>
+				<p>&copy;2013-{:date('Y')} Version {:C('APP_VERSION')} {:C('WEBSITE_OWNER')}</p>
+				<p>{:C('WEBSITE_ICP')}</p>
+				<p>{__RUNTIME__}</p>
+			</div>
+		</footer>
+		
+		
+		<script type="text/html" src="{:U('Tool/Task/index')}"></script>
+	</body>
+<script type="text/javascript">
+	$(function(){
+		$("img.lazy").lazyload({effect : 'fadeIn'});
+	})
+</script>
+</html>

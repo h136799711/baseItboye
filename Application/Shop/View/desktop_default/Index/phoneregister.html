@@ -1,0 +1,151 @@
+<extend name="desktop_default/template/base_index2" />
+
+<block name="area_header">
+	<link rel="stylesheet" href="__PUBLIC__/Home/Index/css/base.css">
+	<style type="text/css">
+		body {
+			background-color: #f9f9f9;
+		}
+		.level .li .current {
+  background: #ff5783;
+}
+		.logo {
+			/*border: 1px solid #000000;*/
+			color: orangered;
+			height: 100px;
+			width: 180px;
+			margin-left: 25%;
+			margin-top: 2%;
+		}
+		.fm a{color: orangered;}
+		.am-panel {
+			width: 800px;
+			margin-left: 28%;
+			margin-top: 2%;
+		}
+		.dv font{margin-left: 100px;}
+		.am-panel-hd {
+			height: 80px;
+			padding: 20px;
+			background-color: #FFFFFF !important;
+			text-align: center;
+		}
+		 .level .li span {
+  width: 60%;
+  display: table;
+}
+		.level{margin-bottom: 10px; width:350px ;  }
+		.am-form-set div{margin-top: 15px;}
+		 .level .li { margin-top: -5px; background: none repeat scroll 0 0 #eaeaea; color: #fff;display: inline;float: left;height: 18px;line-height: 18px; margin-right: 1px; text-align: center; width: 33%;
+}
+.container{height: 80px; background-color: white; width: 100%; min-width: 1100px;}
+		.fm input{ height: 50px; width: 350px;}
+		.tishi{font-size: 13px; color: darkgray; padding-left: 5px;}
+	</style>
+</block>
+
+<block name="area_body">
+	<include file="desktop_default/width/right" />
+	<include file="desktop_default/width/top"/>
+		<div class=" container">
+		<include file="desktop_default/width/daohang"/>
+	</div><br>
+	<div style="  width: 1080px; margin: 0 auto; height: 50px; background-color: white; ">
+		<img height="70px" style="margin-left: -3px; margin-top: -5px;" src="__IMG__/login.png">
+		<font color="#8C8C8C">买东西必须注册哦!</font>
+	</div><br>
+	<div style="background-color: white; font-size: 14px; height: 600px; width: 600px;  margin: 0 auto; padding: 20px; padding-left: 40px;">
+		<if condition="$isok eq 1">
+		<font size="3" color="green">恭喜你称谓斑马会员!你可能可以赚钱哦!</font><br>
+		<font>您的VIP号码为：<font size="4" color="orangered">{$users['idcode']}</font></font>
+		<else/>
+		<br><br>
+		<form class="fm" id="fm" action="" method="post">
+			<fieldset class="am-form-set">
+				
+				<div><input type="text" name="phone" id="phone" placeholder="  手机号码">&nbsp;<span><font class="tishi">请填写正确的手机号码</font></span></div>
+				<div><input type="text" name="yanzhengma" id="yzm"  placeholder=" 输入验证码">&nbsp;
+					<span style="font-size: 13px;"><button style="font-size: 14px; height: 45px; width: 130px;"  type="button" class="am-btn am-btn-primary btn-loading-example">获取验证码</button></span><br>
+						<font class="tishi" id="yzmts" ></font>
+				</div>
+				<div id="pwds" style="display: none;"><input type="password" name="pwd" id="pwd" placeholder="  输入密码">&nbsp;<span><font class="tishi">请填写密码</font></span></div>
+			</fieldset>
+				<button id="id" style="width: 350px; height: 40px;" url="{:U('Shop/Index/phoneregister')}" target-form="fm"  class="ajax-post btn btn-primary   am-btn am-btn-warning am-btn-block" autofocus="autofocus">注册个性账号</button>
+				<br><br><font color="black" size="2">想更安全？试试<a href="{:U('Shop/Index/register')}">自定义注册</a>吧</font>
+				<br><br><font color="black" size="2">已有账号？请<a href="{:U('Shop/Index/login')}">前往登录</a>斑马账号</font>
+				<br><br><font size="2">点击注册即表示同意接受<a href="{:U('Shop/Index/xieyi')}">斑马协议</a>和<a>隐私策略</a></font>
+		</form>
+		</if>
+	</div>
+	<br>		
+	 <include file="desktop_default/width/floor" />
+	
+</block>
+
+<block name="area_footer">
+<script type="text/javascript">
+	$(function(){
+		
+		var isMobile = /^(?:13\d|15\d|17\d|18\d)\d{5}(\d{3}|\*{3})$/;
+		$('#phone').keyup(function() {
+			if (!isMobile.test($(this).val())) {
+				b = 0;
+				$(this).parent().find("span").html("<font size='-2' color='red'>手机号码格式不正确！</font>");
+			} else {
+				b = 1; 
+				$(this).parent().find("span").html("<font size='-2' color='green'>正确！</font>");
+				if( b==1 ){
+					if($('#yzm').val()==''){
+						
+					}else{
+						$('#id').removeClass('am-disabled');
+					}
+					
+				}else{
+					$('#id').addClass('am-disabled');
+				}
+			}
+		})
+		$('#phone').focus(function(){
+			$('#id').addClass('am-disabled');
+		})
+		$('#yzm').focus(function(){
+			$('#id').addClass('am-disabled');
+		})
+		$('#yzm').blur(function(){
+			var yam=$(this).val();
+			$('#id').addClass('am-disabled');
+			if(yam=="2133"){
+				$('#id').removeClass('am-disabled');
+				$('#yzmts').text('验证码正确!');
+				$('#pwds').show();
+			}else{
+				$('#yzmts').text('验证码不正确!');
+				$('#id').addClass('am-disabled');
+			}
+			
+		})
+		
+		$('.btn-loading-example').click(function () {
+		  var $btn = $(this)
+		  $btn.button('loading');
+		    setTimeout(function(){
+		      $btn.button('reset');
+		  }, 30000);
+		  
+		  $(this).parent().parent().find('font').text('验证码已发送,30秒后可再次尝试!')
+		});
+		
+	})
+</script>
+<!--				d = 1;
+			$.getJSON("{:U('Home/Index/checkname')}",{name:$("#name").val()},function(json){ 
+				if(json!=1){
+					d = 0;
+					$('#name').parent().find("span").html("<font size='-2' color='red'>用户名已存在</font>");
+				}else{
+					d = 1;
+					$('#name').parent().find("span").html("<font size='-2' color='green'>正确！</font>");
+				}-->
+
+</block>

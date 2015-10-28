@@ -1,0 +1,74 @@
+<div class="site-topbar" style="width: 100%;">
+		<div class="containers" style="margin: 0 auto; width: 1100px; background-color: #F2F2F2;">
+			<div class="topbar-nav">
+				<empty name="user">
+				亲!欢迎来到斑马商城,请&nbsp;&nbsp;&nbsp;<a style="color: #B02751;" target="_blank" href="{:U('Shop/Index/login')}">登录</a><span class="sep">|</span><a target="_blank" style="color: #B02751;" href="{:U('Shop/Index/register')}">注册</a>
+				<else/>
+					欢迎你！<a>{$user['username']}</a> &nbsp; &nbsp; &nbsp; &nbsp;<a href="{:U('Shop/User/index',array('id'=>$user['id']))}">个人中心</a>
+					&nbsp; &nbsp; &nbsp; &nbsp;<a href="{:U('Shop/Index/loginout')}">退出登录</a>
+				</empty>
+			</div>
+			<div class="topbar-info J_userInfo">
+				<a class="" style="color: orangered;" href="{:U('Shop/Index/phoneapp')}">手机APP</a><span class="sep">|</span>
+				<a class="" style="color: orangered;" href="{:U('Shop/ShopCart/shopcart')}"> <i class="iconfont"></i>购物车</a><span class="sep">|</span>
+				<a class="kfzx" href="JavaScript:void(0)">客服中心</a><span class="sep">|</span>
+				<a class="jht" href="{:U('Shop/User/order')}"> 我的订单</a><span class="sep">|</span>
+				<a class="jhta" href="{:U('Shop/Article/index')}">帮助</a>
+				
+				<!--<br>
+				<div style="color: #000000; padding-top: 10px;" class="t_tp" >
+					<ul>
+						<li><a href="{:U('Shop/User/order')}">待付款</a> </li>
+						<li><a href="{:U('Shop/User/order')}">待收货</a> </li> 
+						<li><a href="{:U('Shop/User/order')}">已完成</a> </li>
+					</ul>
+				</div>
+				-->
+			</div>
+		</div>
+	</div>
+	<div style="width:100%;  height: 100px;background-color: white; min-width: 1100px;">
+		<div style="width: 1100px; margin: 0 auto;  ">
+			<a href="{:U('Shop/Index/index')}"><img src="__IMG__/logo.png"><img src="__IMG__/lgwb.jpg"></a>
+				
+			<div style="float: right; width: 290px; height: 100px; border: 1px solid #0000;">
+				<form id="schfm"  action="{:U('Shop/Index/sousuo')}" method="post">
+				<input type="text" name="name" id="name" placeholder="  输入查找的商品" style="border: 1px solid #B02751;outline: none; font-size: 12px; height: 30px; width: 238px;  margin-top: 35px;float: left; " />
+				<input type="button" name=""  id="sch" style="height: 30px; background-color: #B02751; border: 0;color: white; width: 50px;  margin-top: 35px;" value="搜索" />
+				<div style="margin-top: 3px;" id="znss"><a style="color: orangered;" class="zn">大麦若叶</a><a class="zn">葡萄籽</a><a class="zn">护眼灵</a><a class="zn">补镁片</a></div>
+				</form>
+			</div>
+			
+		</div>
+		<!--<img height="100" style="width: 100%;" src="__IMG__/guanggao.jpg">-->
+	</div>
+	<style type="text/css">
+		.t_tp{float: left; display: none; width: 70px; margin-left: 65px; z-index: 9999; background-color: #000000;text-align: center; position: fixed;}
+		.t_tp ul li{ list-style: none; margin-left: -25px; margin-top: 10px;  }
+		.t_tp ul li a{color: white;}
+		.t_tp ul li a:hover{color: #B02751; }
+		.jht:hover{color:#B02751;}
+		#znss a{padding: 2px; margin-left: 10px; cursor: pointer;}
+	</style>
+	<script type="text/javascript">
+		$('.kfzx').on('click', function() {
+		    document.body.scrollTop += 10000;//越大速度越快，加入定时函数就是你要的效果了
+		});
+	
+		$('.jht,.t_tp').mouseover(function(){
+			$('.t_tp').show();
+			$('.t_tp2').hide();
+		})
+		$('.zn').mousemove(function(){
+			$('#name').val($(this).text());
+		})
+		$('.zn').click(function(){
+			$('#name').val($(this).text());
+			$('#schfm').submit();
+		})
+		$('#sch').click(function(){
+			$('#schfm').submit();
+		})
+		
+	</script>
+	<!-- .site-topbar END -->

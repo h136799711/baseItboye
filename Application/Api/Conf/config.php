@@ -27,10 +27,10 @@ return array(
     ),
 
     'DB_TYPE'                   =>  'mysql',
-    'DB_HOST'                   =>  '192.168.0.100',//rdsrrbifmrrbifm.mysql.rds.aliyuncs.com
+    'DB_HOST'                   =>  '127.0.0.1',//rdsrrbifmrrbifm.mysql.rds.aliyuncs.com
     'DB_NAME'                   =>  'boye_2015gd', //boye_ceping
     'DB_USER'                   =>  'root',//boye
-    'DB_PWD'                    =>  '1',//bo-ye2015BO-YE
+    'DB_PWD'                    =>  'fdc656d3e7',//bo-ye2015BO-YE
     'DB_PORT'                   =>  '3306',
     'DB_PREFIX'                 =>  'itboye_',
 

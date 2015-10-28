@@ -1,0 +1,46 @@
+<div class="user-banner">
+    <img class="am-responsive-width" src="__IMG__/user-banner/banner.jpg" alt="banner" />
+</div>
+<div class="logo-wrp" >
+    <div class="user-logo am-inline-block">
+        <img class="" src="{$userinfo.avatar}" alt="logo" />
+        <span class="logo-circle"></span>
+    </div>
+    <div class="username">
+        <span >{$userinfo.nickname}的店铺</span>
+			<span class="rank">
+				<for start="0" end="$rank['loop']">
+                    <i class="rank rank-{$rank['type']}"></i>
+                </for>
+			</span>
+    </div>
+    <style type="text/css">
+    	.user_logo_ul li{float:left;margin-left: 1.5rem;padding-top:0.2rem;text-align: center;}
+    	a.a_top:link {color:#666;font-size: 0.25rem;}		/* 未访问的链接 */
+		a.a_top:visited {color:#666;font-size: 0.25rem;}	/* 已访问的链接 */
+		a.a_top:hover {color:#666;font-size: 0.25rem;}	/* 鼠标移动到链接上 */
+		a.a_top:active {color:#666;font-size: 0.25rem;}
+    </style>
+    
+   
+   <ul class="user_logo_ul">
+   		<a class="a_top" href="{:U('Shop/Product/search')}">
+   			<li>{$count}<br />
+   				全部商品
+   			</li>
+   		</a>
+   		<!---->
+   		<a class="a_top" href="javascript:alertMsg('该功能尚未开放')">
+   			<li>
+   				<font class="am-icon-star"></font><br />
+   				收藏本店
+   			</li>
+   		</a>
+   		<a class="a_top" href="{:U('Shop/User/getQrcode')}">
+   			<li>
+   			<font class="am-icon-barcode"></font><br />
+   				二维码
+   			</li>
+   		</a>
+   </ul>
+</div>

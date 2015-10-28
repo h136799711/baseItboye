@@ -11,6 +11,7 @@
 <div>token_type: {$access_token['token_type']}</div>
 <div>scope: {$access_token['scope']}</div>
 <form action="{:U('Api/Banners/query')}?access_token={$access_token['access_token']}" method="post">
+    <input type="text" name="position" value="app_index" />
     广告：<button type="submit">查看</button>
 </form>
 

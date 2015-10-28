@@ -1,0 +1,94 @@
+<extend name="desktop_default/template/base_index2" />
+
+<block name="area_header">
+	
+	
+	<link  href="__PUBLIC__/Home/Index/css/index.min.css" type="text/css">
+	<link rel="stylesheet" href="__PUBLIC__/Home/Index/css/base.css">
+	<style type="text/css">
+		body{background: #F5F5F5}
+		.am-footer-default{background: #F5F5F5}
+		.div_main{width:1100px;margin: 0 auto; background: #F5F5F5 }
+		.div_left{width: 20%;margin: 20px;float: left;background:white}
+		.div_left dl{margin:0 auto; width:70%;margin-top:50px;margin-bottom:50px;}
+		.div_left dl dt{font-size: 20px;font-weight: 100; color: orangered;}
+		.div_left dl dd{padding-left:25px;font-size: 16px;padding-top: 10px;}
+		.div_left dl dd a:visited{color:#ccc}
+		.div_left dl dd a:hover{color:#FF6700}
+		.div_left dl dd a.dd_search{color:#FF6700}
+		.div_right{width: 70%;margin: 20px;border: 1px solid #ccc;float: left;padding: 20px;background:white}
+		.dizhi { margin-left: 10px; margin-top: 10px; height: 170px; width: 200px;border: 1px solid #F5F5F5; float: left; padding: 20px;}
+		.dizhi i{font-size: 33px; display:flex; justify-content:center; padding-top: 25%;}
+		.am-modal-bd{padding: 20px;}
+		.am-modal-bd table tr td{padding-top: 20px;}
+		.container{height: 80px; background-color: white; width: 100%; min-width: 1100px;}
+		.jl td{padding-top: 20px; padding-bottom: 10px; color: #8C8C8C;}
+		.bt td{padding-bottom: 10px; color: orangered;}
+	</style>
+</block>
+
+<block name="area_body">
+	<include file="desktop_default/width/right" />
+	<include file="desktop_default/width/top"/>
+	<div class="container">
+		<include file="desktop_default/width/daohang"/>
+	</div><br>
+	<div style="  width: 1080px; margin: 0 auto; height: 50px; background-color: white; ">
+		<a href="{:U('Shop/User/index')}"><img height="70px" style="margin-left: -3px; margin-top: -5px;" src="__IMG__/userinfo.png"></a>
+		<font color="#8C8C8C">个人信息很重要哦!</font>
+	</div><br>
+	<div class="div_main">
+		<div class="div_left" style="width: 200px;">
+			<include file="desktop_default/width/list"/>
+		</div>
+		<div class="div_right" style="width: 800px;">
+			<font size="5">我的分销</font><hr>
+			<span>可用余额：<font size="6" id="coin" color="orangered">{$userconfig.coin}</font>元</span>
+			<span style="margin-left: 30px;">冻结金额：<font size="6" color="orangered">{$userconfig.frozencoin}</font>元</span>
+			<div style="float: right; margin-top: 20px;">
+				优惠ID码：<font size="5" color="orangered">{$user['idcode']}</font>
+			</div>
+			<hr>
+			<div >
+				<empty name="jilu">
+					<h1 style="margin-left: 40%; margin-top: 20px;">暂无返佣记录</h1>
+					<else/>
+					<table width="100%" style="padding: 10px; text-align: center;">
+						<tr class="bt" style="border-bottom: 1px solid #F5F5F5;">
+							<td width="10%">编号</td>
+							<td width="10%">变更金额</td>
+							<td width="10%">变更类型</td>
+							<td width="30%">备注</td>
+							<td width="20%">变更时间</td>
+							<td width="10%">状态</td>
+						</tr>
+						<volist name="jilu" id="vo">
+						<tr class="jl" style="border-bottom: 1px solid #F5F5F5;">
+							<td >{$vo.id}</td>
+							<td ><font color="green">+{$vo.income}</font></td>
+							<td >
+								返佣
+							</td>
+							<td >{$vo.notes}</td>
+							<td >{$vo.create_time|date='Y-m-d H:i:s',###}</td>
+							<td ><font color="green">正常</if>
+								
+							</td>
+						</tr>
+						</volist>
+					</table>
+				
+					
+				</empty>
+			</div>
+		</div>	
+	</div>
+	 <include file="desktop_default/width/floor" />
+	<hr  style="border: none; clear:both"/>
+</block>
+
+<block name="area_footer">
+<script type="text/javascript">
+		
+</script>
+</block>

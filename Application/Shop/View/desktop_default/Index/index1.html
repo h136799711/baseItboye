@@ -1,0 +1,179 @@
+<extend name="desktop_default/template/base_index2" />
+
+<block name="area_header">
+	
+	<link  href="__PUBLIC__/Home/Index/css/index.min.css" type="text/css">
+    <link rel="stylesheet" href="__PUBLIC__/Home/Index/css/base.css">
+	<style type="text/css">
+		.box-hd{margin-top: 30px;}
+		.am-next{margin-left: 30% !important; width: 30px; height: 30px;}
+		.xm-star-goods-item{text-align: center; padding: 20px;}
+	</style>
+</block>
+
+<block name="area_body">
+	
+	<include file="desktop_default/width/top"/>
+	<div class="site-header container">
+		<include file="desktop_default/width/search"/>
+		<div style=" height: 500px; position: relative; width: 100%; padding: 2px;  margin-left: -27%; margin-top: 10%;">
+			
+			<div class="col col-16 offset4" style=" width: 154%; margin: 0 auto;">
+				<div class="home-slider" style="">
+					<div id="J_homeSlider" class="xm-slider" style="" >
+						<div class="xm-slider-container" style=" width: 100%; height: 500px;">
+							<div class="xm-slider-control" style=" left: 0px; width: 100%; height: 500px;">
+								<div class="am-slider am-slider-default" data-am-flexslider id="demo-slider-0" style="height: 500px;">
+								  <ul class="am-slides" style="height: 500px;">
+								    <li><img style="height: 500px; " src="__IMG__/1.jpg" /></li>
+								    <li><img style="height: 500px;" src="__IMG__/2.jpg" /></li>
+								    <li><img style="height: 500px;" src="__IMG__/3.jpg" /></li>
+								  </ul>
+								</div>
+							</div>
+						</div>
+
+						
+					</div>
+				</div>
+				
+			</div>
+		
+		</div>
+		
+	</div>
+	<!-- .site-header END -->
+	<!-- Main Content START -->
+	<div class="container">
+		
+
+		<div class="home-star-goods">
+			<div class="xm-plain-box J_starGoodsCarousel">
+				<div class="box-hd">
+					<h3 class="title">热销商品<a ><font color="#808080" size="2">热销的商品个个都是精品</font></a></h3>
+					<div class="more">
+					</div>
+				</div>
+				<div class="box-bd">
+					
+				</div>
+			</div>
+		</div>
+		<!-- .home-star-goods END -->
+
+		<div class="home-star-goods">
+			<div class="xm-plain-box J_starGoodsCarousel">
+				<div class="box-hd">
+					<h3 class="title">新货上架</h3>
+					<div class="more">
+						<div class="xm-recommend-page clearfix">
+							
+						</div>
+					</div>
+				</div>
+				<div class="box-bd">
+					
+				</div>
+			</div>
+		</div>
+		<!-- .home-new-goods END -->
+
+		<div class="home-hot-goods">
+			<div class="xm-plain-box">
+				<div class="box-hd">
+					<h3 class="title">大家都喜欢</h3>
+				</div>
+				<div class="box-bd">
+					<div class="row">
+						<div class="col col-15">
+							<div class="brick-list">
+
+								<volist name='new' id='vo'>
+							<div class="xm-star-goods-item">
+								<div class="item-content">
+									<span class="item-thumb">
+                                  <a ><img height="250px" width="220px" src="{$vo.main_img}"></a>
+                                </span>
+									<span class="item-title"><a></a></span>
+									<span class="item-desc">{$vo.name}</span>
+								</div>
+							</div>
+							</volist>
+							</div>
+						</div>
+						<div class="col col-5">
+							<div class="board-section">
+								<h3><span>HOT</span>热销商品排行</h3>
+								<ul class="board-list">
+									<volist name='new' id='vo'>
+										<li class="top">
+											<a href="{:U('Shop/Index/spxq',array('id'=>$vo['id']))}"><img height="60px" width="80px" src="{$vo.main_img}"></a>
+											<span class="item-info">
+	                                        <span class="item-title"><a >{$vo.name}</a></span>
+											<span class="item-price">{$vo.price}元 <del>{$vo.ori_price}</del></span>
+											</span>
+											<span class="item-thumb">
+	                                        
+	                                    </span>
+											<span class="item-num"></span>
+										</li>
+									</volist>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+	</div>
+	
+	<div class="site-footer">
+		<div class="container">
+			<div class="footer-service">
+				<ul class="list-service clearfix">
+					<li>
+						<a>
+							<i class="iconfont"></i>
+							<strong>急速发货</strong>
+						</a>
+					</li>
+					<li>
+						<a >
+							<i class="iconfont"></i>
+							<strong>7天无理由退货</strong>
+						</a>
+					</li>
+					<li>
+						<a >
+							<i class="iconfont"></i>
+							<strong>15天免费换货</strong>
+						</a>
+					</li>
+					<li>
+						<a >
+							<i class="iconfont"></i>
+							<strong>满150元包邮</strong>
+						</a>
+					</li>
+					<li>
+						<a rel="nofollow" >
+							<i class="iconfont"></i>
+							<strong>520余家售后网点</strong>
+						</a>
+					</li>
+
+				</ul>
+			</div>
+			
+			
+		</div>
+	</div>
+
+	
+</block>
+
+<block name="area_footer">
+
+</block>

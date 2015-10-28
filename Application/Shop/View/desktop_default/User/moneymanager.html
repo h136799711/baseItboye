@@ -1,0 +1,238 @@
+<extend name="desktop_default/template/base_index2" />
+
+<block name="area_header">
+	
+	
+	<link  href="__PUBLIC__/Home/Index/css/index.min.css" type="text/css">
+	<link rel="stylesheet" href="__PUBLIC__/Home/Index/css/base.css">
+	<style type="text/css">
+		body{background: #F5F5F5}
+		.am-footer-default{background: #F5F5F5}
+		.div_main{width:1100px;margin: 0 auto; background: #F5F5F5 }
+		.div_left{width: 20%;margin: 20px;float: left;background:white}
+		.div_left dl{margin:0 auto; width:70%;margin-top:50px;margin-bottom:50px;}
+		.div_left dl dt{font-size: 20px;font-weight: 100; color: orangered;}
+		.div_left dl dd{padding-left:25px;font-size: 16px;padding-top: 10px;}
+		.div_left dl dd a:visited{color:#ccc}
+		.div_left dl dd a:hover{color:#FF6700}
+		.div_left dl dd a.dd_search{color:#FF6700}
+		.div_right{width: 70%;margin: 20px;border: 1px solid #ccc;float: left;padding: 20px;background:white}
+		.dizhi { margin-left: 10px; margin-top: 10px; height: 170px; width: 200px;border: 1px solid #F5F5F5; float: left; padding: 20px;}
+		.dizhi i{font-size: 33px; display:flex; justify-content:center; padding-top: 25%;}
+		.am-modal-bd{padding: 20px;}
+		.am-modal-bd table tr td{padding-top: 20px;}
+		.container{height: 80px; background-color: white; width: 100%; min-width: 1100px;}
+		.jl td{padding-top: 20px; padding-bottom: 10px; color: #8C8C8C;}
+		.bt td{padding-bottom: 10px; color: orangered;}
+	</style>
+</block>
+
+<block name="area_body">
+	<include file="desktop_default/width/right" />
+	<include file="desktop_default/width/top"/>
+	<div class="container">
+		<include file="desktop_default/width/daohang"/>
+	</div><br>
+	<div style="  width: 1080px; margin: 0 auto; height: 50px; background-color: white; ">
+		<a href="{:U('Shop/User/index')}"><img height="70px" style="margin-left: -3px; margin-top: -5px;" src="__IMG__/userinfo.png"></a>
+		<font color="#8C8C8C">个人信息很重要哦!</font>
+	</div><br>
+	<div class="div_main">
+		<div class="div_left" style="width: 200px;">
+			<include file="desktop_default/width/list"/>
+		</div>
+		<div class="div_right" style="width: 800px;">
+			<font size="5">资金管理</font><hr>
+			<span>可用余额：<font size="6" id="coin" color="orangered">{$userconfig.coin}</font>元</span>
+			<span style="margin-left: 30px;">冻结金额：<font size="6" color="orangered">{$userconfig.frozencoin}</font>元</span>
+			<div style="float: right; margin-top: 20px;">绑定手机：{$phone}<a style="color: orangered;" href="">[修改]</a></div><br><br>
+				<button style="margin-left: 60%;" type="button" class="am-btn-primary" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0, width: 500, height: 255}">支付宝提现</button>
+				<button style="margin-left: 50px;" type="button" class="am-btn-danger" data-am-modal="{target: '#doc-modal-2', closeViaDimmer: 0, width: 500, height: 355}">银行卡提现</button>
+				<hr>
+			<div >
+				<empty name="jilu">
+					<h1 style="margin-left: 40%; margin-top: 20px;">暂无交易记录</h1>
+					<else/>
+					<table width="100%" style="padding: 10px; text-align: center;">
+						<tr class="bt" style="border-bottom: 1px solid #F5F5F5;">
+							<td width="10%">编号</td>
+							<td width="10%">用户</td>
+							<td width="10%">变更金额</td>
+							<td width="10%">变更类型</td>
+							<td width="30%">备注</td>
+							<td width="20%">变更时间</td>
+							<td width="10%">状态</td>
+						</tr>
+						<volist name="jilu" id="vo">
+						<tr class="jl" style="border-bottom: 1px solid #F5F5F5;">
+							<td>{$vo.id}</td>
+							<td >{$user.username}</td>
+							<td ><if condition="$vo['dtree_type'] eq 4"><font color="green">+{$vo.income}</font><else/><font color="red">-{$vo.defray}</font></if></td>
+							<td ><if condition="$vo['dtree_type'] eq 1">充值</if>
+								<if condition="$vo['dtree_type'] eq 2">奖励</if>
+								<if condition="$vo['dtree_type'] eq 3">提现</if>
+								<if condition="$vo['dtree_type'] eq 4">返佣</if>
+							</td>
+							<td >{$vo.notes}</td>
+							<td >{$vo.create_time|date='Y-m-d H:i:s',###}</td>
+							<td ><if condition="$vo['status'] eq 1"><font color="green">正常</font></if>
+								<if condition="$vo['status'] eq 2"><font color="grey">审核中</font></if>
+								<if condition="$vo['status'] eq 3">冻结</if>
+								<if condition="$vo['status'] eq 4"><font color="red">失败，原因：{$vo.failnotes}</font></if>
+							</td>
+						</tr>
+						</volist>
+					</table>
+				
+					
+				</empty>
+			</div>
+			<!--添加地址-->
+			<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-1">
+				<div class="am-modal-dialog">
+					<div class="am-modal-hd" style="color: orangered;">支付宝提现
+						<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+					</div>
+					<div class="am-modal-bd" style="text-align: left;">
+						<form class="fm"  method="post">
+							<input type="hidden" name="type" id="type" value="1" />
+							<input type="hidden" name="uid" id="uid" value="{$user.id}" />
+						<table style="margin-left: 56px;">
+							<tr>
+								<td>支付宝账号：</td>
+								<td><input type="text" name="unum" id="unum" value="" /></td>
+							</tr>
+							
+							<tr>
+								<td>收款人姓名：</td>
+								<td>
+								<input type="text" name="uname" id="uname" value="" /></td>
+							</tr>
+							<tr>
+								<td >提现金额：</td>
+								<td>
+									<input type="text" name="price" id="uprice" value="" />
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<button type="button" url="{:U('Shop/User/moneymanager')}" target-form="fm" id="ok" style="width: 100px; margin-left: 100px; font-size: 15px;" class="ajax-post am-btn-warning">提交审核</button>
+								</td>
+							</tr>
+						</table>
+						</form>
+					</div>
+				</div>
+			</div>
+			<!--修改地址-->
+			<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-2">
+				<div class="am-modal-dialog">
+					<div class="am-modal-hd" style="color: orangered;">银行卡提现
+						<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+					</div>
+					<div class="am-modal-bd" style="text-align: left;">
+						<form class="fm2" method="post">
+							<input type="hidden" name="type" id="type" value="2" />
+						<table style="margin-left: 56px;">
+							<tr>
+								<td>开户行：</td>
+								<td><select name="bank">
+										<option value="">请选择</option>
+										<option value="招商银行">招商银行</option>
+										<option value="工商银行">工商银行</option>
+										<option value="建设银行">建设银行</option>
+										<option value="兴业银行">兴业银行</option>
+										<option value="农业银行">农业银行</option>
+										<option value="邮政储蓄">邮政储蓄</option>
+										<option value="交通银行">交通银行</option>
+										<option value="广东发展银行">广东发展银行</option>
+										<option value="中信银行">中信银行</option>
+										<option value="光大银行">光大银行</option>
+										<option value="民生银行">民生银行</option>
+										<option value="浦发银行">浦发银行</option>
+										<option value="中国银行">中国银行</option>
+										<option value="农村信用社">农村信用社</option>
+										<option value="北京银行">北京银行</option>
+										<option value="平安银行">平安银行</option>
+										<option value="农村商业银行">农村商业银行</option>
+										<option value="广东南粤银行">广东南粤银行</option>
+										<option value="上海银行">上海银行</option>
+									</select><br>
+								</td>
+							</tr>
+							<tr>
+								<td>持卡人：</td>
+								<td><input type="text" name="uname" id="name" value="" /></td>
+							</tr>
+							<tr>
+								<td>开户信息：</td>
+								<td><select id="loc_province" style="width:80px;">
+										<volist name="pro" id="vo">
+											<option value="{$vo['provinceid']}">{$vo['province']}</option>
+										</volist>
+									</select>
+									<input type="hidden" name="sheng" class="sheng" />
+									<input type="hidden" name="shi" class="shi" />
+									<select id="loc_city" style="width:80px; margin-left: 10px">
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td>银行账号：</td>
+								<td><input type="tel" name="unum" id="num" value="" /></td>
+							</tr>
+							<tr>
+								<td >提现金额：</td>
+								<td>
+									<input type="text" name="price" id="price" value="" />
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<button type="button" url="{:U('Shop/User/moneymanager')}" target-form="fm2" id="ok2" style="width: 100px; margin-left: 100px; font-size: 15px;" class="ajax-post am-btn-warning">提交审核</button>
+								</td>
+							</tr>
+						</table>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	 <include file="desktop_default/width/floor" />
+	<hr  style="border: none; clear:both"/>
+</block>
+
+<block name="area_footer">
+<script type="text/javascript">
+		$('#loc_province').change(function(){
+			$.getJSON("{:U('Shop/User/getcity')}",{sno:$('#loc_province option:selected').val()},function(json){ 
+				$('#loc_city').empty();
+				for (var a=0;a<json.length;a++) {
+					$('#loc_city').append("<option value='"+json[a].cityid+"'>"+json[a].city+"</option>");
+				}
+			}); 
+			var sheng=$('#loc_province option:selected').text();
+			$('.sheng').val(sheng);
+		})
+		$('#loc_city').change(function(){
+			var sheng=$('#loc_city option:selected').text();
+			$('.shi').val(sheng);
+		})
+		$('#uprice').blur(function(){
+			var coin=Number($('#coin').text());
+			if($(this).val()>coin || isNaN($(this).val())){
+				alert('请填写有效余额!');
+				$(this).val('0.00');
+			}
+		})
+		$('#price').blur(function(){
+			var coin=Number($('#coin').text());
+			if($(this).val()>coin || isNaN($(this).val())){
+				alert('请填写有效余额!');
+				$(this).val('0.00');
+			}
+		})
+		
+</script>
+</block>

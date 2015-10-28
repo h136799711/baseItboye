@@ -111,22 +111,22 @@ class AdminController extends CheckLoginController {
 	 * 获取公众号信息
 	 */
 	private function getWxaccount(){
-		$wxaccountid = getWxAccountID();
+//		$wxaccountid = getWxAccountID();
 
-		if($wxaccountid == -1){
-			$map = array("uid"=>UID);
-			$result = apiCall(WxaccountApi::GET_INFO,array($map));
-
-			if($result['status'] && is_array($result['info'])){
-				session("wxaccount",$result['info']);
-				session("wxaccountid",$result['info']['id']);
-				session("appid",$result['info']['appid']);
-				session("appsecret",$result['info']['appsecret']);
-			}
-		}else{
-			$this->appid = session("appid");
-			$this->appsecret = session("appsecret");
-		}
+//		if($wxaccountid == -1){
+//			$map = array("uid"=>UID);
+//			$result = apiCall(WxaccountApi::GET_INFO,array($map));
+//
+//			if($result['status'] && is_array($result['info'])){
+//				session("wxaccount",$result['info']);
+//				session("wxaccountid",$result['info']['id']);
+//				session("appid",$result['info']['appid']);
+//				session("appsecret",$result['info']['appsecret']);
+//			}
+//		}else{
+//			$this->appid = session("appid");
+//			$this->appsecret = session("appsecret");
+//		}
 	}
 	
 	public function checkAuthority() {

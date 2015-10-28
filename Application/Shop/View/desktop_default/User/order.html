@@ -1,0 +1,448 @@
+<extend name="desktop_default/template/base_index2" />
+
+<block name="area_header">
+	<link href="__PUBLIC__/Home/Index/css/index.min.css" type="text/css">
+	<link rel="stylesheet" href="__PUBLIC__/Home/Index/css/base.css">
+	<style type="text/css">
+		body{background: #F5F5F5}
+		.am-footer-default{background: #F5F5F5}
+		.div_main{width:1130px;margin: 0 auto; background: #F5F5F5;}
+		.div_left{margin: 20px;float: left;background:white}
+		.div_left dl{margin:0 auto; width:70%;margin-top:50px;margin-bottom:50px;}
+		.div_left dl dt{font-size: 20px;font-weight: 100;}
+		.div_left dl dd{padding-left:25px;font-size: 16px;padding-top: 10px;}
+		.order-items{ width: 65%;}
+		.div_left dl dd a:visited{color:#ccc}
+		.div_left dl dd a:hover{color:#FF6700}
+		.div_left dl dd a.dd_search{color:#FF6700}
+		.div_right{margin: 20px;border: 1px solid #ccc;float: left;padding: 20px;background:white}
+		.goods-list li{float: left; width: 30%;}
+		li{list-style: none;}
+		.num{font-size: 17px; }
+		.dd_search{color:#FF6700}
+		.am-tabs-default .am-tabs-nav>.am-active a{background-color: orangered; color: white;}
+		.container{height: 80px; background-color: white; width: 100%; min-width: 1100px;}
+	</style>
+</block>
+
+<block name="area_body">
+	<include file="desktop_default/width/right" />
+	<include file="desktop_default/width/top" />
+	<div class=" container">
+		<include file="desktop_default/width/daohang" />
+	</div><br>
+	<div style="  width: 1080px; margin: 0 auto; height: 50px; background-color: white; ">
+		<a href="{:U('Shop/User/index')}"><img height="70px" style="margin-left: -3px; margin-top: -5px;" src="__IMG__/userinfo.png"></a>
+		<font color="#8C8C8C">个人信息很重要哦!</font>
+	</div><br>
+	<div class="div_main">
+		<div class="div_left" style="width: 200px;">
+			<include file="desktop_default/width/list" />
+		</div>
+		<div class="div_right" style="width: 830px">
+			<font style="font-size: 30px">我的订单</font> <font style="font-size: 12px">请谨防钓鱼链接或诈骗电话</font>
+			<br />
+			<div data-am-widget="tabs" class="am-tabs am-tabs-default">
+				<ul class="am-tabs-nav am-cf" style="width: 400px">
+					<li class="am-active" style="width: 100px">
+						<a href="[data-tab-panel-0]">全部有效订单</a>
+					</li>
+					<li class="">
+						<a href="[data-tab-panel-1]">待支付</a>
+					</li>
+					<li class="">
+						<a href="[data-tab-panel-2]">待收货</a>
+					</li>
+					<li class="">
+						<a href="[data-tab-panel-3]">已关闭</a>
+					</li>
+				</ul>
+				<div class="am-tabs-bd" style="margin-top:20px;">
+					<div data-tab-panel-0 class="am-tab-panel am-active" style="text-align: center">
+						<empty name="orders">
+							<h1 style="color: #ccc">当前没有订单。</h1>
+							<else/>
+							<volist name="orders" id="o">
+							<li class="uc-order-item uc-order-item-shipping">
+								<div class="order-detail" style=" border: 1px solid #8C8C8C;">
+									<div class="order-summary" style="font-size: 17px; width: 100%; color: black;  float: left;">
+										<div class="order-status" style="padding-top: 10px; padding-left: 40px; color: green;">
+											
+											<if condition="$o['pay_status'] eq 0">[待支付]</if><if condition="$o['pay_status'] eq 1">[已支付]</if>
+											<if condition="$o['pay_status'] eq 2">[已退款]</if><if condition="$o['pay_status'] eq 5">[货到付款]</if>
+											<if condition="$o['order_status'] eq 12">[订单退回]</if>
+											<if condition="$o['order_status'] eq 3">[待发货]</if><if condition="$o['order_status'] eq 4">[已发货]</if>
+											<if condition="$o['order_status'] eq 5">[已收货]</if>
+											<if condition="$o['order_status'] eq 6">[已退款]</if><if condition="$o['order_status'] eq 2">[待确认]</if>
+											<if condition="$o['order_status'] eq 7">[已完成]</if><if condition="$o['order_status'] eq 8">[取消或交易关闭]</if>
+											<if condition="$o['order_status'] eq 9">[正在申请退款]
+												<volist name="ths" id="a">
+												<if condition="$o['order_code'] eq $a['order_code']">
+													<if condition="$a['valid_status'] eq 0">[待审核]</if>
+													<if condition="$a['valid_status'] eq 1">[审核通过]</if>
+													<if condition="$a['valid_status'] eq 2">[审核驳回][原因：{$a['reply_msg']}]</if>
+												</if>
+												</volist>
+											</if>
+										</div>
+									</div><br>
+									<table class="order-detail-table" style="width: 100%;  ">
+										<thead>
+											<tr style=" font-family: '微软雅黑'; border-bottom: 1px solid #8C8C8C;">
+												<td class="col-main" style="">
+													<span class="caption-info" style="font-family: '微软雅黑'; padding-top: 20px;">{$o.createtime|date='Y-m-d',###},{$o['contactname']},订单号：{$o['order_code']}
+														<if condition="$o['pay_status'] eq 5">,货到付款<else/>,在线支付</if></span>
+												</td>
+												<td class="col-sub">
+													<span style="padding-left: 40px; padding-top: 20px;" class="caption-price"><font style="font-size: 20px; color: orangered;" class="num">{$o.price}</font>元</span>
+													&nbsp;&nbsp;&nbsp;<a style="padding: 3px; margin-top: -5px;" class="am-btn-warning" href="{:U('Shop/User/orderdetails',array('ordercode'=>$o['order_code']))}">订单详情</a>
+												</td>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="order-items">
+													<ul class="goods-list">
+														<volist name="pro" id="vo">
+															<if condition="$o['order_code'] eq $vo['order_code']">
+														<li>
+															<div class="figure figure-thumb" style="padding-top: 5px;">
+																<a href="" target="_blank"> <img src="{:U('Api/Picture/index',array('id'=>$vo['img']))}" width="80" height="80" alt="{$vo['name']}"> </a>
+															</div>
+															<span class="name"><a style="color: black;" target="_blank">{$vo.name|subtext=10}</a></span><br>
+															<span class="price" style="color: red; font-size: 14px;">{$vo.price}元 </span>× {$vo.count}
+														</li>
+														</if>
+														</volist>
+													</ul>
+												</td>
+												<if condition="($o['pay_status'] eq 0) and ($o['order_status'] eq 2)">
+													<td class="order-actions"> <a style="font-size: 13px;" class="am-btn  am-btn-warning" href="{:U('Shop/Orders/paytype',array('ordercode'=>$o['order_code']))}">去支付</a></td>
+												</if>
+												<if condition="($o['pay_status'] eq 1) and ($o['order_status'] eq 4)">
+													<td class="order-actions"> 
+														<input type="hidden" name="ordercode" id="ordercode" value="{$o['order_code']}" />
+														<a style="font-size: 13px;" class="am-btn  am-btn-warning" href="{:U('Shop/Orders/ok',array('ordercode'=>$o['order_code']))}">确认收货</a>
+														<a style="font-size: 13px;" class="am-btn  am-btn-warning th"   data-am-modal="{target: '#my-popup'}" >退货</a>
+													</td>
+												</if>
+												<if condition="($o['pay_status'] eq 1) and ($o['order_status'] eq 9)">
+													<td class="order-actions"> 
+														<input type="hidden" name="ordercode" id="ordercode" value="{$o['order_code']}" />
+														<a style="font-size: 13px;" class="am-btn  am-btn-warning" href="{:U('Shop/Orders/ok',array('ordercode'=>$o['order_code']))}">确认收货</a>
+														<a style="font-size: 13px;" class="am-btn  am-btn-warning th"   data-am-modal="{target: '#my-popup'}" >退货</a>
+													</td>
+												</if>
+												<if condition="($o['pay_status'] eq 1) and ($o['order_status'] eq 2)">
+													<td class="order-actions"> 
+														等待商家发货
+													</td>
+													
+												</if>
+												<if condition="($o['pay_status'] eq 1) and ($o['order_status'] eq 6)">
+													<td class="order-actions"> 
+														退货完成
+													</td>
+												</if>
+												<if condition="$o['order_status'] eq 8">
+													<td class="order-actions"> 
+														交易关闭
+													</td>
+												</if>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</li><br>
+							</volist>
+							{$show1}
+						</empty>
+						
+					</div>
+					<div data-tab-panel-1  class="am-tab-panel " style="text-align: center ;">
+						<empty name="orders_fk">
+							<h1 style="color: #ccc">当前没有待支付订单。</h1>
+							<else/>
+							<volist name="orders_fk" id="o">
+							<li class="uc-order-item uc-order-item-shipping">
+								<div class="order-detail" style=" border: 1px solid #8C8C8C;">
+									<div class="order-summary" style="font-size: 17px; width: 100%; color: black;  float: left;">
+										<div class="order-status" style="padding-top: 10px; padding-left: 40px; color: green;">
+											
+											<if condition="$o['pay_status'] eq 0">[待支付]</if><if condition="$o['pay_status'] eq 1">[已支付]</if>
+											<if condition="$o['pay_status'] eq 2">[已退款]</if><if condition="$o['pay_status'] eq 5">[货到付款]</if>
+											<if condition="$o['order_status'] eq 12">[订单退回]</if>
+											<if condition="$o['order_status'] eq 3">[待发货]</if><if condition="$o['order_status'] eq 4">[已发货]</if>
+											<if condition="$o['order_status'] eq 5">[已收货]</if>
+											<if condition="$o['order_status'] eq 6">[已退款]</if><if condition="$o['order_status'] eq 2">[待确定]</if>
+											<if condition="$o['order_status'] eq 7">[已完成]</if><if condition="$o['order_status'] eq 8">[取消或交易关闭]</if>
+											<if condition="$o['order_status'] eq 9">[正在申请退款]
+												<volist name="ths" id="a">
+												<if condition="$o['order_code'] eq $a['order_code']">
+													<if condition="$a['valid_status'] eq 0">[待审核]</if>
+													<if condition="$a['valid_status'] eq 1">[审核通过]</if>
+													<if condition="$a['valid_status'] eq 2">[审核驳回][原因：{$a['reply_msg']}]</if>
+												</if>
+												</volist>
+											</if>
+										</div>
+									</div><br>
+									<table class="order-detail-table" style="width: 100%;  ">
+										<thead>
+											<tr style=" font-family: '微软雅黑'; border-bottom: 1px solid #8C8C8C;">
+												<td class="col-main" style="">
+													<span class="caption-info" style="font-family: '微软雅黑'; padding-top: 20px;">{$o.createtime|date='Y-m-d',###},{$o['contactname']},订单号：{$o['order_code']}
+														<if condition="$o['pay_status'] eq 5">,货到付款<else/>,在线支付</if></span>
+												</td>
+												<td class="col-sub">
+													<span style="padding-left: 40px; padding-top: 20px;" class="caption-price"><font style="font-size: 20px; color: orangered;" class="num">{$o.price}</font>元</span>
+													&nbsp;&nbsp;&nbsp;<a style="padding: 3px; margin-top: -5px;" class="am-btn-warning" href="{:U('Shop/User/orderdetails',array('ordercode'=>$o['order_code']))}">订单详情</a>
+												</td>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="order-items">
+													<ul class="goods-list">
+														<volist name="pro" id="vo">
+															<if condition="$o['order_code'] eq $vo['order_code']">
+														<li>
+															<div class="figure figure-thumb" style="padding-top: 5px;">
+																<a href="" target="_blank"> <img src="{:U('Api/Picture/index',array('id'=>$vo['img']))}" width="80" height="80" alt="{$vo['name']}"> </a>
+															</div>
+															<span class="name"><a style="color: black;" target="_blank">{$vo.name|subtext=10}</a></span><br>
+															<span class="price" style="color: red; font-size: 14px;">{$vo.price}元 </span>× {$vo.count}
+														</li>
+														</if>
+														</volist>
+													</ul>
+												</td>
+												<if condition="($o['pay_status'] eq 0) and ($o['order_status'] eq 2)">
+													<td class="order-actions"> <a style="font-size: 13px;" class="am-btn  am-btn-warning" href="{:U('Shop/Orders/paytype',array('ordercode'=>$o['order_code']))}">去支付</a></td>
+												</if>
+												<if condition="$o['pay_status'] eq 1">
+												
+												<td class="order-actions">
+														<input type="hidden" name="ordercode" id="ordercode" value="{$o['order_code']}" />
+														<a style="font-size: 13px;" class="am-btn  am-btn-warning" href="{:U('Shop/Orders/ok',array('ordercode'=>$o['order_code']))}">确认收货</a>
+														<a style="font-size: 13px;" class="am-btn  am-btn-warning th"  data-am-modal="{target: '#my-popup'}" >退货</a>
+												</td>
+												</if>
+												<if condition="($o['pay_status'] eq 0) and ($o['order_status'] eq 8)">
+													<td class="order-actions"> 
+														交易关闭
+													</td>
+												</if>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</li><br>
+							</volist>
+							{$show3}
+						</empty>
+						
+					</div>
+
+					<div data-tab-panel-2 class="am-tab-panel " style="text-align: center">
+						<empty name="orders_sh">
+							<h1 style="color: #ccc">当前没有待收货订单。</h1>
+							<else/>
+							<volist name="orders_sh" id="o">
+							<li class="uc-order-item uc-order-item-shipping">
+								<div class="order-detail" style=" border: 1px solid #8C8C8C;">
+									<div class="order-summary" style="font-size: 17px; width: 100%; color: black;  float: left;">
+										<div class="order-status" style="padding-top: 10px; padding-left: 40px; color: green;">
+											
+											<if condition="$o['pay_status'] eq 0">[待支付]</if><if condition="$o['pay_status'] eq 1">[已支付]</if>
+											<if condition="$o['pay_status'] eq 2">[已退款]</if><if condition="$o['pay_status'] eq 5">[货到付款]</if>
+											<if condition="$o['order_status'] eq 12">[订单退回]</if>
+											<if condition="$o['order_status'] eq 3">[待发货]</if><if condition="$o['order_status'] eq 4">[已发货]</if>
+											<if condition="$o['order_status'] eq 5">[已收货]</if>
+											<if condition="$o['order_status'] eq 6">[已退款]</if><if condition="$o['order_status'] eq 2">[待确定]</if>
+											<if condition="$o['order_status'] eq 7">[已完成]</if><if condition="$o['order_status'] eq 8">[取消或交易关闭]</if>
+											<if condition="$o['order_status'] eq 9">[正在申请退款]
+												<volist name="ths" id="a">
+												<if condition="$o['order_code'] eq $a['order_code']">
+													<if condition="$a['valid_status'] eq 0">[待审核]</if>
+													<if condition="$a['valid_status'] eq 1">[审核通过]</if>
+													<if condition="$a['valid_status'] eq 2">[审核驳回][原因：{$a['reply_msg']}]</if>
+												</if>
+												</volist>
+											</if>
+										</div>
+									</div><br>
+									<table class="order-detail-table" style="width: 100%;  ">
+										<thead>
+											<tr style=" font-family: '微软雅黑'; border-bottom: 1px solid #8C8C8C;">
+												<td class="col-main" style="">
+													<span class="caption-info" style="font-family: '微软雅黑'; padding-top: 20px;">{$o.createtime|date='Y-m-d',###},{$o['contactname']},订单号：{$o['order_code']}
+														<if condition="$o['pay_status'] eq 5">,货到付款<else/>,在线支付</if></span>
+												</td>
+												<td class="col-sub">
+													<span style="padding-left: 40px; padding-top: 20px;" class="caption-price"><font style="font-size: 20px; color: orangered;" class="num">{$o.price}</font>元</span>
+													&nbsp;&nbsp;&nbsp;<a style="padding: 3px; margin-top: -5px;" class="am-btn-warning" href="{:U('Shop/User/orderdetails',array('ordercode'=>$o['order_code']))}">订单详情</a>
+												</td>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="order-items">
+													<ul class="goods-list">
+														<volist name="pro" id="vo">
+															<if condition="$o['order_code'] eq $vo['order_code']">
+														<li>
+															<div class="figure figure-thumb" style="padding-top: 5px;">
+																<a href="" target="_blank"> <img src="{:U('Api/Picture/index',array('id'=>$vo['img']))}" width="80" height="80" alt="{$vo['name']}"> </a>
+															</div>
+															<span class="name"><a style="color: black;" target="_blank">{$vo.name|subtext=10}</a></span><br>
+															<span class="price" style="color: red; font-size: 14px;">{$vo.price}元 </span>× {$vo.count}
+														</li>
+														</if>
+														</volist>
+													</ul>
+												</td>
+												<if condition="$o['pay_status'] eq 0">
+												<td class="order-actions"> <a style="font-size: 13px;" class="am-btn  am-btn-warning" href="{:U('Shop/Orders/paytype',array('ordercode'=>$o['order_code']))}">去支付</a></td>
+												</if>
+												<if condition="$o['pay_status'] eq 1">
+												<td class="order-actions"> 
+													<input type="hidden" name="ordercode" id="ordercode" value="{$o['order_code']}" />
+													<a style="font-size: 13px;" class="am-btn  am-btn-warning" href="{:U('Shop/Orders/ok',array('ordercode'=>$o['order_code']))}">确认收货</a>
+													<a style="font-size: 13px;" class="am-btn  am-btn-warning th"  data-am-modal="{target: '#my-popup'}" >退货</a>
+												</td>
+												</if>
+												<if condition="$o['order_status'] eq 8">
+													<td class="order-actions"> 
+														交易关闭
+													</td>
+												</if>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</li><br>
+								</volist>
+								{$show2}
+						</empty>
+					</div>
+
+					<div data-tab-panel-3 class="am-tab-panel " style="text-align: center">
+						<empty name="orders_qx">
+							<h1 style="color: #ccc">当前没有已取消关闭的订单。</h1>
+							<else/>
+							<volist name="orders_qx" id="o">
+							<li class="uc-order-item uc-order-item-shipping">
+								<div class="order-detail" style=" border: 1px solid #8C8C8C;">
+									<div class="order-summary" style="font-size: 17px; width: 100%; color: black;  float: left;">
+										<div class="order-status" style="padding-top: 10px; padding-left: 40px; color: green;">
+											
+											<if condition="$o['pay_status'] eq 0">[待支付]</if><if condition="$o['pay_status'] eq 1">[已支付]</if>
+											<if condition="$o['pay_status'] eq 2">[已退款]</if><if condition="$o['pay_status'] eq 5">[货到付款]</if>
+											<if condition="$o['order_status'] eq 12">[订单退回]</if>
+											<if condition="$o['order_status'] eq 3">[待发货]</if><if condition="$o['order_status'] eq 4">[已发货]</if>
+											<if condition="$o['order_status'] eq 5">[已收货]</if>
+											<if condition="$o['order_status'] eq 6">[已退款]</if><if condition="$o['order_status'] eq 2">[待确定]</if>
+											<if condition="$o['order_status'] eq 7">[已完成]</if><if condition="$o['order_status'] eq 8">[取消或交易关闭]</if>
+											<if condition="$o['order_status'] eq 9">[正在申请退款]
+												<volist name="ths" id="a">
+												<if condition="$o['order_code'] eq $a['order_code']">
+													<if condition="$a['valid_status'] eq 0">[待审核]</if>
+													<if condition="$a['valid_status'] eq 1">[审核通过]</if>
+													<if condition="$a['valid_status'] eq 2">[审核驳回][原因：{$a['reply_msg']}]</if>
+												</if>
+												</volist>
+											</if>
+										</div>
+									</div><br>
+									<table class="order-detail-table" style="width: 100%;  ">
+										<thead>
+											<tr style=" font-family: '微软雅黑'; border-bottom: 1px solid #8C8C8C;">
+												<td class="col-main" style="">
+													<span class="caption-info" style="font-family: '微软雅黑'; padding-top: 20px;">{$o.createtime|date='Y-m-d',###},{$o['contactname']},订单号：{$o['order_code']}
+														<if condition="$o['pay_status'] eq 5">,货到付款<else/>,在线支付</if></span>
+												</td>
+												<td class="col-sub">
+													<span style="padding-left: 40px; padding-top: 20px;" class="caption-price"><font style="font-size: 20px; color: orangered;" class="num">{$o.price}</font>元</span>
+													&nbsp;&nbsp;&nbsp;<a style="padding: 3px; margin-top: -5px;" class="am-btn-warning" href="{:U('Shop/User/orderdetails',array('ordercode'=>$o['order_code']))}">订单详情</a>
+												</td>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="order-items">
+													<ul class="goods-list">
+														<volist name="pro" id="vo">
+															<if condition="$o['order_code'] eq $vo['order_code']">
+														<li>
+															<div class="figure figure-thumb" style="padding-top: 5px;">
+																<a href="" target="_blank"> <img src="{:U('Api/Picture/index',array('id'=>$vo['img']))}" width="80" height="80" alt="{$vo['name']}"> </a>
+															</div>
+															<span class="name"><a style="color: black;" target="_blank">{$vo.name|subtext=10}</a></span><br>
+															<span class="price" style="color: red; font-size: 14px;">{$vo.price}元 </span>× {$vo.count}
+														</li>
+														</if>
+														</volist>
+													</ul>
+												</td>
+												<if condition="($o['pay_status'] eq 0) and ($o['order_status'] eq 2)">
+													<td class="order-actions"> <a style="font-size: 13px;" class="am-btn  am-btn-warning" href="{:U('Shop/Orders/paytype',array('ordercode'=>$o['order_code']))}">去支付</a></td>
+												</if>
+												<if condition="$o['pay_status'] eq 1">
+												
+												<td class="order-actions">
+														<input type="hidden" name="ordercode" id="ordercode" value="{$o['order_code']}" />
+														<a style="font-size: 13px;" class="am-btn  am-btn-warning" href="{:U('Shop/Orders/ok',array('ordercode'=>$o['order_code']))}">确认收货</a>
+														<a style="font-size: 13px;" class="am-btn  am-btn-warning th"  data-am-modal="{target: '#my-popup'}" >退货</a>
+												</td>
+												</if>
+												<if condition="($o['pay_status'] eq 0) and ($o['order_status'] eq 8)">
+													<td class="order-actions"> 
+														交易关闭
+													</td>
+												</if>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</li><br>
+								</volist>
+								{$show4}
+						</empty>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div class="am-popup" id="my-popup" style="height: 280px;">
+  <div class="am-popup-inner">
+    <div class="am-popup-hd">
+      <h4 class="am-popup-title">退货申请</h4>
+      <span data-am-modal-close
+            class="am-close">&times;</span>
+    </div>
+    <div class="am-popup-bd" style="text-align: center;">
+      <font>退货原因：</font><br>
+      	<form method="post" class="thfm">
+      		<input type="hidden" name="orderid" id="order" value="" />
+      	<textarea name="yy" cols="40" rows="6"></textarea><br>
+      	</form>
+      	<button style="margin-top: 20px;" type="button" class="ajax-post am-btn-warning" target-form="thfm" url="{:U('Shop/User/resend')}" >确认退货</button>
+    </div>
+  </div>
+</div>
+<hr  style="border: none; clear:both"/>
+</block>
+
+<block name="area_footer">
+<script type="text/javascript">
+	$(function(){
+		$('.th').click(function(){
+			var ordercode=$(this).parent().find("input[name='ordercode']").val();
+//			alert(ordercode);
+			$('#order').val(ordercode);
+		})
+	})
+</script>
+</block>

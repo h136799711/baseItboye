@@ -1,0 +1,102 @@
+<extend name="desktop_default/template/base_index2" />
+
+<block name="area_header">
+	<link  href="__PUBLIC__/Home/Index/css/index.min.css" type="text/css">
+	<link rel="stylesheet" href="__PUBLIC__/Home/Index/css/base.css">
+	<style type="text/css">
+		body{background: #F5F5F5}
+		.am-footer-default{background: #F5F5F5}
+		.div_main{width:1100px;margin: 0 auto;  background: #F5F5F5 }
+		.div_left{width: 20%;margin: 20px;float: left;background:white}
+			.div_left dl{margin:0 auto; width:70%;margin-top:50px;margin-bottom:50px;}
+				.div_left dl dt{font-size: 20px;font-weight: 100; color: orangered;}
+				.div_left dl dd{padding-left:25px;font-size: 16px;padding-top: 10px;}
+					.div_left dl dd a:visited{color:#ccc}
+					.div_left dl dd a:hover{color:#FF6700}
+					.div_left dl dd a.dd_search{color:#FF6700}
+		.div_right{width: 70%;margin: 20px;border: 1px solid #ccc;float: left;padding: 20px;background:white}
+			.div_right .div_userInfo{width: 90%;border-bottom: 1px solid #ccc;padding: 50px;float: left}
+				.div_right .div_userInfo ul{list-style: none;float: left}
+				.div_right .div_userInfo ul.ul_info{margin-left:10%;margin-top:0px;}
+				.div_right .div_userInfo ul.ul_info li{margin-top:10px; width: 100%; }
+			.div_right .div_orderInfo{ width: 90% ; margin: 0 auto;}
+				.div_right .div_orderInfo ul{width: 100%;margin-top:20px;float: left;list-style: none}
+				.div_right .div_orderInfo ul li{width: 50%;float: left;padding: 50px;}
+				.div_right .div_orderInfo ul li p{margin-left: 120px;}
+				.div_right .div_orderInfo ul li{}
+				.div_right .div_orderInfo ul li{}
+		.dd_search{color:#FF6700}
+		.container{height: 80px; background-color: white; width: 100%; min-width: 1100px;}
+	</style>
+</block>
+
+<block name="area_body">
+	<include file="desktop_default/width/right" />
+	<include file="desktop_default/width/top"/>
+	<div class="container">
+		<include file="desktop_default/width/daohang"/>
+	</div><br>
+	<div style="  width: 1080px; margin: 0 auto; height: 50px; background-color: white; ">
+		<img height="70px" style="margin-left: -3px; margin-top: -5px;" src="__IMG__/userinfo.png">
+		<font color="#8C8C8C">个人信息很重要哦!</font>
+	</div><br>
+	<div class="div_main" >
+		<div class="div_left" style="width: 200px;">
+			<include file="desktop_default/width/list"/>
+		</div>
+		<div class="div_right" style="width: 800px;">
+			<div class="div_userInfo">
+				<div style="float: left; height: 100px; width: 100px; ">
+					 
+						<if condition="$userinfo['head'] eq ''">
+						<img src="__IMG__/head.jpg" style="border-radius: 50%;border: 1px solid #ccc;height: 120px;width: 120px;"/>
+						<else/>
+					<img src="{$userinfo['head']}" style="border-radius: 50%;border: 1px solid #ccc;height: 120px;width: 120px;"/>
+					</if>
+						 
+
+				</div>
+				<ul >
+					<li>{$user['username']}</li>
+					<li>早上好～</li>
+					<li><a href="{:U('Shop/User/info')}" class="dd_search">修改个人信息 ></a></li>
+				</ul>
+				<ul class="ul_info">
+					<li>账户安全：普通</li>
+					<li>绑定手机：{$phone}</li>
+					<li>绑定邮箱：{$user['email']}</li>
+					<li>优惠ID码：<font style="font-size: 22px; color: orangered;">{$user['idcode']}</font></li>
+				</ul>
+			</div>
+			<div class="div_orderInfo" style="clear:both; ">
+				<ul>
+					<li ><a href="{:U('Shop/User/order')}"><img src="__IMG__/portal-icon-1.png" style="float: left;"/></a>
+						<p style="">待支付的订单：{$wait}</p>
+						<p style="margin-top: -20px"><a href="{:U('Shop/User/order')}">查看待支付订单</a></p>
+
+					</li>
+					<li ><a href="{:U('Shop/User/order')}"><img src="__IMG__/portal-icon-2.png" style="float: left;"/></a>
+						<p style="">待收货的订单：{$shouhuo}</p>
+						<p style="margin-top: -20px"><a href="{:U('Shop/User/order')}">查看待收货订单</a></p>
+					</li>
+					<li ><a href="{:U('Shop/User/order')}"><img src="__IMG__/portal-icon-3.png" style="float: left;"/></a>
+						<p style="">待评价商品数：{$pingjia}</p>
+						<p style="margin-top: -20px"><a href="{:U('Shop/User/order')}">查看待评价订单</a></p>
+					</li>
+					<li><a href="{:U('Shop/User/order')}"><img src="__IMG__/portal-icon-4.png" style="float: left;"/></a>
+						<p style="">喜欢的商品：0</p>
+						<p style="margin-top: -20px"><a href="{:U('Shop/User/order')}">查看喜欢的商品</a></p>
+					</li>
+
+				</ul>
+			</div>
+		</div>
+
+	</div>
+	 <include file="desktop_default/width/floor" />
+<hr  style="border: none; clear:both"/>
+</block>
+
+<block name="area_footer">
+
+</block>

@@ -1,0 +1,58 @@
+<extend name="desktop_default/template/base_index2" />
+
+<block name="area_header">
+	<link rel="stylesheet" href="__CSS__/manager.css" />
+	<link  href="__PUBLIC__/Home/Index/css/index.min.css" type="text/css">
+	<link rel="stylesheet" href="__PUBLIC__/Home/Index/css/base.css">
+</block>
+
+<block name="area_body">
+	<div class="div_all">
+		<include file="desktop_default/width/top"/>
+	<div class="container">
+		<include file="desktop_default/width/daohang"/>
+	</div><br>
+		<div class="div_right">
+			<div style=" width: 1000px; margin: 0 auto; border:1px solid #ccc;">
+				<div style="width: 100%; background: url(__IMG__/sf/yjdf_head.jpg); background-size:100% 100%; height: 400px;">
+
+				</div>
+				<div style="width: 100%; background: url(__IMG__/sf/yhdf_bg.jpg); border: 1px solid #D3FACE; background-size:100% 100%;  margin-bottom: 0px;">
+					
+					<div style="width:400px; height: 300px; margin-left: 10px; float: left; background: url(__IMG__/sf/hdsm.png); background-size:100% 100%;">
+						<div style=" margin-top: 85px; width:75%; margin-left: 15%;">如果你邀请的小伙伴成功使用了你的ID码,你可以获得相应分佣比例的金额</div>
+						<div style="margin-top: 15px; width:75%; margin-left: 15%;">对方也将获得对应优惠比例的优惠!</div>
+						<div style="margin-top:25px; width:75%; margin-left: 15%; font-size: 13px; color: red;">注：邀请小伙伴成交的笔数越多，那你的等级将会越高分佣比例也会越高得到的钱也就越高。</div>
+					</div>
+					<div style="float: left; width: 570px; background: url(__IMG__/sf/yqfs.png) no-repeat scroll; border: 1px solid #D3FACE;  height: 300px; margin-left: 10px;">
+						<h3 style="margin-top: 60px; margin-left: 50px;">方式1</h3>
+						<div style="margin-top:10px; margin-left: 50px;color: #666;">怂恿好友在注册宝贝街账号时在邀请人栏目处填入你的优惠ID码(<font size="4" color="red">{$user['idcode']}</font>)。</div>
+						<h3 style="margin-top: 10px; margin-left: 50px;">方式2</h3>
+						<div style="margin-top:10px; margin-left: 50px;color: #666;">用您的专属链接让别人来注册<br>（<font color="#0079FF">www.bammar.com/Shop/Index/register?idcode={$user['idcode']}</font>）</div>
+						
+					</div>
+					<br>
+					<div style="margin-top:360px;  font-size: 13px;color: #999;">
+						<ul>
+							<li style="font-weight: bold;font-size:16px;color: black;">注意事项：</li>
+							<li>1、得到的佣金将在订单完成七天后统一发放；</li>
+							<li>2、邀请的买家成交笔数越多 对应的佣金越丰厚；</li>
+							<li>3、奖励可累加，无上限；</li>
+							<li>4、本活动暂时只针对买家用户，商家用户暂时不在奖励范围之内；</li>
+							<li>5、希望各位会员诚实参与，勿弄虚作假，营造一个公正公平的环境；</li>
+							<li>6、对作弊等恶意参与行为一经发现我们将追回一切违规所得，严重者将进行封号处理，并保有追诉法律责任的权利；</li>
+							<li>7、斑马对本活动享有最终解释权，并有权在网站先行公示的情况下终止本次活动；</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</block>
+
+<block name="area_footer">
+<script type="text/javascript">
+	
+</script>
+</block>
