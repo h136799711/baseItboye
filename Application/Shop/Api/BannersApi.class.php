@@ -61,7 +61,7 @@ class BannersApi extends Api{
      */
     public function queryWithPosition($map = null, $page = array('curpage'=>0,'size'=>10), $order = false, $params = false){
 
-        $field = 'dt.name as position_name,banner.url,banner.noticetime,banner.endtime,banner.starttime,banner.title,banner.createtime,banner.storeid,banner.id,banner.img,banner.position,banner.notes,banner.uid';
+        $field = 'dt.name as position_nameM,banner.sort,banner.url,banner.noticetime,banner.endtime,banner.starttime,banner.title,banner.createtime,banner.storeid,banner.id,banner.img,banner.position,banner.notes,banner.uid';
 
         $query = $this->model->alias(" as banner ")->field($field)->join('LEFT JOIN common_datatree as dt ON dt.id = banner.position');
         if(!is_null($map)){

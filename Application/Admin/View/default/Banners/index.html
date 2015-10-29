@@ -44,10 +44,12 @@
 							<th>
 								跳转链接
 							</th>
-							<th>
-								类别
-							</th>
-							
+                            <th>
+                                类别
+                            </th>
+                            <th>
+                                序号
+                            </th>
 							<th>
 								添加时间
 							</th>
@@ -67,14 +69,17 @@
 									<td>
 										<input type="checkbox" value="{$vo.id}" name="ids[]" class="selectitem" /></td>
 									<td>
-										<img style="width: 120px;height:60px;" src="{:U('Api/Picture/index',array('id'=>$vo['img'],'size'=>60))}" alt="{$vo.url}" />
+										<img style="width:120px;height:60px;" src="{:U('Api/Picture/index',array('id'=>$vo['img'],'size'=>60))}" alt="{$vo.url}" />
 									</td>
 									<td>
 										{$vo.url}
 									</td>
-									<td>
-										{$vo.position_name}
-									</td>
+                                    <td>
+                                        {$vo.position_name}
+                                    </td>
+                                    <td>
+                                        {$vo.sort}
+                                    </td>
 									<td>
 										{$vo.createtime|date='Y-m-d h:i:s',###}
 									</td>
