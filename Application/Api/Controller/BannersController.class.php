@@ -46,10 +46,10 @@ class BannersController extends ApiController{
         $notes = "应用".$this->client_id."，调用Banners分页查询接口";
         addLog("Banners/query",$_GET,$_POST,$notes);
         $arr = array(
-            'app_carousel'=>6009,
             'app_index'=>6007,
-            'app_life'=>6010,
             'app_finance'=>6008,
+            'app_carousel'=>6009,
+            'app_life'=>6010,
         );
         $position = $this->_post('position', '',"位置参数必须");
 
@@ -84,7 +84,18 @@ class BannersController extends ApiController{
 
         foreach($list as &$vo){
             $vo['img_url'] = getImageUrl($vo['img']);
+            unset($vo['img']);
+            unset($vo['id']);
+            unset($vo['notes']);
+            unset($vo['uid']);
+            unset($vo['storeid']);
+            unset($vo['createtime']);
+            unset($vo['starttime']);
+            unset($vo['endtime']);
+            unset($vo['noticetime']);
+
         }
+
 
         return $list;
 

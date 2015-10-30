@@ -38,6 +38,9 @@
 							<th>
 								<input type="checkbox" class="selectall" onclick="myUtils.selectall(this,'.selectitem');" />
 							</th>
+                            <th>
+                                图片标题
+                            </th>
 							<th>
 								图片地址
 							</th>
@@ -68,6 +71,9 @@
 								<tr>
 									<td>
 										<input type="checkbox" value="{$vo.id}" name="ids[]" class="selectitem" /></td>
+                                    <td>
+                                        {$vo.title}
+                                    </td>
 									<td>
 										<img style="width:120px;height:60px;" src="{:U('Api/Picture/index',array('id'=>$vo['img'],'size'=>60))}" alt="{$vo.url}" />
 									</td>

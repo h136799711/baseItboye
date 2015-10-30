@@ -30,7 +30,7 @@ class BannersController extends  AdminController{
             $map['position'] = array("in", $banners_pos);
 
             $page = array('curpage' => I('get.p', 0), 'size' => C('LIST_ROWS'));
-            $order = " createtime desc ";
+            $order = " position desc ";
             //
             $result = apiCall(BannersApi::QUERY_WITH_POSITION, array($map, $page, $order, $params));
         }else{
