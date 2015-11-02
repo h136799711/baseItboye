@@ -63,7 +63,7 @@ class BannersController extends ApiController{
         $map=array(
             'position' => $position,
         );
-
+        $order = " sort asc ";
         $page = array('curpage'=>$curpage,'size'=>$pagesize); //分页
 
         $result=apiCall(BannersApi::QUERY,array($map,$page));
