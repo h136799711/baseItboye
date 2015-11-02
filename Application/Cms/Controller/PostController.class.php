@@ -75,8 +75,16 @@ class PostController extends CmsController {
 		$this->assign("post",$result['info']);
 		$this->assign("title",$title);
 		$this->assign("content",$content);
-		
-		$this->display();
-	}
+
+        $cate_id = $result['info']['post_category'];
+        $path = APP_PATH.'/Cms/View/default/Post/view_'.$cate_id.'.html';
+//        dump($path);
+        if(file_exists(realpath($path))){
+            $this->display('view_'.$cate_id);
+        }else{
+
+		    $this->display();
+	    }
+    }
 }
 
