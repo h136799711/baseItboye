@@ -293,20 +293,21 @@ class UserController extends ApiController
             $password = $this->_post("password");
             $email = "";
             $mobile = "";
-            $idcode = "";
-            if($type == UcenterMemberModel::ACCOUNT_TYPE_EMAIL){
-                $email = $username;
-                $idcode = getIDCode(rand(10000000000,99999999999),'E');
+            $idcode = "123456";
+//            if($type == UcenterMemberModel::ACCOUNT_TYPE_EMAIL){
+//                $email = $username;
+//                $idcode = getIDCode(rand(10000000000,99999999999),'E');
+//
+//            }elseif($type == UcenterMemberModel::ACCOUNT_TYPE_MOBILE){
+//                $mobile = $username;
+//                $username = 'M'.$mobile;
+//                $idcode = getIDCode($mobile,'M');
+//            }
 
-            }elseif($type == UcenterMemberModel::ACCOUNT_TYPE_MOBILE){
-                $mobile = $username;
-                $username = 'M'.$mobile;
-                $idcode = getIDCode($mobile,'M');
-            }
             if(empty($idcode)){
                 $this->apiReturnErr("注册失败!请重试");
             }
-            $nickname = $this->_post("nickname", "斑马新人");
+            $nickname = $this->_post("nickname", "昵称");
 
             $entity = array(
                 'username' => $username,
@@ -484,9 +485,9 @@ class UserController extends ApiController
      */
     private function getUsernameType($str){
 
-        if(preg_match("/1[3458]{1}\d{9}$/",$str)){
-            return UcenterMemberModel::ACCOUNT_TYPE_MOBILE;
-        }
+//        if(preg_match("/1[3458]{1}\d{9}$/",$str)){
+//            return UcenterMemberModel::ACCOUNT_TYPE_MOBILE;
+//        }
 
         return UcenterMemberModel::ACCOUNT_TYPE_USERNAME;
     }
