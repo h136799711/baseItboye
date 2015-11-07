@@ -294,15 +294,15 @@ class UserController extends ApiController
             $email = "";
             $mobile = "";
             $idcode = "123456";
-//            if($type == UcenterMemberModel::ACCOUNT_TYPE_EMAIL){
-//                $email = $username;
+            if($type == UcenterMemberModel::ACCOUNT_TYPE_EMAIL){
+                $email = $username;
 //                $idcode = getIDCode(rand(10000000000,99999999999),'E');
-//
-//            }elseif($type == UcenterMemberModel::ACCOUNT_TYPE_MOBILE){
-//                $mobile = $username;
-//                $username = 'M'.$mobile;
+
+            }elseif($type == UcenterMemberModel::ACCOUNT_TYPE_MOBILE){
+                $mobile = $username;
+                $username = 'M'.$mobile;
 //                $idcode = getIDCode($mobile,'M');
-//            }
+            }
 
             if(empty($idcode)){
                 $this->apiReturnErr("注册失败!请重试");
@@ -359,9 +359,13 @@ class UserController extends ApiController
             $idnumber = $this->_post("idnumber", "");
             $birthday = strtotime($this->_post("birthday", 0));
             $nickname = $this->_post("nickname", "");
-            $sex = $this->_post("sex", 0);
+            $sex = $this->_post("sex", 0,'intval');
             $qq = $this->_post("qq", "");
             $head = $this->_post("head", "");
+
+            if($sex != 0 && $sex != 1){
+                $this->apiReturnErr("性别参数错误!");
+            }
 
             $entity = array();
 
@@ -418,7 +422,7 @@ class UserController extends ApiController
         //TODO: 检测用户账号是否合法
         //1. $type = 1 的时候 $username 是用户名
         //2. $type = 2 的时候 $username 是邮箱,应该符合邮箱规则
-        //3. $type = 4 的时候 $username 是手机,应该符合手机的规则
+        //3. $type = 3 的时候 $username 是手机,应该符合手机的规则
         $from = intval($from);
         if($from != OAuth2TypeModel::BAIDU
             && $from != OAuth2TypeModel::OTHER_APP
@@ -428,6 +432,7 @@ class UserController extends ApiController
             && $from != OAuth2TypeModel::SELF){
             return "用户来源参数无效";
         }
+
         if($type == UcenterMemberModel::ACCOUNT_TYPE_MOBILE && $this->getUsernameType($username) != $type){
                 $this->apiReturnErr("手机号非法!");
         }
@@ -485,9 +490,9 @@ class UserController extends ApiController
      */
     private function getUsernameType($str){
 
-//        if(preg_match("/1[3458]{1}\d{9}$/",$str)){
-//            return UcenterMemberModel::ACCOUNT_TYPE_MOBILE;
-//        }
+        if(preg_match("/^1\d{10}$/",$str)){
+            return UcenterMemberModel::ACCOUNT_TYPE_MOBILE;
+        }
 
         return UcenterMemberModel::ACCOUNT_TYPE_USERNAME;
     }
