@@ -375,9 +375,9 @@ class UserController extends ApiController
                 $entity['card_no'] = $card_no;
             }
 
-            if(!empty($sex)){
+//            if(!$sex)){
                 $entity['sex'] = $sex;
-            }
+//            }
             if(!empty($head)){
                 $entity['head']=$head;
             }
