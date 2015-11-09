@@ -130,6 +130,9 @@ class AccountApi implements IAccount
             if(isset($data['realname'])) {
                 $map['realname'] = $data['realname'];
             }
+            if(isset($data['card_no'])) {
+                $map['card_no'] = $data['card_no'];
+            }
 
             $result= apiCall(MemberApi::SAVE,array($m,$map));
 
@@ -141,7 +144,7 @@ class AccountApi implements IAccount
                 return array('status' => false, 'info' => $result['info']);
             }
         }else{
-            $trans->rollback();
+//            $trans->rollback();
             return array('status' => false, 'info' => $result['info']);
         }
     }

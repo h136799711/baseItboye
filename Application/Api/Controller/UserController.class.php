@@ -359,15 +359,20 @@ class UserController extends ApiController
             $idnumber = $this->_post("idnumber", "");
             $birthday = strtotime($this->_post("birthday", 0));
             $nickname = $this->_post("nickname", "");
-            $sex = $this->_post("sex", 0,'intval');
+            $sex = $this->_post("sex", 0);
             $qq = $this->_post("qq", "");
             $head = $this->_post("head", "");
+            $card_no = $this->_post("card_no", "");
 
             if($sex != 0 && $sex != 1){
                 $this->apiReturnErr("性别参数错误!");
             }
 
             $entity = array();
+
+            if(!empty($card_no)){
+                $entity['card_no'] = $card_no;
+            }
 
             if(!empty($sex)){
                 $entity['sex'] = $sex;
