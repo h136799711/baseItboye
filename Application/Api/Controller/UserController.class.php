@@ -159,7 +159,7 @@ class UserController extends ApiController
             $username = $this->_post('username','');
             $old_psw = $this->_post('old_psw','');
             $psw = $this->_post('psw','');
-            $code = $this->_post('code','',"验证码参数缺失");
+            $code = $this->_post('code','');
 
             if(empty($old_psw) && empty($code)){
                 $this->apiReturnErr("验证参数缺失!");
@@ -174,7 +174,7 @@ class UserController extends ApiController
             $psw = base64_decode($psw);
             $type = $this->getUsernameType($username);
             $result = array('status');
-            if($type == UcenterMemberModel::ACCOUNT_TYPE_MOBILE && !empty($code)){
+            if($type == UcenterMemberModel::ACCOUNT_TYPE_MOBILE){
                 $result = apiCall(UserApi::FIND,array(array('mobile'=>$username)));
             }elseif($type == UcenterMemberModel::ACCOUNT_TYPE_USERNAME){
                 $result = apiCall(UserApi::FIND,array(array('username'=>$username)));
@@ -254,7 +254,8 @@ class UserController extends ApiController
             if(!$result['status']){
                 $this->apiReturnErr($result['info']);
             }
-
+            $userinfo = $result['info'];
+            $userinfo['head'] = getImageUrl($userinfo['head']);
             action_log("api_user_login", "common_member", $uid, $uid);
             $this->apiReturnSuc($result['info']);
         } else {
