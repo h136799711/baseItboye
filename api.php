@@ -7,6 +7,7 @@
  */
 if (version_compare(PHP_VERSION, '5.3.0', '<')) die('require PHP > 5.3.0 !');
 
+header("X-Copyright:http://www.itboye.com");
 
 //应用模式Api
 define('APP_MODE','api');

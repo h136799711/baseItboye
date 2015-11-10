@@ -786,7 +786,6 @@ function addons_url($url, $param = array()){
 
 function addLog($api_uri,$get,$post,$notes){
     $model = M('ApiCallHis');
-
     if(is_array($get)){
         $get = json_encode($get);
     }
@@ -794,6 +793,12 @@ function addLog($api_uri,$get,$post,$notes){
         $post = json_encode($post);
     }
 
+    if(empty($get)){
+        $get = "null";
+    }
+    if(empty($post)){
+        $post = "null";
+    }
     $result = $model->create(array(
         'api_uri'=>$api_uri,
         'call_get_args'=>$get,

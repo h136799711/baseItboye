@@ -1,1 +1,1 @@
-{"code":50500,"data":"服务器异常!"}
+{"code":-500,"data":"<?php echo urlencode(strip_tags($e['message']));?>"}
