@@ -171,13 +171,14 @@ class MemberController extends AdminController {
 		$page = array('curpage'=>0,'size'=>20);
 		$order = " last_login_time desc ";
 		
-		$result = apiCall(MemberApi::QUERY, array($map,$page, $order,false,'uid,nickname'));
+		$result = apiCall(MemberApi::QUERY, array($map,$page, $order,false,'uid,nickname,head'));
 		
 		if($result['status']){
 			$list = $result['info']['list'];
 			
 			foreach($list as $key=>$g){
-				$list[$key]['id']=$list[$key]['uid'];
+                $list[$key]['id']=$list[$key]['uid'];
+                $list[$key]['head']= getImageUrl($list[$key]['head']);
 			}
 			
 			$this->success($list);

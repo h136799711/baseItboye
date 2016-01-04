@@ -11,7 +11,9 @@
 if (version_compare(PHP_VERSION, '5.3.0', '<')) die('require PHP > 5.3.0 !');
 
 // 是否调试模式
-define('APP_DEBUG', FALSE);
+define('APP_DEBUG', TRUE);
+
+define('APP_STATUS', 'gd.itboye.com');
 
 // 插件目录
 define('ADDON_PATH', './Addons/');

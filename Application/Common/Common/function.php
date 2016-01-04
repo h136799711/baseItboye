@@ -815,3 +815,79 @@ function addLog($api_uri,$get,$post,$notes){
 function getWxAccountID(){
 
 }
+
+function getCarrierName($carrierId){
+    switch($carrierId){
+        case 0:
+            return '未知';
+        case 1:
+            return '移动';
+        case 2:
+            return '电信';
+        case 3:
+            return '联通';
+        default:
+            return '未知';
+    }
+}
+
+function getAreaName($area_id){
+    $area_arr = array(
+        '0'=>'未知',
+        '1'=>'全国',
+        '2'=>'浙江',
+        '3'=>'广西',
+        '4'=>'重庆',
+        '5'=>'北京',
+        '6'=>'上海',
+        '7'=>'天津',
+        '8'=>'江苏',
+        '9'=>'广东',
+        '10'=>'河北',
+        '11'=>'山西',
+        '12'=>'黑龙',
+        '13'=>'河南',
+        '14'=>'辽宁',
+        '15'=>'吉林',
+        '16'=>'内蒙',
+        '17'=>'福建',
+        '18'=>'山东',
+        '19'=>'安徽',
+        '20'=>'江西',
+        '21'=>'湖北',
+        '22'=>'湖南',
+        '23'=>'海南',
+        '24'=>'四川',
+        '25'=>'贵州',
+        '26'=>'云南',
+        '27'=>'西藏',
+        '28'=>'陕西',
+        '29'=>'甘肃',
+        '30'=>'宁夏',
+        '31'=>'青海',
+        '32'=>'新疆',
+        );
+
+    if(isset($area_arr[$area_id])){
+        return $area_arr[$area_id];
+    }else{
+        return '未知';
+    }
+
+}
+
+
+/**
+ * 根据图片ID，返回图片地址
+ * @param $imgID
+ * @return string
+ */
+function getImageUrl($imgID){
+    $imurl="";
+    $indexPHP = "index.php/";
+    if(C('URL_MODEL') == 2) {
+        $indexPHP = "";
+    }
+
+    return C('SITE_URL').'/'.$indexPHP.'Api/Picture/index?id='.$imgID;
+}

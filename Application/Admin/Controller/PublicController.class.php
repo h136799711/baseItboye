@@ -15,7 +15,7 @@ class PublicController extends BaseController {
 	protected function _initialize() {
 		parent::_initialize();
 		
-		//TODO:只获取全局通用的配置
+		//TODO: 只获取全局通用的配置
 		$this -> getConfig();
 		$seo = array('title' => C('WEBSITE_TITLE'), 'keywords' => C('WEBSITE_KEYWORDS'), 'description' => C('WEBSITE_DESCRIPTION'));
 		$cfg = array('owner' => C('WEBSITE_OWNER'), 'statisticalcode' => C('WEBSITE_STATISTICAL_CODE'), 'theme' => getSkin(C('DEFAULT_SKIN')), );
@@ -117,7 +117,9 @@ class PublicController extends BaseController {
 	/**
 	 * 登录检测
 	 */
-	public function checkLogin() {$IS_DEBUG = false;
+	public function checkLogin() {
+
+        $IS_DEBUG = false;
         if(defined("APP_DEBUG")){
             $IS_DEBUG = APP_DEBUG;
         }
@@ -177,7 +179,7 @@ class PublicController extends BaseController {
 	 */
 	public function login() {
 		$this -> assignTitle("账号-登录");
-		
+
 		if (IS_GET) {
             if(defined("APP_DEBUG") && APP_DEBUG){
                 $this->assign("testAccount",$this->test_account);

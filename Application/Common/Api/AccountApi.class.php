@@ -293,6 +293,7 @@ class AccountApi implements IAccount
         $realname=$entity['realname'];
         $nickname=$entity['nickname'];
         $birthday=$entity['birthday'];
+        $invite_id=$entity['invite_id'];
         $IDCode = $entity['idcode'];
         $head = isset($entity['head'])?$entity['head']:'';
         $sex = isset($entity['sex'])?$entity['sex']:"";
@@ -347,7 +348,7 @@ class AccountApi implements IAccount
                 'IDCode'=>$IDCode,
                 'wxopenid'=>$wxopenid,
                 'identity_validate'=>0,
-
+                'invite_id'=>$invite_id,
             );
 
             if($type == UcenterMemberModel::ACCOUNT_TYPE_MOBILE) {

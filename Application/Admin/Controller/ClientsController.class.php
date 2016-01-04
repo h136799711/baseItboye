@@ -13,6 +13,10 @@ use Think\Controller;
 class ClientsController extends AdminController{
 
 
+    protected function _initialize()
+    {
+        parent::_initialize();
+    }
 
     public function index(){
 

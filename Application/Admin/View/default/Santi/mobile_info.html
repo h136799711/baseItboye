@@ -1,0 +1,38 @@
+<extend name="template/base_index" />
+
+<block name="area_header">
+
+    <link type="text/css" rel="stylesheet" href="__CDN__/select2/4.0.0/css/select2.min.css" />
+    <link type="text/css" rel="stylesheet" href="__CDN__/select2/4.0.0/css/cosmo-skin.css" />
+</block>
+
+<block name="area_body">
+    {:W('Menus/topbar')}
+    <div class="admin-main container-fluid">
+        {:W('Menus/left')}
+        <div class="admin-main-content">
+            {:W('Menus/breadcrumb')}
+
+            <!-- 带验证 form -->
+            <div>
+                <a class="btn btn-sm btn-primary" href="{:U('Admin/Santi/products')}" ><i class="fa fa-reply"></i>返回</a>
+            </div>
+            <div class="panel">
+                    <div class="panel-body">
+                        <notempty name="mobile_info">
+                            手机号码: {$mobile_info.customer}, {$mobile_info.areaName},{$mobile_info.carrierName}
+                            <else/>
+                            无法查询到相关信息!
+                        </notempty>
+                    </div>
+            </div>
+
+        </div>
+        <!-- END admin-main-content -->
+    </div>
+    <!-- END admin-main-->
+</block>
+
+<block name="area_footer">
+
+</block>

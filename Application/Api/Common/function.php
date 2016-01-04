@@ -29,20 +29,6 @@ function decrypt($data,$key){
 }
 
 
-/**
- * 根据图片ID，返回图片地址
- * @param $imgID
- * @return string
- */
-function getImageUrl($imgID){
-    $imurl="";
-    $indexPHP = "index.php/";
-    if(C('URL_MODEL') == 2) {
-        $indexPHP = "";
-    }
-
-    return C('SITE_URL').'/'.$indexPHP.'Api/Picture/index?id='.$imgID;
-}
 
 if(!function_exists("U")){
     function U($url='',$vars='',$suffix=true,$domain=false) {

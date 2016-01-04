@@ -40,6 +40,7 @@ abstract class ApiController extends RestController{
         $access_token = I("get.access_token");
         if(empty($access_token)){
             $access_token = I("post.access_token");
+            unset($_POST['access_token']);
         }
         if(empty($access_token)){
             $this->apiReturnErr("缺失access_token!");
@@ -104,7 +105,20 @@ abstract class ApiController extends RestController{
         return $value;
     }
 
+    /**
+     * @param $key
+     * @param string $default
+     * @param string $emptyErrMsg  为空时的报错
+     * @return mixed
+     */
+    public function _get($key,$default='',$emptyErrMsg=''){
+        $value = I("get.".$key,$default);
 
+        if($default == $value && !empty($emptyErrMsg)){
+            $this->apiReturnErr($emptyErrMsg);
+        }
+        return $value;
+    }
 
     /**
      * 从数据库中取得配置信息

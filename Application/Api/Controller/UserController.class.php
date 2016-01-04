@@ -167,7 +167,7 @@ class UserController extends ApiController
 
             //验证码存在时，排除密码
             if(!empty($code)){
-                $psw = '';
+                $old_psw = '';
             }
 
             $old_psw = base64_decode($old_psw);
@@ -282,9 +282,14 @@ class UserController extends ApiController
 
         addLog("User/register", $_GET, $_POST, $notes);
         if (IS_POST) {
+
             $type = $this->_post("type", 1);
             $username = $this->_post("username", "");
             $from = $this->_post("from", "");
+            $invite_code= $this->_post("invite_code", "");
+
+            $invite_id = $this->getInviteID($invite_code);
+
             $error = $this->isLegal($type,$username,$from);
 
             if (!($error === false)) {
@@ -322,11 +327,13 @@ class UserController extends ApiController
                 'birthday' => time(),
                 'idcode'=>$idcode,
                 'type'=>$type,
+                'invite_id'=>$invite_id,
             );
 
             $result = apiCall(AccountApi::REGISTER, array($entity));
 
             if ($result['status']) {
+
                 $this->apiReturnSuc($result['info']);
             } else {
                 $this->apiReturnErr($result['info']);
@@ -335,6 +342,14 @@ class UserController extends ApiController
             $this->apiReturnErr("只支持POST请求!");
         }
 
+    }
+
+    private function getInviteID($invite_code){
+        //TODO: 获取邀请码
+
+        //
+
+        return "";
     }
 
     /**
