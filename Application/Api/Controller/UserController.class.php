@@ -288,7 +288,17 @@ class UserController extends ApiController
             $from = $this->_post("from", "");
             $invite_code= $this->_post("invite_code", "");
 
-            $invite_id = $this->getInviteID($invite_code);
+            $invite_id = 0;
+
+            $map = array(
+                'IDCode'=>$invite_code,
+            );
+
+            $result = apiCall(MemberConfigApi::GET_INFO,array($map));
+            if($result['status'] && is_array($result['info'])){
+                $member = $result['info'];
+                $invite_id = $member['uid'];
+            }
 
             $error = $this->isLegal($type,$username,$from);
 
@@ -299,15 +309,15 @@ class UserController extends ApiController
             $password = $this->_post("password");
             $email = "";
             $mobile = "";
-            $idcode = "123456";
+            $idcode = $username;
             if($type == UcenterMemberModel::ACCOUNT_TYPE_EMAIL){
                 $email = $username;
 //                $idcode = getIDCode(rand(10000000000,99999999999),'E');
 
             }elseif($type == UcenterMemberModel::ACCOUNT_TYPE_MOBILE){
                 $mobile = $username;
-                $username = 'M'.$mobile;
-//                $idcode = getIDCode($mobile,'M');
+                $username = 'mobile_'.$mobile;
+                $idcode = $username;
             }
 
             if(empty($idcode)){
@@ -325,14 +335,17 @@ class UserController extends ApiController
                 'email' => $email,
                 'idnumber' => '',
                 'birthday' => time(),
-                'idcode'=>$idcode,
-                'type'=>$type,
+                'idcode' => $idcode,
+                'type' => $type,
                 'invite_id'=>$invite_id,
             );
 
             $result = apiCall(AccountApi::REGISTER, array($entity));
 
             if ($result['status']) {
+
+                //赠送流量包
+                $this->giveFlowPacketTo($invite_id,$mobile);
 
                 $this->apiReturnSuc($result['info']);
             } else {
@@ -344,12 +357,44 @@ class UserController extends ApiController
 
     }
 
-    private function getInviteID($invite_code){
-        //TODO: 获取邀请码
+//    private function getInviteID($invite_code){
+//        //TODO: 获取邀请码
+//
+//        $map = array(
+//            'IDCode'=>$invite_code,
+//        );
+//        $result = apiCall(MemberConfigApi::GET_INFO,array($map));
+//        if($result['status'] && is_array($result['info'])){
+//            $member = $result['info'];
+//            return $member['uid'];
+//        }
+//
+//        return 0;
+//    }
 
-        //
+    /**
+     * 赠送给用户流量包
+     * @param $invite_id 邀请人用户ID
+     * @param $mobile 被邀请人注册的手机号
+     */
+    private function giveFlowPacketTo($invite_id,$mobile){
+        $invite_mobile = '';
+        $result = apiCall(UserApi::GET_INFO,array($invite_id));
+        if($result['status'] && is_array($result['info'])){
+            $invite_mobile = $result['info']['mobile'];
+        }
 
-        return "";
+        if(!empty($invite_mobile) && strlen($invite_mobile) == 11){
+            //11位手机号
+            //TODO: 送给这个手机号，邀请人，老用户
+
+        }
+
+        if(!empty($mobile)){
+            //TODO: 送给这个手机号流量，被邀请人，新用户
+        }
+
+
     }
 
     /**

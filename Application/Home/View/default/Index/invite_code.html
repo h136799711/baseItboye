@@ -1,0 +1,46 @@
+<extend name="template/base_index" />
+
+<block name="area_header">
+    <style type="text/css">
+
+    </style>
+</block>
+
+<block name="area_body">
+
+    <div class="am-panel">
+        <div class="am-panel-body">
+            <div class="am-text-center">您的邀请码</div>
+            <div class="am-text-center am-text-danger">{$id_code}</div>
+        </div>
+    </div>
+
+    <div class="am-article">
+        <div class="am-h2">---邀请记录---</div>
+        <div class="invite_num">
+            <empty name="list">
+                暂无
+                <else/>
+            <ul CLASS="am-list">
+                <volist name="list" id="vo">
+                    <li CLASS="am-cf am-padding-sm">
+                        <div class="am-fl">
+                        {$vo.mobile|encryptMobile}
+                        </div>
+                        <div class="am-fr">
+                            {$vo.reg_time|date='Y-m-d H:i:s',###}
+                        </div>
+                    </li>
+                </volist>
+            </ul>
+
+            </empty>
+        </div>
+        {$show}
+    </div>
+    {__NORUNTIME__}
+</block>
+
+<block name="area_footer">
+
+</block>

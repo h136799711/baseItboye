@@ -10,9 +10,12 @@ use Shop\Model\MemberConfigModel;
  * Time: 11:43
  */
 class MemberConfigApi extends Api{
+
+    const COUNT="Shop/MemberConfig/count";
+
     const ADD="Shop/MemberConfig/add";
 	
-	 const QUERY="Shop/MemberConfig/query";
+	const QUERY="Shop/MemberConfig/query";
 
     const SAVE_BY_ID="Shop/MemberConfig/saveByID";
 	

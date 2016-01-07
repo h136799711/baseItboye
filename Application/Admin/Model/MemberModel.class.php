@@ -14,7 +14,9 @@ use Think\Model;
  * 基本用户成员信息表
  */
 class MemberModel extends Model {
-	
+
+
+
 	/**
 	 * 前缀
 	 */

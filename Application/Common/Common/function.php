@@ -891,3 +891,11 @@ function getImageUrl($imgID){
 
     return C('SITE_URL').'/'.$indexPHP.'Api/Picture/index?id='.$imgID;
 }
+
+function encryptMobile($str){
+    if(strlen($str) == 11){
+        return substr($str,0,2).'***'.substr($str,7,4);
+    }
+
+    return $str;
+}

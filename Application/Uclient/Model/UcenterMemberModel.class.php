@@ -13,6 +13,7 @@ use Think\Model;
  */
 class UcenterMemberModel extends Model{
 
+
     /**
      * 账户是用户名注册的
      */

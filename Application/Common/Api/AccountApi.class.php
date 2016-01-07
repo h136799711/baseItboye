@@ -10,6 +10,7 @@ namespace Common\Api;
 
 use Admin\Api\MemberApi;
 use Admin\Api\UidMgroupApi;
+use Common\Model\ValidUserInfoModel;
 use Common\Model\WxuserGroupModel;
 use Shop\Api\MemberConfigApi;
 use Uclient\Api\UserApi;
@@ -59,6 +60,45 @@ class AccountApi implements IAccount
     const GET_INFO = "Common/Account/getInfo";
 
     const UPDATE="Common/Account/update";
+
+    const QUERY = "Common/Account/query";
+
+    public function query($map = null, $page = array('curpage'=>0,'size'=>10), $order = false, $params = false, $fields = false) {
+
+        $query = new ValidUserInfoModel();
+        if(!is_null($map)){
+            $query = $query->where($map);
+        }
+        if(!($order === false)){
+            $query = $query->order($order);
+        }
+        if(!($fields === false)){
+            $query = $query->field($fields);
+        }
+        $list = $query -> page($page['curpage'] . ',' . $page['size']) -> select();
+
+        $query = new ValidUserInfoModel();
+        if ($list === false) {
+            $error =$query -> getDbError();
+            return array('status'=>false,'info'=>$error);
+        }
+
+        $count = $query -> where($map) -> count();
+        // 查询满足要求的总记录数
+        $Page = new \Think\Page($count, $page['size']);
+
+        //分页跳转的时候保证查询条件
+        if ($params !== false) {
+            foreach ($params as $key => $val) {
+                $Page -> parameter[$key] = urlencode($val);
+            }
+        }
+
+        // 实例化分页类 传入总记录数和每页显示的记录数
+        $show = $Page -> show();
+
+        return array('status'=>true,'info'=>array("show" => $show, "list" => $list));
+    }
 
     /**
      * @param $uid 用户ID
@@ -292,12 +332,14 @@ class AccountApi implements IAccount
         $from = $entity['from'];
         $realname=$entity['realname'];
         $nickname=$entity['nickname'];
-        $birthday=$entity['birthday'];
-        $invite_id=$entity['invite_id'];
-        $IDCode = $entity['idcode'];
+        $birthday= isset($entity['birthday'])?$entity['birthday']:'';
+        $invite_id=isset($entity['invite_id'])?$entity['invite_id']:0;
+        $IDCode = isset($entity['idcode'])?$entity['idcode']:'';
         $head = isset($entity['head'])?$entity['head']:'';
         $sex = isset($entity['sex'])?$entity['sex']:"";
         $weixin_bind = isset($entity['weixin_bind'])?$entity['weixin_bind']:0;
+//        if(empty($IDCode)){
+//        }
         //微信的openid
         $wxopenid  = isset($entity['wxopenid'])?$entity['wxopenid']:'';
 
