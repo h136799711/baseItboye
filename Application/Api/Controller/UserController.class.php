@@ -317,7 +317,11 @@ class UserController extends ApiController
             }elseif($type == UcenterMemberModel::ACCOUNT_TYPE_MOBILE){
                 $mobile = $username;
                 $username = 'mobile_'.$mobile;
-                $idcode = $username;
+                $idcode = $mobile;
+            }
+
+            if(strlen($idcode) >= 6){
+                $idcode = substr($idcode,strlen($idcode)-6,6);
             }
 
             if(empty($idcode)){
