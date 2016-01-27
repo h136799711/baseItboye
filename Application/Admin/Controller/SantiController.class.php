@@ -19,6 +19,19 @@ use Uclient\Api\UserApi;
 
 class SantiController extends AdminController {
 
+    public function order_list(){
+        $map = array(
+
+        );
+        $page = array('curpage'=>I('param.p',0),'size'=>10);
+        $order = 'create_time desc';
+        $result = apiCall(SantiOrderApi::QUERY,array($map,$page,$order));
+        if($result['status']){
+            $this->assign("list",$result['info']['list']);
+            $this->assign("show",$result['info']['show']);
+        }
+        $this->display();
+    }
 
     public function mobile_info(){
         $mobile = I('get.mobile','');
@@ -40,8 +53,9 @@ class SantiController extends AdminController {
 
 
         $request = new SFProduct();
+        $carrier = 0;
 
-        $result = $request->getProductList(1,20);
+        $result = $request->getProductList(1,20,$carrier);
 
         if(!$result['status']){
             $this->error($result['info']);

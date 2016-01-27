@@ -831,6 +831,25 @@ function getCarrierName($carrierId){
     }
 }
 
+function getSantiOrderDesc($order_status){
+    switch($order_status){
+        case 0:
+            return "订单未提交";
+        case 1:
+            return "准备充值";
+        case 2:
+            return "订单取消";
+        case 3:
+            return "充值中";
+        case 4:
+            return "充值成功";
+        case 5:
+            return "充值失败";
+        default:
+            return "未知订单状态";
+    }
+}
+
 function getAreaName($area_id){
     $area_arr = array(
         '0'=>'未知',

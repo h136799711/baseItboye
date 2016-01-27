@@ -9,6 +9,8 @@ namespace Api\Controller;
 
 use Admin\Api\MemberApi;
 use Admin\Api\SecurityCodeApi;
+use Api\Vendor\SantiFlow\SFFlowFacade;
+use Api\Vendor\SantiFlow\SFMobile;
 use Common\Api\AccountApi;
 use Shop\Api\MemberConfigApi;
 use Uclient\Api\UserApi;
@@ -289,7 +291,7 @@ class UserController extends ApiController
             $invite_code= $this->_post("invite_code", "");
 
             $invite_id = 0;
-
+            $invite_code = strtolower($invite_code);
             $map = array(
                 'IDCode'=>$invite_code,
             );
@@ -312,8 +314,6 @@ class UserController extends ApiController
             $idcode = $username;
             if($type == UcenterMemberModel::ACCOUNT_TYPE_EMAIL){
                 $email = $username;
-//                $idcode = getIDCode(rand(10000000000,99999999999),'E');
-
             }elseif($type == UcenterMemberModel::ACCOUNT_TYPE_MOBILE){
                 $mobile = $username;
                 $username = 'mobile_'.$mobile;
@@ -327,7 +327,10 @@ class UserController extends ApiController
             if(empty($idcode)){
                 $this->apiReturnErr("注册失败!请重试");
             }
-            $nickname = $this->_post("nickname", "昵称");
+            $nickname = $this->_post("nickname", "");
+            if(empty($nickname)){
+                $nickname = '昵称'.$mobile;
+            }
 
             $entity = array(
                 'username' => $username,
@@ -342,16 +345,27 @@ class UserController extends ApiController
                 'idcode' => $idcode,
                 'type' => $type,
                 'invite_id'=>$invite_id,
+
             );
 
             $result = apiCall(AccountApi::REGISTER, array($entity));
 
             if ($result['status']) {
+//
+                $member_config = new MemberConfigApi();
+
+                $entity = array(
+                    'IDCode'=>$this->getIDCode($result['info']),
+                );
+
+                $member_config->saveByID($result['info'],$entity);
+
+                //生成IDCode
 
                 //赠送流量包
                 $this->giveFlowPacketTo($invite_id,$mobile);
 
-                $this->apiReturnSuc($result['info']);
+                $this->apiReturnSuc("注册成功");
             } else {
                 $this->apiReturnErr($result['info']);
             }
@@ -361,25 +375,18 @@ class UserController extends ApiController
 
     }
 
-//    private function getInviteID($invite_code){
-//        //TODO: 获取邀请码
-//
-//        $map = array(
-//            'IDCode'=>$invite_code,
-//        );
-//        $result = apiCall(MemberConfigApi::GET_INFO,array($map));
-//        if($result['status'] && is_array($result['info'])){
-//            $member = $result['info'];
-//            return $member['uid'];
-//        }
-//
-//        return 0;
-//    }
+    private function getIDCode($uid){
+
+        $idcode = dechex($uid+1048576);
+        $idcode = str_pad($idcode,6,"0",STR_PAD_LEFT);
+
+        return $idcode;
+    }
 
     /**
      * 赠送给用户流量包
-     * @param $invite_id 邀请人用户ID
-     * @param $mobile 被邀请人注册的手机号
+     * @param $invite_id int 邀请人用户ID
+     * @param $mobile string 被邀请人注册的手机号
      */
     private function giveFlowPacketTo($invite_id,$mobile){
         $invite_mobile = '';
@@ -387,19 +394,49 @@ class UserController extends ApiController
         if($result['status'] && is_array($result['info'])){
             $invite_mobile = $result['info']['mobile'];
         }
-
+        $santi = new SFFlowFacade();
+        $flow = ß0;
         if(!empty($invite_mobile) && strlen($invite_mobile) == 11){
             //11位手机号
             //TODO: 送给这个手机号，邀请人，老用户
+            //
+            if($santi->is10010($invite_mobile)){
+                $flow = 20;
+            }else{
+                $flow = 10;
+            }
+
+            $result = $santi->createAndSubmit($invite_mobile,$flow);
+            if(!$result['status']){
+                addLog("User/giveFlowPacketTo",$result,$invite_mobile,$flow."M,赠送流量失败(邀请人，老用户)!");
+            }else{
+                addLog("User/giveFlowPacketTo",$result,$invite_mobile,$flow."M赠送流量成功!(邀请人，老用户)");
+            }
 
         }
 
         if(!empty($mobile)){
             //TODO: 送给这个手机号流量，被邀请人，新用户
+            if(empty($invite_mobile)){
+                //未使用邀请码注册  送100M
+                $flow = 100;
+            }else{
+                //使用邀请码注册 送200M
+                $flow = 200;
+            }
+
+            $result = $santi->createAndSubmit($mobile,$flow);
+            if(!$result['status']){
+                addLog("User/giveFlowPacketTo",$result,$mobile,$flow."M赠送流量失败(注册用户)!");
+            }else{
+                addLog("User/giveFlowPacketTo",$result,$mobile,$flow."M赠送流量成功(注册用户)!");
+            }
         }
 
 
     }
+
+
 
     /**
      * 用户信息更新

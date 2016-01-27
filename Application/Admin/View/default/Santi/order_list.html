@@ -1,0 +1,123 @@
+<extend name="template/base_index" />
+
+<block name="area_header">
+
+    <link type="text/css" rel="stylesheet" href="__CDN__/select2/4.0.0/css/select2.min.css" />
+    <link type="text/css" rel="stylesheet" href="__CDN__/select2/4.0.0/css/cosmo-skin.css" />
+</block>
+
+<block name="area_body">
+    {:W('Menus/topbar')}
+    <div class="admin-main container-fluid">
+        {:W('Menus/left')}
+        <div class="admin-main-content">
+            {:W('Menus/breadcrumb')}
+
+            <!-- 带验证 form -->
+            <div>
+                <h3>流量送出日志</h3>
+                <table class="table table-border table-hover">
+                    <thead>
+                    <tr>
+                        <th>手机号</th>
+                        <th>订单编号</th>
+                        <th>流量</th>
+                        <th>订单状态</th>
+                        <th>创建时间</th>
+                        <!--<th>操作</th>-->
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <volist name="list" id="vo">
+                        <tr>
+                            <td>
+                                <a href="{:U('Admin/Santi/mobile_info',array('mobile'=>$vo['mobile']))}">{$vo.mobile}</a>
+                            </td>
+                            <td>
+                                {$vo.order_no}
+                            </td>
+                            <td>
+                                {$vo.prod_id}
+                            </td>
+                            <td>
+                                {:getSantiOrderDesc($vo['order_status'])}
+                            </td>
+                            <td>
+                                {$vo.create_time|date='Y-m-d H:i:s',###}
+                            </td>
+                            <!--<td>-->
+                                <!--{:getSantiOrderDesc($vo['order_status'])}-->
+                            <!--</td>-->
+                        </tr>
+
+                    </volist>
+
+                    </tbody>
+                </table>
+                {$show}
+            </div>
+        </div>
+        <!-- END admin-main-content -->
+    </div>
+    <!-- END admin-main-->
+</block>
+
+<block name="area_footer">
+
+
+    <script src="__CDN__/select2/4.0.0/js/select2.min.js"></script>
+    <script src="__CDN__/select2/4.0.0/js/i18n/zh-CN.js"></script>
+    <script type="text/javascript">
+
+        $(function(){
+
+
+            $("#user_select2").select2({
+                placeholder: "输入用户id或昵称查询"	,
+                language: "zh-CN",
+                ajax: {
+                    url: "{:U('Member/select')}",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        var queryParameters = {
+                            q: params.term
+                        }
+                        return queryParameters;
+
+                    },
+                    processResults: function (data, page) {
+                        if(!data.info){
+                            data.info = new Array();
+                            data.info['nodata']="无相关数据";
+                        }
+                        // parse the results into the format expected by Select2.
+                        // since we are using custom formatting functions we do not need to
+                        // alter the remote JSON data
+                        return {
+                            results: data.info
+                        };
+                    },
+                    cache: true
+                },
+                minimumInputLength: 0,
+                templateSelection: function (repo) {
+                    var selection = repo.nickname || repo.text;
+                    if(repo.nickname){
+
+                    }
+                    return selection;
+                },
+                templateResult: function (repo) {
+
+                    if (repo.loading) return repo.text;
+                    if(repo.nodata) return repo.nodata;
+
+                    var markup = '<div><img src="'+repo.head+'" style="width:30px;height:30px;"/>[id:'+repo.id+'] '+repo.nickname+'</div>';
+                    return $(markup);
+                },
+            });
+
+        })
+    </script>
+</block>
