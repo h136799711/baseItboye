@@ -19,18 +19,18 @@ class SFBase {
 //正式App_KEY : 5184434d987271c7
 //密钥: da5c8e5ea87dce1be0642eb5410caabc
 
-//    protected $cfg = array(
-//        'api_uri'=>'http://pms.liulianggo.com:8051',
-//        'app_key'=>'5184434d987271c7',
-//        'app_secret'=>'da5c8e5ea87dce1be0642eb5410caabc',
-//        'notify_url'=>'http://gd.itboye.com/api.php/SantiCallback/index',
-//    );
     protected $cfg = array(
-        'api_uri'=>'http://test-pms.zjseek.com.cn:10086',
-        'app_key'=>'6da2681d45058b8b',
-        'app_secret'=>'6c41a870b54abb78efc9874475612345',
+        'api_uri'=>'http://pms.liulianggo.com:8051',
+        'app_key'=>'5184434d987271c7',
+        'app_secret'=>'da5c8e5ea87dce1be0642eb5410caabc',
         'notify_url'=>'http://gd.itboye.com/api.php/SantiCallback/index',
     );
+//    protected $cfg = array(
+//        'api_uri'=>'http://test-pms.zjseek.com.cn:10086',
+//        'app_key'=>'6da2681d45058b8b',
+//        'app_secret'=>'6c41a870b54abb78efc9874475612345',
+//        'notify_url'=>'http://gd.itboye.com/api.php/SantiCallback/index',
+//    );
 
     public function getNotifyUrl(){
         return $this->cfg['notify_url'];

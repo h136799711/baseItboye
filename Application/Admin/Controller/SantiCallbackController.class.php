@@ -9,16 +9,25 @@
 namespace Admin\Controller;
 
 
+use Santi\Api\OrderCallbackApi;
 use Santi\Api\SantiCallbackApi;
 
 class SantiCallbackController extends AdminController {
 
     public function index(){
+        $mobile = I('post.mobile','');
 
         $map = array();
+        $params= array();
+        if(!empty($mobile)){
+            $map['mobile'] = $mobile;
+            $params['mobile']= $mobile;
+        }
         $page = array('curpage'=>I('param.p',0),'size'=>10);
-        $result = apiCall(SantiCallbackApi::QUERY,array($map,$page,'create_time desc'));
-//        dump($result);
+
+        $api = new OrderCallbackApi();
+        $result = $api->query($map,$page,'create_time desc',$params);
+
         if($result['status']){
             $this->assign("list",$result['info']['list']);
             $this->assign("show",$result['info']['show']);
@@ -26,6 +35,7 @@ class SantiCallbackController extends AdminController {
             $this->error($result['info']);
         }
 
+        $this->assign("mobile",$mobile);
         $this->display();
     }
 
