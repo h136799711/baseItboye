@@ -13,23 +13,34 @@ use Api\Vendor\SantiFlow\SFMobile;
 use Api\Vendor\SantiFlow\SFOrder;
 use Api\Vendor\SantiFlow\SFProduct;
 use Common\Api\BoyeServiceApi;
+use Santi\Api\OrderCallbackApi;
 use Santi\Api\SantiOrderApi;
+use Santi\Model\OrderCallbackModel;
 use Santi\Model\SantiOrder;
 use Uclient\Api\UserApi;
 
 class SantiController extends AdminController {
 
     public function order_list(){
-        $map = array(
 
-        );
+        $mobile = I('post.mobile','');
+
+        $map = array();
+        $params= array();
+        if(!empty($mobile)){
+            $map['mobile'] = $mobile;
+            $params['mobile']= $mobile;
+        }
+
         $page = array('curpage'=>I('param.p',0),'size'=>10);
         $order = 'create_time desc';
-        $result = apiCall(SantiOrderApi::QUERY,array($map,$page,$order));
+
+        $result = apiCall(OrderCallbackApi::QUERY,array($map,$page,$order));
         if($result['status']){
             $this->assign("list",$result['info']['list']);
             $this->assign("show",$result['info']['show']);
         }
+        $this->assign("mobile",$mobile);
         $this->display();
     }
 
