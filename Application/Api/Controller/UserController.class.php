@@ -301,7 +301,7 @@ class UserController extends ApiController
                 $member = $result['info'];
                 $invite_id = $member['uid'];
             }
-
+            addLog("User/register",$invite_id,$invite_code,"邀请人ID与邀请码");
             $error = $this->isLegal($type,$username,$from);
 
             if (!($error === false)) {
