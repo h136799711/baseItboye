@@ -72,6 +72,10 @@
         .pagination a.active, .pagination div {
             cursor: default;
         }
+        ul.invite-list li{
+            line-height: 40px;
+            height: 60px;
+        }
     </style>
 </block>
 
@@ -79,7 +83,7 @@
 
     <div class="am-panel">
         <div class="am-panel-body">
-            <!--<div class="am-text-center">您的邀请码</div>-->
+            <div class="am-text-center">您的邀请码</div>
             <div style="font-size: 4rem;" class="am-text-center am-text-danger am-text-lg">{$id_code}</div>
         </div>
     </div>
@@ -91,14 +95,15 @@
             <empty name="list">
                 暂无
                 <else/>
-            <ul CLASS="am-list">
+            <ul CLASS="am-list invite-list">
                 <volist name="list" id="vo">
                     <li CLASS="am-cf am-padding-sm">
                         <div class="am-fl">
+                            <img style="width:30px;height:30px;border-radius: 50%;" src="{:getImageUrl($vo['head'])}" alt="头像"/>
                             <span>{$vo.nickname}</span>
                             <span>({$vo.mobile|encryptMobile})</span>
                         </div>
-                        <div class="am-fr">
+                        <div class="am-fr time">
                             {$vo.reg_time|date='Y-m-d H:i:s',###}
                         </div>
                     </li>
