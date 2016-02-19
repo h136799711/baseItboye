@@ -20,18 +20,16 @@ class AccountController extends AdminController {
 
 	public function index() {
 		$params = array();
-		
-		$map['nickname'] = array('like', "%" . I('nickname', '', 'trim') . "%");		
-		$map['uid'] = I('nickname',-1);
-		$map['_logic'] = 'OR';
-		
-		$page = array('curpage' => I('get.p'), 'size' => C('LIST_ROW'));
-		$order = " last_login_time desc ";
-		$params['nickname'] = I('nickname','','trim');
-		$result = apiCall("Admin/Member/query", array($map, $page, $order));
+        $idcode =  I('idcode', '', 'trim');
+		$map['idcode'] = array('like', $idcode . "%");
+
+		$page = array('curpage' => I('get.p'), 'size' => 10 );
+		$order = " id desc ";
+		$params['idcode'] = $idcode;
+		$result = apiCall(AccountApi::QUERY, array($map, $page, $order));
 		
 		if ($result['status']) {
-			
+			$this->assign("idcode",$idcode);
 			$this -> assign("show", $result['info']['show']);
 			$this -> assign("list", $result['info']['list']);
 			$this -> display();

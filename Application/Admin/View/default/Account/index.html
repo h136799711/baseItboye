@@ -13,11 +13,11 @@
 			<div class="table-responsive well">
 	<!-- 过滤\查询按钮 -->
 	<div class="filter-controls">
-		<form action="{:U('Admin/Member/index')}" class="memberForm form-inline" method="post">
+		<form action="{:U('Admin/Account/index')}" class="memberForm form-inline" method="post">
 			<div class="form-group">
-				<label class="control-label">用户昵称或ID</label>
+				<label class="control-label">用户邀请码</label>
 				<div class="input-group">
-						<input class="form-control" type="text" name="nickname" placeholder="请输入用户昵称或用户ID" />
+						<input class="form-control" type="text" name="idcode" placeholder="请输入用户邀请码" VALUE="{$idcode}" />
 				</div>
 			</div>
 			<div class="form-group">
@@ -47,11 +47,11 @@
 					昵称
 				</th>
 				<th>
-					积分
+					邀请码
 				</th>
-				<th>
-					登录次数
-				</th>
+				<!--<th>-->
+					<!--登录次数-->
+				<!--</th>-->
 				<th>
 					状态
 				</th>
@@ -72,13 +72,13 @@
 							<input type="checkbox" value="{$vo.uid}" name="uids[]" class="selectitem" /></td>
 						
 						<td>
-							{$vo.uid}</td>
+							{$vo.id}</td>
 						<td>
                             <a href="{:U('Admin/Account/view',array('id'=>$vo['uid']))}">{$vo.nickname}</a></td>
 						<td>
-							{$vo.score}</td>
-						<td>
-							{$vo.login}</td>
+							{$vo.idcode}</td>
+						<!--<td>-->
+							<!--{$vo.login}</td>-->
 
 						<td>{$vo.status|getStatus}</td>
 						<td>
