@@ -395,7 +395,7 @@ class UserController extends ApiController
             $invite_mobile = $result['info']['mobile'];
         }
         $santi = new SFFlowFacade();
-        $flow = ß0;
+        $flow = 0;
         if(!empty($invite_mobile) && strlen($invite_mobile) == 11){
             //11位手机号
             //TODO: 送给这个手机号，邀请人，老用户

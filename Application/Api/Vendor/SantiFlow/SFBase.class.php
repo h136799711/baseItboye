@@ -74,7 +74,7 @@ class SFBase {
     public function makeSign($props,$secret){
         ksort($props);
 
-        $val = [];
+        $val = array();
         foreach($props as $key=>$prop){
             if(isset($props[$key])){
                 $val[] = $key;
