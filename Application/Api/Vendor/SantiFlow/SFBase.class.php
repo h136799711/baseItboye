@@ -23,7 +23,8 @@ class SFBase {
         'api_uri'=>'http://pms.liulianggo.com:8051',
         'app_key'=>'5184434d987271c7',
         'app_secret'=>'da5c8e5ea87dce1be0642eb5410caabc',
-        'notify_url'=>'http://gd.itboye.com/api.php/SantiCallback/index',
+//        'notify_url'=>'http://gd.itboye.com/api.php/SantiCallback/index',
+        'notify_url'=>'http://120.199.28.62:8000/api.php/SantiCallback/index',
     );
 //    protected $cfg = array(
 //        'api_uri'=>'http://test-pms.zjseek.com.cn:10086',

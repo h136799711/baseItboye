@@ -46,7 +46,7 @@ class ClientsController extends AdminController{
             $form = I('post.form',array());
             $grant_types = I('post.grant_types','');
 //            dump($grant_types);
-            $entity = array_merge([],$form);
+            $entity = array_merge(array(),$form);
 
             import("Org.String");
 

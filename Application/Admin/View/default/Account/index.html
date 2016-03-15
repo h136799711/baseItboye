@@ -69,12 +69,12 @@
 				<volist name="list" id="vo">
 					<tr>
 						<td>
-							<input type="checkbox" value="{$vo.uid}" name="uids[]" class="selectitem" /></td>
+							<input type="checkbox" value="{$vo.id}" name="uids[]" class="selectitem" /></td>
 						
 						<td>
 							{$vo.id}</td>
 						<td>
-                            <a href="{:U('Admin/Account/view',array('id'=>$vo['uid']))}">{$vo.nickname}</a></td>
+                            <a href="{:U('Admin/Account/view',array('id'=>$vo['id']))}">{$vo.nickname}</a></td>
 						<td>
 							{$vo.idcode}</td>
 						<!--<td>-->
@@ -82,7 +82,7 @@
 
 						<td>{$vo.status|getStatus}</td>
 						<td>
-							<a href="{:U('Admin/Account/edit',array('id'=>$vo['uid']))}" class="btn btn-danger btn-sm" ><i class="fa fa-edit"></i>编辑</a>
+							<a href="{:U('Admin/Account/edit',array('id'=>$vo['id']))}" class="btn btn-danger btn-sm" ><i class="fa fa-edit"></i>编辑</a>
 						</td>
 					</tr>
 
