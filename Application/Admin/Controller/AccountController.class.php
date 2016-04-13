@@ -229,6 +229,7 @@ class AccountController extends AdminController {
         }
         //获取参数
         $password   =   I('post.old');
+
         empty($password) && $this->error(L('ERR_NEED_OLD_PASSWORD'));
         $data['password'] = I('post.password');
         empty($data['password']) && $this->error(L('ERR_NEED_NEW_PASSWORD'));
@@ -238,8 +239,9 @@ class AccountController extends AdminController {
         if($data['password'] !== $repassword){
             $this->error(L('ERR_NEED_SAME_PASSWORD'));
         }
+        $new_password = $data['password'];
 
-        $res    = apiCall(UserApi::UPDATEPWD,array(UID, $password, $data));
+        $res    = apiCall(UserApi::UPDATEPWD,array(UID, $new_password));
 
         if($res['status']){
             $this->success(L('RESULT_SUCCESS'));

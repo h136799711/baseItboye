@@ -124,8 +124,8 @@ abstract class ApiController extends RestController{
      * 从数据库中取得配置信息
      */
     protected function getConfig() {
-        $config = S('config_' . session_id() . '_' . session("uid"));
-        //dump($config);
+        $config = S('global_config');
+
         if ($config === false) {
             $map = array();
             $fields = 'type,name,value';
@@ -140,15 +140,13 @@ abstract class ApiController extends RestController{
                     }
                 }
                 //缓存配置300秒
-                S("config_" . session_id() . '_' . session("uid"), $config, 300);
+                S("global_config", $config, 300);
             } else {
                 LogRecord('INFO:' . $result['info'], '[FILE] ' . __FILE__ . ' [LINE] ' . __LINE__);
                 $this -> error($result['info']);
             }
         }
-        //dump(session_id());
 
-        //dump($config);
         C($config);
     }
 

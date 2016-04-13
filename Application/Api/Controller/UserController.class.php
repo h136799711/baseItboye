@@ -7,10 +7,10 @@
  */
 namespace Api\Controller;
 
+use Admin\Api\DevicePhoneApi;
 use Admin\Api\MemberApi;
 use Admin\Api\SecurityCodeApi;
 use Api\Vendor\SantiFlow\SFFlowFacade;
-use Api\Vendor\SantiFlow\SFMobile;
 use Common\Api\AccountApi;
 use Shop\Api\MemberConfigApi;
 use Uclient\Api\UserApi;
@@ -284,6 +284,35 @@ class UserController extends ApiController
 
         addLog("User/register", $_GET, $_POST, $notes);
         if (IS_POST) {
+            $device_id = $this->_post("device_id", '');
+            $device_type = $this->_post("device_type", '');
+
+            if(empty($device_id)){
+                $device_id = time();
+            }
+            if(empty($device_type)){
+                $device_type = 2;
+            }
+
+            $entity = array(
+                'device_id'=>$device_id,
+                'device_type'=>$device_type,
+            );
+
+            $result = apiCall(DevicePhoneApi::GET_INFO,array($entity));
+
+            addLog("User/register", $entity, $result, "检测该手机是否已注册");
+            if($result['status'] && is_array($result['info'])){
+                $this->apiReturnErr('一台手机只能注册一个帐号！');
+            }
+
+            $entity['create_time'] = time();
+
+            $result = apiCall(DevicePhoneApi::ADD,array($entity));
+
+            if(!$result['status']){
+                $this->error("登录失败(code=-2)");
+            }
 
             $type = $this->_post("type", 1);
             $username = $this->_post("username", "");
@@ -389,6 +418,16 @@ class UserController extends ApiController
      * @param $mobile string 被邀请人注册的手机号
      */
     private function giveFlowPacketTo($invite_id,$mobile){
+
+        $is_close = C('CLOSE_SANTI_API');
+
+        addLog("User/giveFlowPacketTo",$is_close,$is_close,"关闭了送流量接口!");
+        if($is_close == 1){
+            //如果关闭了 ，则直接返回
+            addLog("User/giveFlowPacketTo",$is_close,$is_close,"关闭了送流量接口!");
+            return ;
+        }
+
         $invite_mobile = '';
         $result = apiCall(UserApi::GET_INFO,array($invite_id));
         if($result['status'] && is_array($result['info'])){
@@ -397,32 +436,40 @@ class UserController extends ApiController
         $santi = new SFFlowFacade();
         $flow = 0;
         if(!empty($invite_mobile) && strlen($invite_mobile) == 11){
-            //11位手机号
-            //TODO: 送给这个手机号，邀请人，老用户
-            //
-            if($santi->is10010($invite_mobile)){
-                $flow = 20;
-            }else{
-                $flow = 10;
-            }
 
-            $result = $santi->createAndSubmit($invite_mobile,$flow);
-            if(!$result['status']){
-                addLog("User/giveFlowPacketTo",$result,$invite_mobile,$flow."M,赠送流量失败(邀请人，老用户)!");
-            }else{
-                addLog("User/giveFlowPacketTo",$result,$invite_mobile,$flow."M赠送流量成功!(邀请人，老用户)");
-            }
+            //检测是否符合条件
+//            $result = apiCall(SantiOrderApi::COUNT,array(array('mobile'=>$invite_mobile)));
+
+//            if($result['info'] < $invite_cnt){
+                //11位手机号
+                //TODO: 送给这个手机号，邀请人，老用户
+                //
+                if($santi->is10010($invite_mobile)){
+                    $flow = 20;
+                }else{
+                    $flow = 10;
+                }
+
+                $result = $santi->createAndSubmit($invite_mobile,$flow);
+                if(!$result['status']){
+                    addLog("User/giveFlowPacketTo",$result,$invite_mobile,$flow."M,赠送流量失败(邀请人，老用户)!");
+                }else{
+                    addLog("User/giveFlowPacketTo",$result,$invite_mobile,$flow."M赠送流量成功!(邀请人，老用户)");
+                }
+//            }
+
+
 
         }
 
         if(!empty($mobile)){
             //TODO: 送给这个手机号流量，被邀请人，新用户
             if(empty($invite_mobile)){
-                //未使用邀请码注册  送100M
-                $flow = 100;
+                //未使用邀请码注册  送50M
+                $flow = 50;
             }else{
-                //使用邀请码注册 送200M
-                $flow = 200;
+                //使用邀请码注册 送100M
+                $flow = 100;
             }
 
             $result = $santi->createAndSubmit($mobile,$flow);

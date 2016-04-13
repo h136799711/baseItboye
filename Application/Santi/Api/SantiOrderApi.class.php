@@ -14,6 +14,8 @@ use Santi\Model\SantiOrderModel;
 
 class SantiOrderApi extends Api {
 
+    const  COUNT = "Santi/SantiOrder/COUNT";
+
     const  ADD = "Santi/SantiOrder/add";
 
     const  QUERY = "Santi/SantiOrder/query";
