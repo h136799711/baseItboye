@@ -9,6 +9,7 @@
 namespace Api\Controller;
 
 
+use Api\Vendor\crypt\DesCrypt;
 use OAuth2Manage\Api\AccessTokensApi;
 use Think\Controller\RestController;
 use Admin\Api\ConfigApi;
@@ -34,6 +35,38 @@ abstract class ApiController extends RestController{
             $this->_init();
         }
 
+    }
+
+    protected function decodePost(){
+
+        $post = $this->_post('itboye','');
+        if(!empty($post)){
+            $data = DesCrypt::decode(base64_decode($post),$this->client_id);
+            $data = $this->filter_post($data);
+            $obj = json_decode($data,JSON_OBJECT_AS_ARRAY);
+            $_POST = $obj;
+        }else{
+            $_POST = array();
+        }
+
+
+    }
+
+    /**
+     * 过滤末尾多余空白符 ASCII码等于7的奇怪符号
+     * @param $post
+     * @return string
+     */
+    protected function filter_post($post){
+        $post = trim($post);
+        for ($i=strlen($post)-1;$i>=0;$i--) {
+            $ord = ord($post[$i]);
+            if($ord > 31 && $ord != 127){
+                $post = substr($post,0,$i+1);
+                return $post;
+            }
+        }
+        return $post;
     }
 
     protected function _init(){
@@ -62,6 +95,8 @@ abstract class ApiController extends RestController{
         if($result['status']){
             $this->client_id = $result['info']['client_id'];
         }
+
+        $this->decodePost();
 
         $this->getConfig();
     }

@@ -1,1 +1,1 @@
-{"code":-500,'file':"<?php echo $e['file'];?>",'line':"<?php echo $e['line'];?>","data":"<?php echo urlencode(strip_tags($e['message']));?>"}
+{"code":-500,"file":"<?php echo urlencode($e['file']);?>","line":"<?php echo $e['line'];?>","data":"<?php echo urlencode(strip_tags($e['message']));?>"}

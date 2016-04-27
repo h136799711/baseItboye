@@ -8,6 +8,7 @@
 namespace Api\Controller;
 
 use Api\Service\OAuth2Service;
+use Api\Vendor\crypt\DesCrypt;
 use OAuth2\Request;
 use Think\Controller\RestController;
 use Think\Log;
@@ -20,6 +21,7 @@ class TokenController extends RestController{
     protected   $allowType      =   array('json');
 
     public function index(){
+        addLog("Token/index",$_GET,$_POST,"");
         $grant_type = I('get.grant_type','');
         if(empty($grant_type)){
             $grant_type = I('post.grant_type','');
@@ -41,15 +43,22 @@ class TokenController extends RestController{
         if(empty($client_id)
             || empty($grant_type) || empty($client_secret)){
 
-            $this->ajaxReturn(array('code'=>-1,'data'=>"参数缺失!"),"json");
+            $this->ajaxReturn(array('code'=>-1,'data'=>$grant_type."参数缺失!".$client_id),"json");
         }
 
         $notes = $client_id."调用接口";
 
-        addLog('/Api/Token/index',serialize(I('get.')),serialize($_POST),$notes);
+        $_POST['grant_type'] = $grant_type;
+        $_POST['client_id'] = $client_id;
+        $_POST['client_secret'] = $client_secret;
+        unset($_GET['client_id']);
+        unset($_GET['client_secret']);
+        unset($_GET['grant_type']);
+        addLog("Token/index",$_GET,$_POST,"");
 
         $this->credentials($grant_type);
     }
+
 
     private function credentials($type){
         $api = new OAuth2Service();
