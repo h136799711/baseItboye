@@ -96,7 +96,7 @@ abstract class ApiController extends RestController{
             $this->client_id = $result['info']['client_id'];
         }
 
-        $this->decodePost();
+//        $this->decodePost();
 
         $this->getConfig();
     }

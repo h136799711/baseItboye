@@ -69,6 +69,7 @@ class SantiController extends AdminController {
         $result = $request->getProductList(1,20,$carrier);
 
         if(!$result['status']){
+            addLog("products",$result,$_POST,"[getProductList]");
             $this->error($result['info']);
         }
 
@@ -80,6 +81,7 @@ class SantiController extends AdminController {
             $this->assign('prod_list',$prodList);
 
         }else{
+            addLog("products",$resultReason,$resultReason,"[getProductList result]");
             $this->error($resultReason);
         }
 

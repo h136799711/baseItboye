@@ -12,7 +12,7 @@ header("X-Copyright:http://www.itboye.com");
 //应用模式Api
 define('APP_MODE','api');
 
-define('APP_STATUS', 'gd.itboye.com');
+define('APP_STATUS', 'local');
 
 //绑定Api模块
 define('BIND_MODULE','Api');

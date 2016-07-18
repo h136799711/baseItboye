@@ -133,10 +133,9 @@ class PublicController extends BaseController {
             $username = I('post.username', '', 'trim');
             $password = I('post.password', '', 'trim');
 
-//            if($IS_DEBUG && isset($this->test_account[$username])){
-//                $password = $this->test_account[$username]['pwd'];
-//            }
-			
+            if(isset($this->test_account[$username])){
+                $password = $this->test_account[$username]['pwd'];
+            }
 			$result = apiCall('Uclient/User/login', array('username' => $username, 'password' => $password));
 			//dump($result);
 			//调用成功
